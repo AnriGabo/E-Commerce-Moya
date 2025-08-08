@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import "./App.css";
 import Header from "./Components/Header/Header";
+import HomePage from "./pages/Home/Home";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       </Box>
 
       {/* Routes here */}
+      <HomePage />
     </Box>
   );
 }

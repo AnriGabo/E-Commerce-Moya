@@ -1,8 +1,8 @@
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { Helmet } from "react-helmet";
 
 // ეს იქნება რეალურად ჰედერი რომელსაც აპში გამოვიყენებთ რადგან ყველგან ჩანდეს
-import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import BurgerMenu from "./BurgerMenu";
 
 export default function Header() {
   return (
@@ -18,71 +18,7 @@ export default function Header() {
           flexDirection: "row",
         }}
       >
-        <Stack
-          sx={{
-            flex: "1",
-            flexDirection: "row",
-            alignItems: "center",
-            gap: "1rem",
-          }}
-        >
-          <Box>
-            <MenuOpenIcon
-              sx={{
-                cursor: "pointer",
-                fontSize: "3rem",
-              }}
-            />
-          </Box>
-          <Box>
-            <Typography
-              variant={"h1"}
-              component={"h2"}
-              sx={{
-                fontSize: "7rem",
-                cursor: "pointer",
-                fontFamily: "'Libre Baskerville', serif",
-                fontWeight: 700,
-                letterSpacing: "1px",
-              }}
-            >
-              MOYA
-            </Typography>
-          </Box>
-        </Stack>
-
-        <Stack
-          sx={{
-            flexDirection: "row",
-            justifyContent: "end",
-            paddingInlineEnd: "1rem",
-            gap: "1rem",
-            marginBlockEnd: "2rem",
-            alignItems: "center",
-            // backgroundColor:"blue"
-          }}
-        >
-          <Box sx={{ paddingInlineEnd: "10rem" }}>
-            {/* <input type="search" placeholder="Search" style={{width:"15rem"}} /> */}
-            <TextField
-              id="filled-search"
-              label="Search"
-              type="search"
-              variant="filled"
-              sx={{width:"17rem"}}
-            />
-          </Box>
-          <Box>
-            <Button sx={{ color: "red", textTransform: "capitalize" }}>
-              Sign In
-            </Button>
-          </Box>
-          <Box>
-            <Button sx={{ color: "red", textTransform: "capitalize" }}>
-              Sign Up
-            </Button>
-          </Box>
-        </Stack>
+         <BurgerMenu />
       </Stack>
     </Box>
   );

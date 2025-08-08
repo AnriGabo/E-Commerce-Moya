@@ -9,6 +9,7 @@ const videos = [
   "/src/Videos/FashionModel2.mp4",
   "/src/Videos/FashionModel3.mp4",
 ];
+console.log(videos.length);
 
 export default function VideoSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,7 +28,7 @@ export default function VideoSlider() {
     >
       <video
         key={videos[currentIndex]} // ეს აუცილებელია ვიდეოს თავიდან ჩატვირთვისთვის
-        src={videos[currentIndex]}
+        src={videos[currentIndex]} // ეს ფაქტიურად ნიშნავს src={videos[1]}
         autoPlay
         playsInline
         muted
@@ -47,7 +48,7 @@ export default function VideoSlider() {
         style={navBtnStyle("right")}
         sx={{ color: "black", border: "none" }}
       >
-        <ArrowForwardIcon />
+        <ArrowForwardIcon/>
       </Button>
     </Box>
   );
