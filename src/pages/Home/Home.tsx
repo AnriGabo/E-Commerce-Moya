@@ -1,13 +1,11 @@
 
 import { Stack } from "@mui/material";
-import VideoSlider from "../../Components/VideoCarousel/VideoSlider";
-import PhotoGallery from "../../Components/PhotoGallery/Collection";
+import VideoSlider from "../../Components/Home/VideoSlider";
 
 const HomePage = () => {
   return (
     <Stack>
       <VideoSlider />
-      <PhotoGallery />
     </Stack>
   );
 };
