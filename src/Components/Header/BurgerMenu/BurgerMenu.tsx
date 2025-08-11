@@ -8,6 +8,7 @@ const BurgerMenu = () => {
         sx={{
           cursor: "pointer",
           fontSize: "3rem",
+          position:"fixed"
         }}
       />
     </Box>

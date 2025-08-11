@@ -1,8 +1,9 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { Helmet } from "react-helmet";
 
 // ეს იქნება რეალურად ჰედერი რომელსაც აპში გამოვიყენებთ რადგან ყველგან ჩანდეს
-import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import BurgerMenu from "./BurgerMenu/BurgerMenu";
+import EnterTheSystem from "./EnterTheSystem/EnterTheSystem";
 
 export default function Header() {
   return (
@@ -23,17 +24,10 @@ export default function Header() {
             flex: "1",
             flexDirection: "row",
             alignItems: "center",
-            gap: "1rem",
+            gap: "2rem",
           }}
         >
-          <Box>
-            <MenuOpenIcon
-              sx={{
-                cursor: "pointer",
-                fontSize: "3rem",
-              }}
-            />
-          </Box>
+         <BurgerMenu />
           <Box>
             <Typography
               variant={"h1"}
@@ -44,6 +38,12 @@ export default function Header() {
                 fontFamily: "'Libre Baskerville', serif",
                 fontWeight: 700,
                 letterSpacing: "1px",
+                position:"fixed",
+                zIndex:1000,
+                paddingInlineStart:"5rem",
+                top:"0",
+                margin:"0",
+                left:"0"
               }}
             >
               MOYA
@@ -51,29 +51,7 @@ export default function Header() {
           </Box>
         </Stack>
 
-        <Stack
-          sx={{
-            flexDirection: "row",
-            justifyContent: "end",
-            paddingInlineEnd: "1rem",
-            gap: "1rem",
-            marginBlockEnd: "2rem",
-            alignItems: "center",
-            // backgroundColor:"blue"
-          }}
-        >
-          
-          <Box>
-            <Button sx={{ color: "red", textTransform: "capitalize" }}>
-              Sign In
-            </Button>
-          </Box>
-          <Box>
-            <Button sx={{ color: "red", textTransform: "capitalize" }}>
-              Sign Up
-            </Button>
-          </Box>
-        </Stack>
+       <EnterTheSystem />
       </Stack>
     </Box>
   );

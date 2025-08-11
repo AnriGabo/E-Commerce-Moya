@@ -1,7 +1,7 @@
 
 import { Stack } from "@mui/material";
 import VideoSlider from "../../Components/VideoCarousel/VideoSlider";
-import Collection from "../../Components/PhotoGallery/Collection";
+import Collection from "../../Components/PhotoGallery/TheNewCollection";
 
 const HomePage = () => {
   return (
