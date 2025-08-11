@@ -1,38 +1,50 @@
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
+
+import Kneel from "../../Images/FashionModel6.jpg";
+import KneelShirt from "../../Images/FashionModel11.jpg";
 
 const ImageSlider = [
   {
-    img: "/src/Images/ModelViewN2.jpg",
+    img: Kneel,
+    h5: "Look 01",
   },
 
   {
-    img: "/src/Images/ModelViewN3.jpg",
-  },
-  {
-    img: "/src/Images/ModelViewN4.jpg",
+    img: KneelShirt,
+    h5: "Look 02",
   },
 ];
 
 const PhotoSlider = () => {
   return (
-    <Stack sx={{ marginBlock: "5rem" }}>
+    <Stack sx={{ marginBlockStart: "8rem" }}>
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(3,1fr)",
-          marginInlineStart: "5rem",
-          gap: "2rem",
+          gridTemplateColumns: "repeat(2,1fr)",
+          marginInlineStart: "1rem",
         }}
       >
         {ImageSlider.map((Item2, I) => (
-          <Box>
+          <Stack>
             <img
               src={Item2.img}
               key={I}
               alt={`Image-${I}`}
-              style={{ width: "90%" }}
+              style={{ width: "100%", cursor: "pointer", objectFit: "cover" }}
             />
-          </Box>
+            <Box sx={{ marginBlockStart: "1rem",marginInlineStart:"0.2rem" }}>
+              <Typography
+                component={"h4"}
+                sx={{
+                  fontSize: "1rem",
+                  fontFamily: "'Playfair Display', serif;",
+                }}
+              >
+                {Item2.h5}
+              </Typography>
+            </Box>
+          </Stack>
         ))}
       </Box>
     </Stack>
