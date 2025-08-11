@@ -5,11 +5,11 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const videos = [
   "/src/Videos/FashionModel1.mp4",
+  "/src/Videos/FashionModel5.mp4",
   "/src/Videos/FashionModel4.mp4",
   "/src/Videos/FashionModel2.mp4",
   "/src/Videos/FashionModel3.mp4",
 ];
-console.log(videos.length);
 
 export default function VideoSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -24,11 +24,11 @@ export default function VideoSlider() {
 
   return (
     <Box
-      sx={{ display: "flex", justifyContent: "center", marginBlock: "2rem" }}
+      sx={{ display: "flex", justifyContent: "center", marginBlock: "6rem" }}
     >
       <video
-        key={videos[currentIndex]} // ეს აუცილებელია ვიდეოს თავიდან ჩატვირთვისთვის
-        src={videos[currentIndex]} // ეს ფაქტიურად ნიშნავს src={videos[1]}
+        key={videos[currentIndex]}
+        src={videos[currentIndex]}
         autoPlay
         playsInline
         muted
@@ -48,7 +48,7 @@ export default function VideoSlider() {
         style={navBtnStyle("right")}
         sx={{ color: "black", border: "none" }}
       >
-        <ArrowForwardIcon/>
+        <ArrowForwardIcon />
       </Button>
     </Box>
   );
