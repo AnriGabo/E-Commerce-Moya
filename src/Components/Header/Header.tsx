@@ -1,19 +1,20 @@
-import { Box, Stack, Typography } from "@mui/material";
-import { Helmet } from "react-helmet";
-
+import { Box, Stack } from "@mui/material";
+import { HelmetProvider } from 'react-helmet-async';
 // ეს იქნება რეალურად ჰედერი რომელსაც აპში გამოვიყენებთ რადგან ყველგან ჩანდეს
-import BurgerMenu from "./BurgerMenu/BurgerMenu";
+import CustomMainTitleTypography from "../CustomMuiComponents/CustomPageTitleTypography";
+// import BurgerMenu from "./BurgerMenu/BurgerMenu";
+import OpenMenu from "./BurgerMenu/OpenMenu";
 import EnterTheSystem from "./EnterTheSystem/EnterTheSystem";
 
 export default function Header() {
   return (
     <Box component={"header"}>
-      <Helmet>
+      <HelmetProvider>
         <link
           href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap"
           rel="stylesheet"
         />
-      </Helmet>
+      </HelmetProvider>
       <Stack
         sx={{
           flexDirection: "row",
@@ -27,28 +28,8 @@ export default function Header() {
             gap: "2rem",
           }}
         >
-         <BurgerMenu />
-          <Box>
-            <Typography
-              variant={"h1"}
-              component={"h2"}
-              sx={{
-                fontSize: "7rem",
-                cursor: "pointer",
-                fontFamily: "'Libre Baskerville', serif",
-                fontWeight: 700,
-                letterSpacing: "1px",
-                position:"fixed",
-                zIndex:1000,
-                paddingInlineStart:"5rem",
-                top:"0",
-                margin:"0",
-                left:"0"
-              }}
-            >
-              MOYA
-            </Typography>
-          </Box>
+         <OpenMenu />
+         <CustomMainTitleTypography>MOYA</CustomMainTitleTypography>
         </Stack>
 
        <EnterTheSystem />
