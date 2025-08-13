@@ -1,52 +1,97 @@
 import { Box, Stack, Typography } from "@mui/material";
+import { HelmetProvider } from "react-helmet-async";
 
-import Kneel from "../../Images/FashionModel6.jpg";
-import KneelShirt from "../../Images/FashionModel11.jpg";
+import Kneel from "../../Images/BlackFashionModel4.jpg";
+import KneelShirt from "../../Images/BlackFashionModel5.jpg";
 
 const ImageSlider = [
   {
     img: Kneel,
-    h5: "Look 01",
   },
 
   {
     img: KneelShirt,
-    h5: "Look 02",
+    h4: "SPECIAL EDITION",
+    h5: "MOYA WOMAN COLLECTION",
+    h6: "BLACK FRAME / 003",
   },
 ];
 
 const PhotoSlider = () => {
   return (
-    <Stack sx={{ marginBlockStart: "8rem" }}>
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(2,1fr)",
-          marginInlineStart: "1rem",
-        }}
-      >
-        {ImageSlider.map((Item2, I) => (
-          <Stack>
-            <img
-              src={Item2.img}
-              key={I}
-              alt={`Image-${I}`}
-              style={{ width: "100%", cursor: "pointer", objectFit: "cover" }}
-            />
-            <Box sx={{ marginBlockStart: "1rem",marginInlineStart:"0.2rem" }}>
-              <Typography
-                component={"h4"}
-                sx={{
-                  fontSize: "1rem",
-                  fontFamily: "'Playfair Display', serif;",
-                }}
-              >
-                {Item2.h5}
-              </Typography>
-            </Box>
-          </Stack>
-        ))}
-      </Box>
+    <Stack
+      sx={{
+        marginBlockStart: "8rem",
+        display: "grid",
+        gridTemplateColumns: "repeat(2,1fr)",
+        marginInlineStart: "1rem",
+      }}
+    >
+      <HelmetProvider>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
+      </HelmetProvider>
+      {ImageSlider.map((Item, I) => (
+        <Stack key={I}>
+          <img
+            src={Item.img}
+            alt={`Image-${I}`}
+            style={{ width: "100%", cursor: "pointer", objectFit: "cover" }}
+          />
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "flex-end",
+              flexDirection: "column",
+              paddingBlockStart: "1rem",
+            }}
+          >
+            <Typography
+              component={"h4"}
+              sx={{
+                fontFamily: "'Bodoni Moda', serif",
+                letterSpacing: "2px",
+                textTransform: "uppercase",
+                fontWeight: 500,
+              }}
+            >
+              {Item.h4}
+            </Typography>
+            <Typography
+              component={"h4"}
+              sx={{
+                fontFamily: "'Montserrat', sans-serif",
+                letterSpacing: "1px",
+                textTransform: "uppercase",
+                fontWeight: 500,
+              }}
+            >
+              {Item.h5}
+            </Typography>
+            <Typography
+              component={"h4"}
+              sx={{
+                fontFamily: "'Playfair Display', serif",
+                letterSpacing: "1.5px",
+                textTransform: "uppercase",
+                fontWeight: 500,
+              }}
+            >
+              {Item.h6}
+            </Typography>
+          </Box>
+        </Stack>
+      ))}
     </Stack>
   );
 };

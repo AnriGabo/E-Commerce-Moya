@@ -1,3 +1,5 @@
+// ეს გვერდი დასასრულებელი :)
+
 import { Stack } from "@mui/material";
 import FashionBag0 from "../../Images/FashionBag1.jpg";
 import FashionBag1 from "../../Images/FashionBag2.jpg";
@@ -13,12 +15,31 @@ const LuxuryBag = [
 
 const FashionBag = () => {
   return (
-    <Stack sx={{ flexDirection: "row", marginBlockStart: "8rem", }}>
-      <Stack sx={{flexDirection:"row",gap: "3rem",marginInlineStart:"7rem"}}>
-        {LuxuryBag.map((Item, I) => (
-          <img src={Item.img} alt={`Item ${I}`} style={{ width: "45%" }}></img>
-        ))}
-      </Stack>
+    <Stack
+      sx={{
+        marginBlockStart: "7rem",
+        display: "grid",
+        gridTemplateColumns: "repeat(2,1fr)",
+        gap:"3rem"
+      }}
+    >
+      {LuxuryBag.map((Item, I) => (
+        <Stack
+          key={I}
+          sx={{
+            flexDirection: "row",
+            marginInlineStart: "1rem",
+          }}
+        >
+          {Item.img && (
+            <img
+              src={Item.img}
+              alt={`Fashion Model Bag ${I}`}
+              style={{ width: "100%", objectFit: "cover" }}
+            />
+          )}
+        </Stack>
+      ))}
     </Stack>
   );
 };
