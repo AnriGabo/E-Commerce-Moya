@@ -1,22 +1,21 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
-import PhotoSlider from "./PhotoSlider";
-import SummerCollection from "./SummerCollection";
+import { HelmetProvider } from "react-helmet-async";
 
-import { Helmet } from "react-helmet";
+import PhotoSlider from "./PhotoSlider";
 import FashionBag from "./FashionBag";
-import SpringCollection from "./SpringCollection";
+import SpringCollection from "./FashionCollection/SpringCollection";
+import SummerCollection from "./FashionCollection/SummerCollection";
+import FashionModel from "./FashionModel";
 
 const Collection = () => {
- 
-
   return (
     <Stack sx={{ marginBlock: "2rem" }}>
-      <Helmet>
+      <HelmetProvider>
         <link
           href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap"
           rel="stylesheet"
         />
-      </Helmet>
+      </HelmetProvider>
 
       <Box sx={{ marginBlock: "4rem" }}>
         <Typography
@@ -32,12 +31,11 @@ const Collection = () => {
           The New
         </Typography>
       </Box>
-   
+
       <SpringCollection />
       <PhotoSlider />
+      <FashionModel />
       <SummerCollection />
-      {/* ვტესტავთ */}
-      {/* <SummerCollection /> */}
 
       <Divider
         sx={{
