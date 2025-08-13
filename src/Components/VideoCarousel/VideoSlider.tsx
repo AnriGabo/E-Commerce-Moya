@@ -7,7 +7,6 @@ const videos = [
   "/src/Videos/FashionModel1.mp4",
   "/src/Videos/FashionModel5.mp4",
   "/src/Videos/FashionModel4.mp4",
-  "/src/Videos/FashionModel2.mp4",
   "/src/Videos/FashionModel3.mp4",
 ];
 
