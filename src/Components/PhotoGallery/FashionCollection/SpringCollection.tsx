@@ -1,11 +1,13 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
-import FashionModel3 from "../../Images/FashionModel3.jpg";
-import FashionModel4 from "../../Images/FashionModel4.jpg";
-import FashionModel5 from "../../Images/FashionModel5.jpg";
+
+import FashionModel3 from "../../../Images/FashionModel3.jpg";
+import FashionModel4 from "../../../Images/FashionModel4.jpg";
+import FashionModel5 from "../../../Images/FashionModel5.jpg";
+import CustomBoxComponent from "../../CustomMuiComponents/CustomBoxComponent";
+import CustomImageDescriptionTypography from "../../CustomMuiComponents/CustomImageDescriptionTypo";
 
 const SpringCollectionGallery = [
-  
   {
     img: FashionModel3,
   },
@@ -24,13 +26,7 @@ const SpringCollectionGallery = [
 
 const SpringCollection = () => {
   return (
-    <Stack
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "repeat(2,1fr)",
-        gridTemplateRows: "repeat(2,1fr)",
-      }}
-    >
+    <CustomBoxComponent>
       {SpringCollectionGallery.map((Item, i) => (
         <Box key={i} sx={{ display: "flex", flexDirection: "column" }}>
           {Item.img && (
@@ -57,30 +53,16 @@ const SpringCollection = () => {
             >
               {Item.h4}
             </Typography>
-            <Typography
-              sx={{
-                fontFamily: `"Didot", "Bodoni MT", "Palatino Linotype", "Book Antiqua", Palatino, "Garamond", "Georgia", "Times New Roman", Times, serif`,
-                fontWeight: 570,
-                letterSpacing: "0.5px",
-                fontSize: "1.2rem",
-              }}
-            >
+            <CustomImageDescriptionTypography>
               <i>{Item.h5}</i>
-            </Typography>
-            <Typography
-              sx={{
-                fontFamily: `"Didot", "Bodoni MT", "Palatino Linotype", "Book Antiqua", Palatino, "Garamond", "Georgia", "Times New Roman", Times, serif`,
-                fontWeight: 570,
-                letterSpacing: "0.5px",
-                fontSize: "1.2rem",
-              }}
-            >
+            </CustomImageDescriptionTypography>
+            <CustomImageDescriptionTypography>
               <i>{Item.h6}</i>
-            </Typography>
+            </CustomImageDescriptionTypography>
           </Box>
         </Box>
       ))}
-    </Stack>
+    </CustomBoxComponent>
   );
 };
 

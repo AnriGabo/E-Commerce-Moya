@@ -1,30 +1,27 @@
 import { Box, Stack, Typography } from "@mui/material";
+
+import FashionModel12 from "../../Images/BlackFashionModel3.jpg";
+import FashionModel13 from "../../Images/BlackFashionModel2.jpg";
 import { HelmetProvider } from "react-helmet-async";
 
-import BlackWomanFashionModel from "../../Images/BlackFashionModel4.jpg";
-import BlackWomanFashionModelWithKneel from "../../Images/BlackFashionModel5.jpg";
-
-const ImageSlider = [
+const FashionModelStyle = [
   {
-    img: BlackWomanFashionModel,
+    img: FashionModel12,
   },
-
   {
-    img: BlackWomanFashionModelWithKneel,
-    h4: "SPECIAL EDITION",
+    img: FashionModel13,
+    h4: "LIMITED DROP",
     h5: "MOYA WOMAN COLLECTION",
-    h6: "BLACK FRAME / 003",
+    h6: "BLACK CUT / 003",
   },
 ];
-
-const PhotoSlider = () => {
+const FashionModel = () => {
   return (
     <Stack
       sx={{
-        marginBlockStart: "8rem",
         display: "grid",
         gridTemplateColumns: "repeat(2,1fr)",
-        marginInlineStart: "1rem",
+        marginBlockStart: "8rem",
       }}
     >
       <HelmetProvider>
@@ -41,13 +38,15 @@ const PhotoSlider = () => {
           rel="stylesheet"
         />
       </HelmetProvider>
-      {ImageSlider.map((Item, I) => (
-        <Stack key={I}>
-          <img
-            src={Item.img}
-            alt={`Image-${I}`}
-            style={{ width: "100%", cursor: "pointer", objectFit: "cover" }}
-          />
+      {FashionModelStyle.map((Item, I) => (
+        <Stack key={I} sx={{ display: "flex", flexDirection: "column" }}>
+          {Item.img && (
+            <img
+              src={Item.img}
+              alt={`Fashion Model Style ${I}`}
+              style={{ width: "100%", objectFit: "cover" }}
+            />
+          )}
           <Box
             sx={{
               display: "flex",
@@ -61,7 +60,6 @@ const PhotoSlider = () => {
               sx={{
                 fontFamily: "'Bodoni Moda', serif",
                 letterSpacing: "2px",
-                textTransform: "uppercase",
                 fontWeight: 500,
               }}
             >
@@ -70,10 +68,9 @@ const PhotoSlider = () => {
             <Typography
               component={"h4"}
               sx={{
-                fontFamily: "'Montserrat', sans-serif",
-                letterSpacing: "1px",
-                textTransform: "uppercase",
+                letterSpacing: "2px",
                 fontWeight: 500,
+                fontFamily: "Montserrat, sans-serif",
               }}
             >
               {Item.h5}
@@ -81,10 +78,9 @@ const PhotoSlider = () => {
             <Typography
               component={"h4"}
               sx={{
-                fontFamily: "'Playfair Display', serif",
-                letterSpacing: "1.5px",
-                textTransform: "uppercase",
+                letterSpacing: "2px",
                 fontWeight: 500,
+                fontFamily: "Playfair Display, serif",
               }}
             >
               {Item.h6}
@@ -96,4 +92,4 @@ const PhotoSlider = () => {
   );
 };
 
-export default PhotoSlider;
+export default FashionModel;
