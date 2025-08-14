@@ -1,11 +1,13 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
 import { HelmetProvider } from "react-helmet-async";
 
-import PhotoSlider from "./PhotoSlider";
-import FashionBag from "./FashionBag";
+import FashionDesignChapter5 from "./FashionCollection/FashionDesignChapter5";
+import MainFashionDesign from "./FashionCollection/MainFashionDesign";
 import SpringCollection from "./FashionCollection/SpringCollection";
 import SummerCollection from "./FashionCollection/SummerCollection";
 import FashionModel from "./FashionModel";
+import PhotoSlider from "./PhotoSlider";
+import ZaraWomanCollection from "./FashionBag";
 
 const Collection = () => {
   return (
@@ -36,18 +38,23 @@ const Collection = () => {
       <PhotoSlider />
       <FashionModel />
       <SummerCollection />
+      <MainFashionDesign />
 
-      <Divider
-        sx={{
-          backgroundColor: "rgba(0,0,0,0.1)",
-          height: "2px",
-          marginBlockStart: "8rem",
-          marginInline: "10rem",
-        }}
-      />
-
-      <FashionBag />
-      {/* <FashionBag /> */}
+      <FashionDesignChapter5 />
+      <Divider sx={{ marginBlockStart: "4rem", marginInline: "5rem" }}>
+        <Typography
+          sx={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "1rem",
+            fontWeight: 500,
+            letterSpacing: "0.05em",
+          }}
+        >
+          {" "}
+          Zara Woman /2025 Collection
+        </Typography>
+      </Divider>
+      <ZaraWomanCollection />
     </Stack>
   );
 };
