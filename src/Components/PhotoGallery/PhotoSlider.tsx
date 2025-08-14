@@ -13,7 +13,7 @@ const ImageSlider = [
     img: BlackWomanFashionModelWithKneel,
     h4: "SPECIAL EDITION",
     h5: "MOYA WOMAN COLLECTION",
-    h6: "BLACK FRAME / 003",
+    h6: "BLACK FRAME / 002",
   },
 ];
 

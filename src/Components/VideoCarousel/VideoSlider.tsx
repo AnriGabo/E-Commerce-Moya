@@ -1,7 +1,7 @@
-import { Box, Button } from "@mui/material";
-import { useState } from "react";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { Button, Stack } from "@mui/material";
+import { useState } from "react";
 
 const videos = [
   "/src/Videos/FashionModel1.mp4",
@@ -22,8 +22,13 @@ export default function VideoSlider() {
   };
 
   return (
-    <Box
-      sx={{ display: "flex", justifyContent: "center", marginBlock: "6rem" }}
+    <Stack
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        marginBlockStart: "6rem",
+        flexDirection: "row",
+      }}
     >
       <video
         key={videos[currentIndex]}
@@ -40,16 +45,16 @@ export default function VideoSlider() {
         style={navBtnStyle("left")}
         sx={{ color: "black" }}
       >
-        <ArrowBackIcon />
+        <ArrowBackIcon sx={{ fontSize: "1.8rem" }} />
       </Button>
       <Button
         onClick={goToNext}
         style={navBtnStyle("right")}
         sx={{ color: "black", border: "none" }}
       >
-        <ArrowForwardIcon />
+        <ArrowForwardIcon sx={{ fontSize: "1.8rem" }} />
       </Button>
-    </Box>
+    </Stack>
   );
 }
 

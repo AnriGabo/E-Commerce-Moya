@@ -16,7 +16,7 @@ const summerCollectionImg = [
     img: SummerCollectionCloth3,
   },
   {
-    h4: "002",
+    h4: "004",
     h5: "summer,woman",
     h6: "collection",
   },
@@ -47,15 +47,15 @@ const SummerCollection = () => {
               <Typography
                 variant={"h4"}
                 component={"h5"}
-                sx={{ fontWeight: "bold" }}
+                sx={{ fontWeight: "bold",letterSpacing:"0.5rem" }}
               >
                 {Item.h4}
               </Typography>
               <CustomImageDescriptionTypography>
-                <i>{Item.h5}</i>
+                {Item.h5}
               </CustomImageDescriptionTypography>
               <CustomImageDescriptionTypography>
-                <i>{Item.h6}</i>
+                {Item.h6}
               </CustomImageDescriptionTypography>
             </Box>
           </Stack>
