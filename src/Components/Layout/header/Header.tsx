@@ -1,8 +1,8 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
 import { HelmetProvider } from "react-helmet-async";
-import CustomMainTitleTypography from "../CustomMuiComponents/CustomPageTitleTypography";
-import BurgerMenu from "./BurgerMenu/BurgerMenu";
-import EnterTheSystem from "./Auth/EnterTheSystem";
+import CustomMainTitleTypography from "../../CustomMuiComponents/PageTitle";
+import EnterTheSystem from "../header/AuthLink";
+import BurgerMenu from "../header/BurgerMenu";
 
 export default function Header() {
   return (

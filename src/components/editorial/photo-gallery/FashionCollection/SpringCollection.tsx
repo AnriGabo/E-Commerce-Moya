@@ -3,8 +3,8 @@ import { Box, Typography } from "@mui/material";
 import FashionModel3 from "../../../Images/FashionModel3.jpg";
 import FashionModel4 from "../../../Images/FashionModel4.jpg";
 import FashionModel5 from "../../../Images/FashionModel5.jpg";
-import CustomBoxComponent from "../../CustomMuiComponents/CustomBoxComponent";
-import CustomImageDescriptionTypography from "../../CustomMuiComponents/CustomImageDescriptionTypo";
+import CustomBoxComponent from "../../CustomMuiComponents/BoxContainer";
+import CustomImageDescriptionTypography from "../../CustomMuiComponents/ImageCaption";
 
 const SpringCollectionGallery = [
   {

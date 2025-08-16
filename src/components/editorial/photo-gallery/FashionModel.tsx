@@ -1,15 +1,15 @@
 import { Box, Stack, Typography } from "@mui/material";
 
-import FashionModel12 from "../../Images/BlackFashionModel3.jpg";
-import FashionModel13 from "../../Images/BlackFashionModel2.jpg";
+import BlackFashionModel3 from "../../Assets/Images/BlackFashionModel3.jpg";
+import BlackFashionModel2 from "../../Assets/Images/BlackFashionModel2.jpg";
 import { HelmetProvider } from "react-helmet-async";
 
 const FashionModelStyle = [
   {
-    img: FashionModel12,
+    img: BlackFashionModel3,
   },
   {
-    img: FashionModel13,
+    img: BlackFashionModel2,
     h4: "LIMITED DROP",
     h5: "MOYA WOMAN COLLECTION",
     h6: "BLACK CUT / 003",

@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import "./App.css";
-import Header from "./Components/Header/Header";
+import Header from "./Components/Layout/header/Header";
 import HomePage from "./pages/Home/Home";
 
 function App() {
