@@ -1,8 +1,8 @@
 import { Stack } from "@mui/material";
-import Zara2025CollectionN0 from "../../Images/ZaraWomanCollection.jpg";
-import Zara2025CollectionN1 from "../../Images/ZaraWomanCollection1.jpg";
-import Zara2025Keys from "../../Images/ZaraKeys.jpg";
-import Zara2025Jewellery from "../../Images/ZaraJewellery.jpg";
+import Zara2025CollectionN0 from "../../../Assets/Images/ZaraWomanCollection.jpg";
+import Zara2025CollectionN1 from "../../../Assets/Images/ZaraWomanCollection1.jpg";
+import Zara2025Keys from "../../../Assets/Images/ZaraKeys.jpg";
+import Zara2025Jewellery from "../../../Assets/Images/ZaraJewellery.jpg";
 
 const ZaraCollectionOf2025 = [
   {

@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import Fashioniko from "../../../Images/FashionModelNewChapter1.jpg";
+import Fashioniko from "../../../../Assets/Images/FashionModelNewChapter1.jpg"
 
 const FashionDesignChapter6 = () => {
   return (

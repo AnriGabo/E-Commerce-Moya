@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import MainFashionModel from "../../../Images/MainFashionModel.jpg";
+import MainFashionModel from "../../../../Assets/Images/MainFashionModel.jpg"
 
 const MainModels = [
   {

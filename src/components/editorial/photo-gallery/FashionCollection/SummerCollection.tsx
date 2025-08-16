@@ -1,9 +1,12 @@
 import { Box, Stack, Typography } from "@mui/material";
-import SummerCollectionCloth from "../../../Images/FashionModel0.jpg";
-import SummerCollectionCloth2 from "../../../Images/FashionModel1.jpg";
-import SummerCollectionCloth3 from "../../../Images/FashionModel2.jpg";
-import CustomBoxComponent from "../../CustomMuiComponents/BoxContainer";
-import CustomImageDescriptionTypography from "../../CustomMuiComponents/ImageCaption";
+import SummerCollectionCloth from "../../../../Assets/Images/FashionModel0.jpg"
+import SummerCollectionCloth2 from "../../../../Assets/Images/FashionModel1.jpg";
+import SummerCollectionCloth3 from "../../../../Assets/Images/FashionModel2.jpg";
+
+
+
+import CustomBoxComponent from "../../../MuiUI/BoxContainer";
+import CustomImageDescriptionTypography from "../../../MuiUI/ImageCaption";
 
 const summerCollectionImg = [
   {

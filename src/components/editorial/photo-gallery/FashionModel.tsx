@@ -1,7 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
 
-import BlackFashionModel3 from "../../Assets/Images/BlackFashionModel3.jpg";
-import BlackFashionModel2 from "../../Assets/Images/BlackFashionModel2.jpg";
+import BlackFashionModel3 from "../../../Assets/Images/BlackFashionModel3.jpg"
+import BlackFashionModel2 from "../../../Assets/Images/BlackFashionModel2.jpg"
 import { HelmetProvider } from "react-helmet-async";
 
 const FashionModelStyle = [

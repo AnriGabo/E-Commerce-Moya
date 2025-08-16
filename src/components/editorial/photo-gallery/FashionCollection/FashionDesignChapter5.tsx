@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import NewChapterDesign from "../../../Images/FashionModelNewChapter0.jpg";
+import NewChapterDesign from "../../../../Assets/Images/FashionModelNewChapter0.jpg";
 import FashionDesignChapter6 from "./FashionDesignChapter6";
 
 const Fashion = [

@@ -1,8 +1,8 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { HelmetProvider } from "react-helmet-async";
 
-import BlackWomanFashionModel from "../../Images/BlackFashionModel4.jpg";
-import BlackWomanFashionModelWithKneel from "../../Images/BlackFashionModel5.jpg";
+import BlackWomanFashionModel from "../../../Assets/Images/BlackFashionModel4.jpg";
+import BlackWomanFashionModelWithKneel from "../../../Assets/Images/BlackFashionModel5.jpg";
 
 const ImageSlider = [
   {
