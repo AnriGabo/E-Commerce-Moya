@@ -3,13 +3,12 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Button, Stack } from "@mui/material";
 import { useState } from "react";
 
-import VideoSlider0 from "../../../Assets/Videos/FashionModel1.mp4";
-import VideoSlider1 from "../../../Assets/Videos/FashionModel5.mp4";
-import VideoSlider2 from "../../../Assets/Videos/FashionModel4.mp4";
+import VideoSlider1 from "../../../Assets/Videos/FashionModel1.mp4";
+import VideoSlider4 from "../../../Assets/Videos/FashionModel4.mp4";
 import VideoSlider3 from "../../../Assets/Videos/FashionModel3.mp4";
-// 1 5 4 3
+import VideoSlider2 from "../../../Assets/Videos/FashionMode2.mp4";
 
-const videos = [VideoSlider0, VideoSlider2, VideoSlider3, VideoSlider1];
+const videos = [VideoSlider2, VideoSlider1, VideoSlider4, VideoSlider3];
 
 export default function VideoSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
