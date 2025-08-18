@@ -1,6 +1,6 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Button, Stack } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import { useState } from "react";
 
 import VideoSlider1 from "../../../Assets/Videos/FashionModel1.mp4";
@@ -26,19 +26,30 @@ export default function VideoSlider() {
       sx={{
         display: "flex",
         justifyContent: "center",
+        alignItems:"center",
         marginBlockStart: "6rem",
-        flexDirection: "row",
       }}
     >
-      <video
-        key={videos[currentIndex]}
-        src={videos[currentIndex]}
-        autoPlay
-        playsInline
-        muted
-        loop
-        style={{ width: "50%", objectFit: "cover" }}
-      />
+      <Box
+        sx={{width:"50%"}}
+      >
+        <Box sx={{ aspectRatio: "16 / 9", width: "100%" }}>
+          <video
+            key={videos[currentIndex]}
+            src={videos[currentIndex]}
+            autoPlay
+            playsInline
+            muted
+            loop
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "block",
+              objectFit: "cover",
+            }}
+          />
+        </Box>
+      </Box>
 
       <Button
         onClick={goToPrev}
