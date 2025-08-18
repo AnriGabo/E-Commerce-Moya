@@ -1,11 +1,18 @@
-import { Box, Divider, Stack } from "@mui/material";
+import { Box, ButtonBase, Divider, Stack } from "@mui/material";
 import { HelmetProvider } from "react-helmet-async";
+import { NavLink } from "react-router-dom";
 import CustomMainTitleTypography from "../../MuiUI/PageTitle";
 import BurgerMenu from "../burgermenu/BurgerMenu";
 import EnterTheSystem from "../header/AuthLink";
 import AnnouncmentBar from "./AnnouncmentBar";
 
 export default function Header() {
+  const handleClick = () => {
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    })
+  }
   return (
     <Box component={"header"}>
       <AnnouncmentBar />
@@ -23,7 +30,7 @@ export default function Header() {
           justifyContent: "space-between",
           alignItems: "center",
           marginBlockStart: "2rem",
-          marginInline:"2rem",
+          marginInline: "2rem",
         }}
       >
         <Stack
@@ -35,12 +42,12 @@ export default function Header() {
           <Box>
             <BurgerMenu />
           </Box>
-          <CustomMainTitleTypography>MOYA</CustomMainTitleTypography>
+          <ButtonBase component={NavLink} to={"/"} onClick={handleClick}>
+            <CustomMainTitleTypography>MOYA</CustomMainTitleTypography>
+          </ButtonBase>
         </Stack>
 
-        <Box>
-          <EnterTheSystem />
-        </Box>
+        <EnterTheSystem />
       </Stack>
     </Box>
   );
