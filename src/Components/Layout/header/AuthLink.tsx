@@ -3,12 +3,7 @@ import LoginIcon from "@mui/icons-material/Login";
 
 const EnterTheSystem = () => {
   return (
-    <Stack
-      sx={{
-        paddingInlineEnd: "1rem",
-        alignItems: "flex-end",
-      }}
-    >
+    <Stack>
       <Button
         sx={{
           textTransform: "capitalize",
@@ -23,17 +18,15 @@ const EnterTheSystem = () => {
             fontSize: "1rem",
             letterSpacing: "1px",
             color: "black",
+            gap: "0.4rem",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
-            gap: "0.4rem",
           }}
         >
-          Login to your account
+          Access your account
           <LoginIcon />
         </Typography>
       </Button>
-      
     </Stack>
   );
 };

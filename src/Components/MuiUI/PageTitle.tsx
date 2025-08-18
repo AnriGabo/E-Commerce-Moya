@@ -21,10 +21,8 @@ export default function CustomMainTitleTypography({
           letterSpacing: "1px",
           position: "fixed",
           zIndex: 1000,
-          paddingInlineStart: "8rem",
-          top: "1rem",
-          margin: "0",
-          left: "0",
+          top: "2rem",
+         
         }}
       >
         {children}

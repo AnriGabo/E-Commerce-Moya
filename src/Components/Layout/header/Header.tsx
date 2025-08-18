@@ -1,36 +1,14 @@
-import { Box, Divider, Stack, Typography } from "@mui/material";
+import { Box, Divider, Stack } from "@mui/material";
 import { HelmetProvider } from "react-helmet-async";
 import CustomMainTitleTypography from "../../MuiUI/PageTitle";
+import BurgerMenu from "../burgermenu/BurgerMenu";
 import EnterTheSystem from "../header/AuthLink";
-import BurgerMenu from "../header/BurgerMenu";
+import AnnouncmentBar from "./AnnouncmentBar";
 
 export default function Header() {
   return (
     <Box component={"header"}>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "33px",
-        }}
-      >
-        <Typography
-          component={"h4"}
-          sx={{
-            fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 500,
-            fontSize: { xs: 11, md: 12 },
-            letterSpacing: "0.7px",
-            whiteSpace: "nowrap",
-          }}
-        >
-          FREE SHIPPING OVER 100 GEL ·{" "}
-          <Box component="span" sx={{ fontWeight: 600 }}>
-            30-DAY RETURNS
-          </Box>
-        </Typography>
-      </Box>
+      <AnnouncmentBar />
       <Divider sx={{ marginInline: "30rem" }}></Divider>
 
       <HelmetProvider>
@@ -39,19 +17,30 @@ export default function Header() {
           rel="stylesheet"
         />
       </HelmetProvider>
-      <Stack>
+      <Stack
+        sx={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBlockStart: "2rem",
+          marginInline:"2rem",
+        }}
+      >
         <Stack
           sx={{
-            flex: "1",
             flexDirection: "row",
-            alignItems: "center",
-            gap: "2rem",
+            gap: "3rem",
           }}
         >
-          <BurgerMenu />
+          <Box>
+            <BurgerMenu />
+          </Box>
           <CustomMainTitleTypography>MOYA</CustomMainTitleTypography>
         </Stack>
-        <EnterTheSystem />
+
+        <Box>
+          <EnterTheSystem />
+        </Box>
       </Stack>
     </Box>
   );
