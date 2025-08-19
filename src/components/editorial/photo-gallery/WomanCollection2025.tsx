@@ -46,7 +46,7 @@ const ZaraWomanCollection = () => {
             <img
               src={Item.img}
               alt={`Fashion Model 2025 Collection ${I}`}
-              style={{ width: "100%", objectFit: "cover", cursor: "pointer" }}
+              style={{ width: "100%", cursor: "pointer" }}
             />
           )}
         </Stack>

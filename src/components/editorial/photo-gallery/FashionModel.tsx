@@ -44,7 +44,7 @@ const FashionModel = () => {
             <img
               src={Item.img}
               alt={`Fashion Model Style ${I}`}
-              style={{ width: "100%", objectFit: "cover" }}
+              style={{ width: "100%"}}
             />
           )}
           <Box

@@ -33,7 +33,7 @@ const SpringCollection = () => {
             <img
               src={Item.img}
               alt={`Fashion Model Image-${i}`}
-              style={{ width: "100%", objectFit: "cover", cursor: "pointer" }}
+              style={{ width: "100%", cursor: "pointer" }}
             />
           )}
 

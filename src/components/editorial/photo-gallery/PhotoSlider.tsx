@@ -46,7 +46,7 @@ const PhotoSlider = () => {
           <img
             src={Item.img}
             alt={`Image-${I}`}
-            style={{ width: "100%", cursor: "pointer", objectFit: "cover" }}
+            style={{ width: "100%", cursor: "pointer" }}
           />
           <Box
             sx={{
