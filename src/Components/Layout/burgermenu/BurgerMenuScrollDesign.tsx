@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import BurgerMenuVideo from "../../../Assets/Videos/HamburgerMenu1.mp4";
+import BurgerMenuVideo from "../../../Assets/Videos/BurgerMeniuAd.mp4";
 
 const BurgerMenuScrollDesign = () => {
   return (
