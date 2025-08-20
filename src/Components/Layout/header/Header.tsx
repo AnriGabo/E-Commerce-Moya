@@ -2,7 +2,7 @@ import { Box, ButtonBase, Divider, Stack } from "@mui/material";
 import { HelmetProvider } from "react-helmet-async";
 import { NavLink } from "react-router-dom";
 import CustomMainTitleTypography from "../../MuiUI/PageTitle";
-import BurgerMenu from "../burgermenu/BurgerMenu";
+import BurgerMenu from "../burgermenu/HamburgerMenu";
 import EnterTheSystem from "../header/AuthLink";
 import AnnouncmentBar from "./AnnouncmentBar";
 

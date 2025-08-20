@@ -23,6 +23,7 @@ const EnterTheSystem = () => {
             alignItems: "center",
           }}
         >
+          {/* Link გამოვიყენებთ აქ რადგან აქტიური იქნება თუ არა ეს ღილაკი არ გვაინტერესებს */}
           Access your account
           <LoginIcon />
         </Typography>
