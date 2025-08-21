@@ -1,5 +1,7 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
-import Accssesyouraccount from "../../../../Assets/Images/AuthenticationImage.jpg";
+import { Box, Stack, Typography } from "@mui/material";
+import AuthButtons from "./AuthButtons";
+
+import AccountImage from "../../../../Assets/Images/AuthenticationImage.jpg";
 
 const AccountAccessLink = () => {
   return (
@@ -7,13 +9,16 @@ const AccountAccessLink = () => {
       sx={{
         marginInline: "3.5rem",
         marginBlockStart: "6rem",
+        justifyContent: "space-between",
+        flexDirection: "row",
       }}
     >
       <Stack
         sx={{
-          width: "fit-content",
+          width: "22rem",
+          height: "fit-content",
         }}
-        spacing={1.25}
+        spacing={2.75}
       >
         <Typography
           component={"h2"}
@@ -40,28 +45,15 @@ const AccountAccessLink = () => {
             and take advantage of all our services.
           </Typography>
         </Box>
+        <AuthButtons />
       </Stack>
 
-      <Stack
-        sx={{ width: "fit-content", marginBlockStart: "2rem" }}
-        spacing={1.5}
-      >
-        <Button
-          variant="contained"
-          sx={{ width: "13rem", textTransform: "capitalize" }}
-        >
-          Access your account
-        </Button>
-        <Button
-          variant="outlined"
-          sx={{ width: "13rem", textTransform: "capitalize" }}
-        >
-          Registration
-        </Button>
-      </Stack>
-
-      <Box sx={{display:"flex",marginInlineStart:"28rem",marginTop:"-12rem"}}>
-        <img src={Accssesyouraccount} style={{width:"95%"}} />
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <img
+          src={AccountImage}
+          style={{ width: "75%" }}
+          alt="Authlink page image"
+        />
       </Box>
     </Stack>
   );

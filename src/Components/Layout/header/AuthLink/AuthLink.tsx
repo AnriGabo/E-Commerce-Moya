@@ -12,7 +12,7 @@ const EnterTheSystem = () => {
           "&:active": { boxShadow: "none", backgroundColor: "transparent" },
         }}
       >
-        <Link to={"/accsesyourAccount"} style={{textDecoration:"none"}}>
+        <Link to={"/accsesyourAccount"} style={{ textDecoration: "none" }}>
           <Typography
             sx={{
               fontFamily: "'Josefin Sans', sans-serif",
