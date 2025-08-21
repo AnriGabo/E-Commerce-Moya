@@ -3,16 +3,21 @@ import { HelmetProvider } from "react-helmet-async";
 import { NavLink } from "react-router-dom";
 import CustomMainTitleTypography from "../../MuiUI/PageTitle";
 import BurgerMenu from "../burgermenu/HamburgerMenu";
-import EnterTheSystem from "../header/AuthLink";
+import EnterTheSystem from "./AuthLink/AuthLink";
 import AnnouncmentBar from "./AnnouncmentBar";
+import { useLocation } from "react-router-dom";
 
 export default function Header() {
+  const { pathname } = useLocation();
+
+  const hideRoute = pathname.startsWith("/accsesyourAccount");
+
   const handleClick = () => {
     window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    })
-  }
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <Box component={"header"}>
       <AnnouncmentBar />
@@ -46,8 +51,7 @@ export default function Header() {
             <CustomMainTitleTypography>MOYA</CustomMainTitleTypography>
           </ButtonBase>
         </Stack>
-
-        <EnterTheSystem />
+        {!hideRoute && <EnterTheSystem />}
       </Stack>
     </Box>
   );
