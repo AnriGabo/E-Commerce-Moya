@@ -1,10 +1,10 @@
 import { Stack } from "@mui/material";
-import NewChapterDesign from "../../../../Assets/Images/FashionModelNewChapter0.jpg";
+import NewWoman2025Collection from "../../../../Assets/Images/FashionModelNewChapter0.jpg";
 import FashionDesignChapter6 from "./FashionDesignChapter6";
 
 const Fashion = [
   {
-    img: NewChapterDesign,
+    img: NewWoman2025Collection,
   },
 ];
 

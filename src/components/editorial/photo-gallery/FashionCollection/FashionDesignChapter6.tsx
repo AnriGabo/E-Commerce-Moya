@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import Fashioniko from "../../../../Assets/Images/FashionModelNewChapter1.jpg"
+import NewWomanCollection2025 from "../../../../Assets/Images/FashionModelNewChapter1.jpg"
 
 const FashionDesignChapter6 = () => {
   return (
@@ -10,7 +10,7 @@ const FashionDesignChapter6 = () => {
         marginBlockStart: "3rem",
       }}
     >
-      <img src={Fashioniko} alt={"Fashion Model"} style={{width:"90%"}}  />
+      <img src={NewWomanCollection2025} alt={"Fashion Model"} style={{width:"90%"}}  />
       <Box
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
