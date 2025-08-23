@@ -2,15 +2,20 @@ import { Box, ButtonBase, Divider, Stack } from "@mui/material";
 import { HelmetProvider } from "react-helmet-async";
 import { NavLink } from "react-router-dom";
 import CustomMainTitleTypography from "../../MuiUI/PageTitle";
-import BurgerMenu from "../burgermenu/HamburgerMenu";
-import EnterTheSystem from "./AuthLink/AuthLink";
+import BurgerMenu from "../hamburgerMenu/HamburgerMenu";
+import EnterTheSystem from "../AuthLink/AuthLink";
 import AnnouncmentBar from "./AnnouncmentBar";
 import { useLocation } from "react-router-dom";
 
 export default function Header() {
   const { pathname } = useLocation();
 
-  const hideRoute = pathname.startsWith("/accsesyourAccount");
+
+
+  const hideRoute =
+    pathname.startsWith("/registration") ||
+    pathname.startsWith("/signin") ||
+    pathname.startsWith("/accsesyourAccount");
 
   const handleClick = () => {
     window.scrollTo({

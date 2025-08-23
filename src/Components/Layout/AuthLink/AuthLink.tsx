@@ -5,14 +5,13 @@ import { Link } from "react-router-dom";
 const EnterTheSystem = () => {
   return (
     <Stack>
-      <Button
-        sx={{
-          textTransform: "capitalize",
-          "&:hover": { backgroundColor: "transparent", boxShadow: "none" },
-          "&:active": { boxShadow: "none", backgroundColor: "transparent" },
-        }}
-      >
-        <Link to={"/accsesyourAccount"} style={{ textDecoration: "none" }}>
+      <Link to={"/accsesyourAccount"} style={{ textDecoration: "none" }}>
+        <Button
+          sx={{
+            textTransform: "capitalize",
+          
+          }}
+        >
           <Typography
             sx={{
               fontFamily: "'Josefin Sans', sans-serif",
@@ -28,8 +27,8 @@ const EnterTheSystem = () => {
             Access your account
             <LoginIcon />
           </Typography>
-        </Link>
-      </Button>
+        </Button>
+      </Link>
     </Stack>
   );
 };

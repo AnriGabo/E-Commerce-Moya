@@ -5,7 +5,8 @@ import Collection from "./Components/editorial/photo-gallery/TheNewSection";
 import AccountAccessLink from "./Components/Layout/AuthLink/AccountAccessLink";
 import Header from "./Components/Layout/header/Header";
 import HomePage from "./pages/Home/Home";
-import Registration from "./Components/Layout/AuthLink/Registration";
+import Registration from "./Components/Layout/Registration/Registration";
+import SignIn from "./Components/Layout/signIn/SignIn";
 
 function App() {
   return (
@@ -16,8 +17,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/thenewcollection" element={<Collection />} />
         <Route path="/accsesyourAccount" element={<AccountAccessLink />} />
-        <Route path="registration" element={<Registration />} />
-        <Route path="signin" element={""} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/signin" element={<SignIn />} />
       </Routes>
     </Stack>
   );

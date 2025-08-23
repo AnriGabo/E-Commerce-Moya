@@ -7,7 +7,7 @@ const AccountAccessLink = () => {
   return (
     <Stack
       sx={{
-        marginInline: "3.5rem",
+        marginInline: "4rem",
         marginBlockStart: "6rem",
         justifyContent: "space-between",
         flexDirection: "row",
@@ -51,7 +51,7 @@ const AccountAccessLink = () => {
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <img
           src={AccountImage}
-          style={{ width: "75%" }}
+          style={{ width: "73%" }}
           alt="Authlink page image"
         />
       </Box>
