@@ -1,16 +1,12 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import { Box, IconButton } from "@mui/material";
-import { useState } from "react";
-import Unite from "./MenuPanels";
+
 
 const BurgerMenu = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  console.log(isOpen);
 
-  const handleOpen = () => setIsOpen((prev) => !prev);
   return (
     <Box>
-      <IconButton onClick={handleOpen}>
+      <IconButton>
         <MenuIcon
           sx={{
             cursor: "pointer",
@@ -20,7 +16,6 @@ const BurgerMenu = () => {
           }}
         />
       </IconButton>
-      {isOpen  ? <Unite /> : ""}
     </Box>
   );
 };
