@@ -1,7 +1,15 @@
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { IconButton, InputAdornment, Stack } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  InputAdornment,
+  Stack,
+  Typography,
+} from "@mui/material";
 import TextField from "@mui/material/TextField";
+import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
 
 export default function RegistrationTextField() {
@@ -9,7 +17,13 @@ export default function RegistrationTextField() {
   const handleClick = () => setVisiblePass((prev) => !prev);
 
   const [repeatVisiblePass, setRepeatVisiblePass] = useState<boolean>(false);
-  const repeatHandleClick = () => setRepeatVisiblePass((prev) => (!prev));
+  const repeatHandleClick = () => setRepeatVisiblePass((prev) => !prev);
+
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+  };
 
   return (
     <Stack
@@ -56,6 +70,53 @@ export default function RegistrationTextField() {
           ),
         }}
       />
+
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          paddingBlockStart: "0.5rem",
+        }}
+      >
+        <Checkbox
+          checked={checked}
+          onChange={handleChange}
+          inputProps={{ "aria-label": "controlled" }}
+        />
+        <Typography
+          sx={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "1rem",
+            fontWeight: 500,
+            color: "#2c2c2c",
+          }}
+        >
+          I have read the privacy and cookie policy.
+        </Typography>
+      </Box>
+      <Box sx={{ paddingInlineStart: "0.5rem" }}>
+        <Button
+          variant="outlined"
+          sx={{
+            width: "14rem",
+            textTransform: "capitalize",
+            color: "black",
+            border: "1px solid black",
+          }}
+        >
+          <Typography
+            sx={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontSize: "0.875rem", // 14px
+              fontWeight: 400,
+              letterSpacing: "1px",
+              color: "black",
+            }}
+          >
+            Create account
+          </Typography>
+        </Button>
+      </Box>
     </Stack>
   );
 }

@@ -3,7 +3,7 @@ import RegistrationTextField from "./RegistrationField";
 
 const Registration = () => {
   return (
-    <Stack sx={{ marginBlockStart: "6rem", marginInline: "3.5rem" }}>
+    <Stack sx={{ marginBlockStart: "6rem", marginInline: "4rem" }}>
       <Typography
         component="h2"
         sx={{
