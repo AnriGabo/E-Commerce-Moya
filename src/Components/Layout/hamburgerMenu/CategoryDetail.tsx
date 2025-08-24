@@ -16,6 +16,8 @@ const BurgerMenuScrollDesign = () => {
       }}
     >
       <Box sx={{ aspectRatio: "16/9 ", width: "100%", pl: "1rem" }}>
+      {/* react router v5 ში იყო რეალურად activeClassname რომელიც იღებდა active */}
+      {/* მაგრამ v6ვერსიაში ფუნქცია არის className რომელიც პარამეტრის სახით იღებს isActive , და მერე ტერნერული ლოგიკა*/}
         <NavLink to={"/coldweathercollection"}>
           <video
             autoPlay
@@ -124,7 +126,7 @@ const BurgerMenuScrollDesign = () => {
             </NavLink>
             <NavLink
               to={"/specialprice"}
-              style={{ textDecoration: "none", color: "red" }}
+              style={{ textDecoration: "none", color: "black" }}
             >
               <Typography
                 component={"li"}

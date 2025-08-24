@@ -25,7 +25,10 @@ const MainCategories = () => {
         >
           <NavLink
             to="/woman"
-            style={{ textDecoration: "none", color: "black" }}
+            style={({ isActive }) => ({
+              textDecoration: isActive ? "underline" : "none",
+              color: isActive ? "#d32f2f" : "black",
+            })}
           >
             <Typography
               component={"li"}
@@ -38,7 +41,14 @@ const MainCategories = () => {
               Woman
             </Typography>
           </NavLink>
-          <NavLink to="/man" style={{ textDecoration: "none", color: "black" }}>
+
+          <NavLink
+            to="/man"
+            style={({ isActive }) => ({
+              textDecoration: isActive ? "underline" : "none",
+              color: isActive ? "#d32f2f" : "black",
+            })}
+          >
             <Typography
               component={"li"}
               sx={{
@@ -51,7 +61,10 @@ const MainCategories = () => {
           </NavLink>
           <NavLink
             to="/children"
-            style={{ textDecoration: "none", color: "black" }}
+            style={({ isActive }) => ({
+              textDecoration: isActive ? "underline" : "none",
+              color: isActive ? "#d32f2f" : "black",
+            })}
           >
             <Typography
               component={"li"}
@@ -65,7 +78,10 @@ const MainCategories = () => {
           </NavLink>
           <NavLink
             to="/thenewcollection"
-            style={{ textDecoration: "none", color: "black" }}
+            style={({ isActive }) => ({
+              textDecoration: isActive ? "underline" : "none",
+              color: isActive ? "#d32f2f" : "black",
+            })}
           >
             <Typography
               component={"li"}
@@ -79,8 +95,11 @@ const MainCategories = () => {
             </Typography>
           </NavLink>
           <NavLink
-            to="/about"
-            style={{ textDecoration: "none", color: "black" }}
+            to="/aboutmoya"
+            style={({ isActive }) => ({
+              textDecoration: isActive ? "underline" : "none",
+              color: isActive ? "#d32f2f" : "black",
+            })}
           >
             <Typography
               component={"li"}
@@ -90,7 +109,7 @@ const MainCategories = () => {
               }}
             >
               {" "}
-              TRAVEL MODE
+              About MOYA
             </Typography>
           </NavLink>
         </Box>

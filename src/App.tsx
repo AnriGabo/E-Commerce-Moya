@@ -15,7 +15,12 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/woman" element={<Collection />} />
+        <Route path="/man" element={<Collection />} />
+        <Route path="/children" element={<Collection />} />
         <Route path="/thenewcollection" element={<Collection />} />
+        <Route path="/woman" element={<Collection />} />
+        <Route path="/woman" element={<Collection />} />
         <Route path="/accsesyourAccount" element={<AccountAccessLink />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/signin" element={<SignIn />} />
