@@ -1,7 +1,10 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-const MainCategories = () => {
+type MainCategoriesProps = {
+  handleClick: (name: string) => void;
+};
+const MainCategories = ({ handleClick } : MainCategoriesProps) => {
   return (
     <Stack
       sx={{
@@ -26,11 +29,13 @@ const MainCategories = () => {
           <NavLink
             to="/woman"
             style={({ isActive }) => ({
-              textDecoration: isActive ? "underline" : "none",
+              textDecoration: "none",
               color: isActive ? "#d32f2f" : "black",
+              fontWeight: isActive ? "bold" : 400,
             })}
           >
             <Typography
+              onClick={() => handleClick("Woman")}
               component={"li"}
               sx={{
                 fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
@@ -45,11 +50,13 @@ const MainCategories = () => {
           <NavLink
             to="/man"
             style={({ isActive }) => ({
-              textDecoration: isActive ? "underline" : "none",
+              textDecoration: "none",
               color: isActive ? "#d32f2f" : "black",
+              fontWeight: isActive ? "bold" : 400,
             })}
           >
             <Typography
+              onClick={() => handleClick("Man")}
               component={"li"}
               sx={{
                 fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
@@ -62,11 +69,13 @@ const MainCategories = () => {
           <NavLink
             to="/children"
             style={({ isActive }) => ({
-              textDecoration: isActive ? "underline" : "none",
+              textDecoration: "none",
               color: isActive ? "#d32f2f" : "black",
+              fontWeight: isActive ? "bold" : 400,
             })}
           >
             <Typography
+              onClick={() => handleClick("Children")}
               component={"li"}
               sx={{
                 fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
@@ -79,11 +88,13 @@ const MainCategories = () => {
           <NavLink
             to="/thenewcollection"
             style={({ isActive }) => ({
-              textDecoration: isActive ? "underline" : "none",
+              textDecoration: "none",
               color: isActive ? "#d32f2f" : "black",
+              fontWeight: isActive ? "bold" : 400,
             })}
           >
             <Typography
+              onClick={() => handleClick("Thenewcollection")}
               component={"li"}
               sx={{
                 fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
@@ -97,11 +108,13 @@ const MainCategories = () => {
           <NavLink
             to="/aboutmoya"
             style={({ isActive }) => ({
-              textDecoration: isActive ? "underline" : "none",
+              textDecoration: "none",
               color: isActive ? "#d32f2f" : "black",
+              fontWeight: isActive ? "bold" : 400,
             })}
           >
             <Typography
+              onClick={() => handleClick("AboutMoya")}
               component={"li"}
               sx={{
                 fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
