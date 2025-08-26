@@ -13,6 +13,7 @@ const AuthLink = () => {
     <Stack direction={"row"} sx={{ gap: "1rem" }}>
       <Button sx={{ textTransform: "capitalize" }} onClick={scrollToFooter}>
         <Typography
+          component={"h2"}
           sx={{
             fontFamily: "'Josefin Sans', sans-serif",
             fontWeight: 500,
@@ -35,6 +36,7 @@ const AuthLink = () => {
           }}
         >
           <Typography
+            component={"h2"}
             sx={{
               fontFamily: "'Josefin Sans', sans-serif",
               fontWeight: 500,
