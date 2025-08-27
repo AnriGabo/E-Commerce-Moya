@@ -1,16 +1,17 @@
-import { Box, ButtonBase, Divider, Stack } from "@mui/material";
+import { Box, ButtonBase, Divider, Stack, Slide } from "@mui/material";
 import { HelmetProvider } from "react-helmet-async";
 import { NavLink } from "react-router-dom";
 import CustomMainTitleTypography from "../../MuiUI/PageTitle";
 import BurgerMenu from "../hamburgerMenu/HamburgerMenu";
-import EnterTheSystem from "../AuthLink/AuthLink";
+import AuthLink from "../AuthLink/AuthLink";
 import AnnouncmentBar from "./AnnouncmentBar";
 import { useLocation } from "react-router-dom";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
 
 export default function Header() {
+  const trigger = useScrollTrigger();
+
   const { pathname } = useLocation();
-
-
 
   const hideRoute =
     pathname.startsWith("/registration") ||
@@ -52,11 +53,13 @@ export default function Header() {
           <Box>
             <BurgerMenu />
           </Box>
-          <ButtonBase component={NavLink} to={"/"} onClick={handleClick}>
-            <CustomMainTitleTypography>MOYA</CustomMainTitleTypography>
-          </ButtonBase>
+          <Slide in={!trigger}>
+            <ButtonBase component={NavLink} to={"/"} onClick={handleClick}>
+              <CustomMainTitleTypography>MOYA</CustomMainTitleTypography>
+            </ButtonBase>
+          </Slide>
         </Stack>
-        {!hideRoute && <EnterTheSystem />}
+        {!hideRoute && <AuthLink />}
       </Stack>
     </Box>
   );
