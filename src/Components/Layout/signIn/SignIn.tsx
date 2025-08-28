@@ -2,12 +2,12 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 import {
-    Box,
-    Button,
-    IconButton,
-    InputAdornment,
-    Stack,
-    Typography,
+  Box,
+  Button,
+  IconButton,
+  InputAdornment,
+  Stack,
+  Typography,
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
@@ -21,14 +21,14 @@ const SignIn = () => {
   return (
     <Stack
       sx={{
-        marginInline: "6rem",
+        marginInline: "5.8rem",
+        marginBlockStart: "10rem",
       }}
     >
       <Stack
         component="form"
         sx={{
           "& > :not(style)": { width: "45ch" },
-          marginBlockStart: "5rem",
         }}
         noValidate
         autoComplete="off"

@@ -16,9 +16,6 @@ export default function RegistrationTextField() {
   const [visiblePass, setVisiblePass] = useState<boolean>(false);
   const handleClick = () => setVisiblePass((prev) => !prev);
 
-  const [repeatVisiblePass, setRepeatVisiblePass] = useState<boolean>(false);
-  const repeatHandleClick = () => setRepeatVisiblePass((prev) => !prev);
-
   const [checked, setChecked] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,17 +55,8 @@ export default function RegistrationTextField() {
       <TextField
         id="standard-password"
         label="Repeat password"
-        type={repeatVisiblePass ? "text" : "password"}
+        type="password"
         variant="standard"
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={repeatHandleClick}>
-                {repeatVisiblePass ? <VisibilityIcon /> : <VisibilityOffIcon />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
       />
 
       <Box
@@ -76,7 +64,7 @@ export default function RegistrationTextField() {
           display: "flex",
           alignItems: "center",
           paddingBlockStart: "0.5rem",
-          gap:"0.5rem"
+          gap: "0.5rem",
         }}
       >
         <Checkbox
@@ -84,8 +72,8 @@ export default function RegistrationTextField() {
           onChange={handleChange}
           inputProps={{ "aria-label": "controlled" }}
           sx={{
-            m:0,
-            p:0
+            m: 0,
+            p: 0,
           }}
         />
         <Typography

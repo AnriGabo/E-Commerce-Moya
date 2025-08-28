@@ -8,7 +8,7 @@ const AccountAccessLink = () => {
     <Stack
       sx={{
         marginInline: "4rem",
-        marginBlockStart: "6rem",
+        marginBlockStart: "10rem",
         justifyContent: "space-between",
         flexDirection: "row",
       }}

@@ -10,7 +10,7 @@ const AuthLink = () => {
     }
   };
   return (
-    <Stack direction={"row"} sx={{ gap: "1rem" }}>
+    <Stack direction={"row"} sx={{ gap: "1rem"}}>
       <Button sx={{ textTransform: "capitalize" }} onClick={scrollToFooter}>
         <Typography
           component={"h2"}
@@ -26,7 +26,7 @@ const AuthLink = () => {
           }}
         >
           Contact
-          <FiSend style={{ fontSize: "1.2rem" }} />
+          <FiSend style={{ fontSize: "1.2rem" }} aria-label="Contact Page" />
         </Typography>
       </Button>
       <Link to={"/accsesyourAccount"} style={{ textDecoration: "none" }}>
@@ -49,7 +49,7 @@ const AuthLink = () => {
             }}
           >
             Access your account
-            <FiLogIn style={{ fontSize: "1.3rem" }} />
+            <FiLogIn style={{ fontSize: "1.3rem" }} aria-label="SignIn/SignUp page" />
           </Typography>
         </Button>
       </Link>

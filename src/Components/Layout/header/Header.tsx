@@ -25,9 +25,9 @@ export default function Header() {
     });
   };
   return (
-    <Box component={"header"}>
+    <Box component={"header"} sx={{position:"fixed",top:"0",width:"96%",zIndex:1200}}>
       <AnnouncmentBar />
-      <Divider sx={{ marginInline: "30rem" }}></Divider>
+      <Divider sx={{ mx: { xs: 2, sm: 4, md: 8, lg: "30rem" } }} />
 
       <HelmetProvider>
         <link
@@ -36,29 +36,28 @@ export default function Header() {
         />
       </HelmetProvider>
       <Stack
+        direction={"row"}
+        alignItems={"center"}
+        justifyContent={"space-between"}
         sx={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBlockStart: "2rem",
-          marginInline: "2rem",
+          height:"6rem",
         }}
       >
         <Stack
           sx={{
             flexDirection: "row",
-            gap: "3rem",
+            gap: "1rem",
+            alignItems:"center",
           }}
         >
-          <Box>
-            <BurgerMenu />
-          </Box>
-          <Slide in={!trigger}>
+          <BurgerMenu />
+          <Slide in={!trigger} direction="down" mountOnEnter unmountOnExit>
             <ButtonBase component={NavLink} to={"/"} onClick={handleClick}>
               <CustomMainTitleTypography>MOYA</CustomMainTitleTypography>
             </ButtonBase>
           </Slide>
         </Stack>
+
         {!hideRoute && <AuthLink />}
       </Stack>
     </Box>
