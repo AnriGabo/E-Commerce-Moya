@@ -1,20 +1,7 @@
-import { Box, Stack, Typography } from "@mui/material";
-import FemaleModel from "../../../Assets/Images/female-model.jpg";
-import FemaleModelBlindfold from "../../../Assets/Images/female-model-blindfold.jpg";
-import MaleModelBlindfold from "../../../Assets/Images/male-model-blindfold.jpg";
+import { Stack, Typography } from "@mui/material";
 import FooterCaption from "../../MuiUI/FooterCaption";
+import FooterImage from "./FooterImage";
 
-const footerImages = [
-  {
-    img: MaleModelBlindfold,
-  },
-  {
-    img: FemaleModel,
-  },
-  {
-    img: FemaleModelBlindfold,
-  },
-];
 const Footer = () => {
   return (
     <Stack
@@ -59,34 +46,7 @@ const Footer = () => {
           English | Georgian • © 2025 YourBrand. All rights reserved.
         </Typography>
       </Stack>
-      <Box
-        sx={{
-          display: "flex",
-          gap: "1.8rem",
-          paddingBlock: "2rem",
-          alignItems: "stretch",
-        }}
-      >
-        {footerImages.map((item, i) => (
-          <Box
-            key={i}
-            component="img"
-            src={item.img}
-            alt="Footer preview"
-            loading="lazy"
-            sx={{
-              flex: "1 1 0",
-              width: "100%",
-              maxWidth: "240px",
-              height: "130px",
-              objectFit: "cover",
-              borderRadius: "6px",
-              display: "block",
-              boxShadow: 5,
-            }}
-          />
-        ))}
-      </Box>
+      <FooterImage />
     </Stack>
   );
 };
