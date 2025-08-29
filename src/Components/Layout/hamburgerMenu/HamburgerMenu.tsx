@@ -1,10 +1,10 @@
 import { Box, IconButton, Slide } from "@mui/material";
-import { FiMenu } from "react-icons/fi";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
+import { FiMenu } from "react-icons/fi";
 
 const BurgerMenu = () => {
   const trigger = useScrollTrigger();
-  
+
   return (
     <Box
       sx={{

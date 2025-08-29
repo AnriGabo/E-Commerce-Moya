@@ -1,14 +1,11 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-type MainCategoriesProps = {
-  handleClick: (name: string) => void;
-};
-const MainCategories = ({ handleClick } : MainCategoriesProps) => {
+const MainCategories = () => {
   return (
     <Stack
       sx={{
-        backgroundColor: "#F8F9FA",
+        backgroundColor: "rgba(247, 245, 245, 1)",
         height: "21rem",
         width: "15rem",
       }}
@@ -26,16 +23,15 @@ const MainCategories = ({ handleClick } : MainCategoriesProps) => {
             paddingBlockStart: "1rem",
           }}
         >
-          <NavLink
-            to="/woman"
-            style={({ isActive }) => ({
-              textDecoration: "none",
-              color: isActive ? "#d32f2f" : "black",
-              fontWeight: isActive ? "bold" : 400,
-            })}
-          >
+            <NavLink
+              to="/woman"
+              style={({ isActive }) => ({
+                textDecoration: "none",
+                color: isActive ? "#b71c1c" : "black",
+                fontWeight: isActive ? "bold" : 400,
+              })}
+            >
             <Typography
-              onClick={() => handleClick("Woman")}
               component={"li"}
               sx={{
                 fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
@@ -51,12 +47,11 @@ const MainCategories = ({ handleClick } : MainCategoriesProps) => {
             to="/man"
             style={({ isActive }) => ({
               textDecoration: "none",
-              color: isActive ? "#d32f2f" : "black",
+              color: isActive ? "#b71c1c" : "black",
               fontWeight: isActive ? "bold" : 400,
             })}
           >
             <Typography
-              onClick={() => handleClick("Man")}
               component={"li"}
               sx={{
                 fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
@@ -70,12 +65,11 @@ const MainCategories = ({ handleClick } : MainCategoriesProps) => {
             to="/children"
             style={({ isActive }) => ({
               textDecoration: "none",
-              color: isActive ? "#d32f2f" : "black",
+              color: isActive ? "#b71c1c" : "black",
               fontWeight: isActive ? "bold" : 400,
             })}
           >
             <Typography
-              onClick={() => handleClick("Children")}
               component={"li"}
               sx={{
                 fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
@@ -86,35 +80,14 @@ const MainCategories = ({ handleClick } : MainCategoriesProps) => {
             </Typography>
           </NavLink>
           <NavLink
-            to="/thenewcollection"
-            style={({ isActive }) => ({
-              textDecoration: "none",
-              color: isActive ? "#d32f2f" : "black",
-              fontWeight: isActive ? "bold" : 400,
-            })}
-          >
-            <Typography
-              onClick={() => handleClick("Thenewcollection")}
-              component={"li"}
-              sx={{
-                fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
-                letterSpacing: "0.5px",
-              }}
-            >
-              {" "}
-              The New Collection
-            </Typography>
-          </NavLink>
-          <NavLink
             to="/aboutmoya"
             style={({ isActive }) => ({
               textDecoration: "none",
-              color: isActive ? "#d32f2f" : "black",
+              color: isActive ? "#b71c1c" : "black",
               fontWeight: isActive ? "bold" : 400,
             })}
           >
             <Typography
-              onClick={() => handleClick("AboutMoya")}
               component={"li"}
               sx={{
                 fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,

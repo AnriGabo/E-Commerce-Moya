@@ -8,8 +8,8 @@ const WomanDetail = () => {
       sx={{
         maxWidth: "30rem",
         maxHeight: "31rem",
-        backgroundColor: "#F8F9FA",
         fontSize: "2rem",
+        backgroundColor: "rgba(247, 245, 245, 1)",
       }}
     >
       <Box
@@ -17,7 +17,6 @@ const WomanDetail = () => {
           aspectRatio: "16/9 ",
           width: "100%",
           pl: "1rem",
-          paddingBlockStart: "1.5rem",
         }}
       >
         <video

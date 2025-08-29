@@ -8,13 +8,12 @@ interface listmenegmentType {
 }
 
 const SecondaryCategories = ({ listmenegment }: listmenegmentType) => {
-  console.log("SecondaryCategories", listmenegment);
+  
   return (
     <Stack>
-      {listmenegment === "Man" && <MenDetail />}
-      {listmenegment === "Woman" && <WomanDetail />}
-      {listmenegment === "Children" && <Children />}
-      {listmenegment === "Thenewcollection" && <h1>The New Collection</h1>}
+      {listmenegment === "man" && <MenDetail />}
+      {listmenegment === "woman" && <WomanDetail />}
+      {listmenegment === "children" && <Children />}
     </Stack>
   );
 };

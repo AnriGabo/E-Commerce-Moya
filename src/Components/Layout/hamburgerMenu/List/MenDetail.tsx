@@ -8,7 +8,7 @@ const MenDetail = () => {
       sx={{
         maxWidth: "30rem",
         maxHeight: "31rem",
-        backgroundColor: "#F8F9FA",
+        backgroundColor: "rgba(247, 245, 245, 1)",
         fontSize: "2rem",
       }}
     >
