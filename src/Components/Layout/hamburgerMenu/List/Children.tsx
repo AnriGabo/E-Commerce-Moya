@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import ChildrenFashion from "../../../../Assets/Videos/ChildrenFashion.mp4";
+import ChildrenFashion from "../../../../Assets/Videos/children_fashion_video.mp4";
 
 const Children = () => {
   return (
@@ -13,38 +13,33 @@ const Children = () => {
       }}
     >
       <Box sx={{ aspectRatio: "16/9 ", width: "100%", pl: "1rem" }}>
-        <NavLink to={"/coldweathercollection"}>
-          <video
-            autoPlay
-            playsInline
-            muted
-            loop
-            src={ChildrenFashion}
-            style={{
-              width: "70%",
-              height: "70%",
-              objectFit: "cover",
-              display: "block",
-              cursor: "pointer",
-            }}
-          />
-        </NavLink>
-        <NavLink
-          to={"/coldweathercollection"}
-          style={{ color: "black", textDecoration: "none" }}
+        <video
+          autoPlay
+          playsInline
+          muted
+          loop
+          src={ChildrenFashion}
+          style={{
+            width: "70%",
+            height: "70%",
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
+
+        <Typography
+          component={"h4"}
+          sx={{
+            paddingBlockStart: "0.7rem",
+            fontFamily: `"Didot", "Bodoni MT", "Times New Roman", serif`,
+            fontSize: "0.8rem",
+            letterSpacing: "0.15rem",
+            fontWeight: 400,
+            textTransform: "uppercase",
+          }}
         >
-          <Typography
-            component={"h4"}
-            sx={{
-              paddingBlockStart: "0.5rem",
-              cursor: "pointer",
-              fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
-              fontSize: "0.8rem",
-            }}
-          >
-            AUTUMN.WINTER COLLECTION
-          </Typography>
-        </NavLink>
+          COMFY, COLORFUL, PLAYFUL.
+        </Typography>
       </Box>
       <Box
         component={"nav"}
@@ -60,7 +55,7 @@ const Children = () => {
             flexDirection: "column",
           }}
         >
-          <Box sx={{ display: "flex", gap: "1rem", flexDirection: "column" }}>
+          <Box sx={{ display: "flex", gap: "0.6rem", flexDirection: "column" }}>
             <NavLink
               to={"/trendingforyou"}
               style={{ textDecoration: "none", color: "black" }}
@@ -68,11 +63,15 @@ const Children = () => {
               <Typography
                 component={"li"}
                 sx={{
-                  fontWeight: "bold",
-                  fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+                  fontFamily: `"Helvetica Neue", Arial, sans-serif`,
+                  fontWeight: 600,
+                  fontSize: "0.85rem",
+                  letterSpacing: "0.05rem",
+                  textTransform: "uppercase",
+                  color: "#b71c1c",
                 }}
               >
-                TRENDING FOR YOU
+                Girls
               </Typography>
             </NavLink>
             <NavLink
@@ -85,14 +84,64 @@ const Children = () => {
               <Typography
                 component={"li"}
                 sx={{
-                  fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+                  fontFamily: `"Open Sans", sans-seriff`,
+                  fontWeight: 300,
+                  fontSize: "1rem",
+                  letterSpacing: "0.03rem",
+                  textTransform: "capitalize",
+                  cursor: "pointer",
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
                 }}
               >
-                Jeans / Trousers
+                1½ - 6 year
+              </Typography>
+            </NavLink>
+            {/*  */}
+            <NavLink
+              to={"/jeans"}
+              style={({ isActive }) => ({
+                textDecoration: "none",
+                color: isActive ? "red" : "black",
+              })}
+            >
+              <Typography
+                component={"li"}
+                sx={{
+                  fontFamily: `"Open Sans", sans-seriff`,
+                  fontWeight: 300,
+                  fontSize: "1rem",
+                  letterSpacing: "0.03rem",
+                  textTransform: "capitalize",
+                  cursor: "pointer",
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
+                }}
+              >
+                6 - 14 year
               </Typography>
             </NavLink>
           </Box>
-          <Box sx={{ display: "flex", gap: "1rem", flexDirection: "column" }}>
+          <Box sx={{ display: "flex", gap: "0.6rem", flexDirection: "column" }}>
+            <NavLink
+              to={"/trendingforyou"}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <Typography
+                component={"li"}
+                sx={{
+                  fontFamily: `"Helvetica Neue", Arial, sans-serif`,
+                  fontWeight: 600,
+                  fontSize: "0.85rem",
+                  letterSpacing: "0.05rem",
+                  textTransform: "uppercase",
+                }}
+              >
+                Boys
+              </Typography>
+            </NavLink>
             <NavLink
               to={"/jackets"}
               style={{ textDecoration: "none", color: "black" }}
@@ -100,10 +149,18 @@ const Children = () => {
               <Typography
                 component={"li"}
                 sx={{
-                  fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+                  fontFamily: `"Open Sans", sans-seriff`,
+                  fontWeight: 300,
+                  fontSize: "1rem",
+                  letterSpacing: "0.03rem",
+                  textTransform: "capitalize",
+                  cursor: "pointer",
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
                 }}
               >
-                Jackets | Coats
+                1½ - 6 year
               </Typography>
             </NavLink>
             <NavLink
@@ -113,25 +170,18 @@ const Children = () => {
               <Typography
                 component={"li"}
                 sx={{
-                  fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+                  fontFamily: `"Open Sans", sans-seriff`,
+                  fontWeight: 300,
+                  fontSize: "1rem",
+                  letterSpacing: "0.03rem",
+                  textTransform: "capitalize",
+                  cursor: "pointer",
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
                 }}
               >
-                Sweaters | Knitwear
-              </Typography>
-            </NavLink>
-            <NavLink
-              to={"/specialprice"}
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <Typography
-                component={"li"}
-                sx={{
-                  fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
-                  fontWeight: "bold",
-                  fontStyle: "inherit",
-                }}
-              >
-                SPECIAL PRICE
+                6 - 14 year
               </Typography>
             </NavLink>
           </Box>

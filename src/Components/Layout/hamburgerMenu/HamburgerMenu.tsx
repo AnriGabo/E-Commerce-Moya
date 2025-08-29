@@ -9,7 +9,6 @@ const BurgerMenu = () => {
     <Box
       sx={{
         cursor: "pointer",
-       
       }}
     >
       <Slide in={!trigger} direction="down" mountOnEnter unmountOnExit>

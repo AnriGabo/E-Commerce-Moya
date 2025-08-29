@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import BurgerMenuVideo from "../../../../Assets/Videos/BurgerMeniuAd.mp4";
+import BurgerMenuVideo from "../../../../Assets/Videos/hamburger_meniu_fashion.mp4";
 
 const WomanDetail = () => {
   return (
@@ -12,39 +12,40 @@ const WomanDetail = () => {
         fontSize: "2rem",
       }}
     >
-      <Box sx={{ aspectRatio: "16/9 ", width: "100%", pl: "1rem" }}>
-        <NavLink to={"/coldweathercollection"}>
-          <video
-            autoPlay
-            playsInline
-            muted
-            loop
-            src={BurgerMenuVideo}
-            style={{
-              width: "70%",
-              height: "70%",
-              objectFit: "cover",
-              display: "block",
-              cursor: "pointer",
-            }}
-          />
-        </NavLink>
-        <NavLink
-          to={"/coldweathercollection"}
-          style={{ color: "black", textDecoration: "none" }}
+      <Box
+        sx={{
+          aspectRatio: "16/9 ",
+          width: "100%",
+          pl: "1rem",
+          paddingBlockStart: "1.5rem",
+        }}
+      >
+        <video
+          autoPlay
+          playsInline
+          muted
+          loop
+          src={BurgerMenuVideo}
+          style={{
+            width: "70%",
+            height: "70%",
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
+        <Typography
+          component={"h4"}
+          sx={{
+            paddingBlockStart: "0.7rem",
+            fontFamily: `"Didot", "Bodoni MT", "Times New Roman", serif`,
+            fontSize: "0.8rem",
+            letterSpacing: "0.15rem",
+            fontWeight: 400,
+            textTransform: "uppercase",
+          }}
         >
-          <Typography
-            component={"h4"}
-            sx={{
-              paddingBlockStart: "0.5rem",
-              cursor: "pointer",
-              fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
-              fontSize: "0.8rem",
-            }}
-          >
-            AUTUMN.WINTER COLLECTION
-          </Typography>
-        </NavLink>
+          EVERYDAY, EVERYWHERE, ALWAYS NEW
+        </Typography>
       </Box>
       <Box
         component={"nav"}
@@ -60,7 +61,7 @@ const WomanDetail = () => {
             flexDirection: "column",
           }}
         >
-          <Box sx={{ display: "flex", gap: "1rem", flexDirection: "column" }}>
+          <Box sx={{ display: "flex", gap: "0.5rem", flexDirection: "column" }}>
             <NavLink
               to={"/trendingforyou"}
               style={{ textDecoration: "none", color: "black" }}
@@ -68,8 +69,11 @@ const WomanDetail = () => {
               <Typography
                 component={"li"}
                 sx={{
-                  fontWeight: "bold",
-                  fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+                  fontFamily: `"Helvetica Neue", Arial, sans-serif`,
+                  fontWeight: 600,
+                  fontSize: "0.85rem",
+                  letterSpacing: "0.05rem",
+                  textTransform: "uppercase",
                 }}
               >
                 TRENDING FOR YOU
@@ -85,14 +89,22 @@ const WomanDetail = () => {
               <Typography
                 component={"li"}
                 sx={{
-                  fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+                  fontFamily: `"Open Sans", sans-seriff`,
+                  fontWeight: 300,
+                  fontSize: "1rem",
+                  letterSpacing: "0.03rem",
+                  textTransform: "capitalize",
+                  cursor: "pointer",
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
                 }}
               >
-                Jeans / Trousers
+                Dresses / Skirts
               </Typography>
             </NavLink>
           </Box>
-          <Box sx={{ display: "flex", gap: "1rem", flexDirection: "column" }}>
+          <Box sx={{ display: "flex", gap: "0.8rem", flexDirection: "column" }}>
             <NavLink
               to={"/jackets"}
               style={{ textDecoration: "none", color: "black" }}
@@ -100,10 +112,18 @@ const WomanDetail = () => {
               <Typography
                 component={"li"}
                 sx={{
-                  fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+                  fontFamily: `"Open Sans", sans-seriff`,
+                  fontWeight: 300,
+                  fontSize: "1rem",
+                  letterSpacing: "0.03rem",
+                  textTransform: "capitalize",
+                  cursor: "pointer",
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
                 }}
               >
-                Jackets | Coats
+                Sweaters | Knitwear
               </Typography>
             </NavLink>
             <NavLink
@@ -113,10 +133,18 @@ const WomanDetail = () => {
               <Typography
                 component={"li"}
                 sx={{
-                  fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+                  fontFamily: `"Open Sans", sans-seriff`,
+                  fontWeight: 300,
+                  fontSize: "1rem",
+                  letterSpacing: "0.03rem",
+                  textTransform: "capitalize",
+                  cursor: "pointer",
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
                 }}
               >
-                Sweaters | Knitwear
+                Bags / Accessories
               </Typography>
             </NavLink>
             <NavLink
@@ -126,9 +154,12 @@ const WomanDetail = () => {
               <Typography
                 component={"li"}
                 sx={{
-                  fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
-                  fontWeight: "bold",
-                  fontStyle: "inherit",
+                  fontFamily: `"Helvetica Neue", Arial, sans-serif`,
+                  fontWeight: 600,
+                  fontSize: "0.85rem",
+                  letterSpacing: "0.05rem",
+                  textTransform: "uppercase",
+                  color: "#b71c1c",
                 }}
               >
                 SPECIAL PRICE

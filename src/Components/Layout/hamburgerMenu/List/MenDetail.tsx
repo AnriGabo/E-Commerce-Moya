@@ -1,6 +1,6 @@
-import { Box, Stack, Typography } from "@mui/material"
-import { NavLink } from "react-router-dom"
-import ManListFashion from "../../../../Assets/Videos/ManFashion.mp4";
+import { Box, Stack, Typography } from "@mui/material";
+import { NavLink } from "react-router-dom";
+import ManListFashion from "../../../../Assets/Videos/man_fashion_video.mp4";
 
 const MenDetail = () => {
   return (
@@ -13,38 +13,33 @@ const MenDetail = () => {
       }}
     >
       <Box sx={{ aspectRatio: "16/9 ", width: "100%", pl: "1rem" }}>
-        <NavLink to={"/coldweathercollection"}>
-          <video
-            autoPlay
-            playsInline
-            muted
-            loop
-            src={ManListFashion}
-            style={{
-              width: "70%",
-              height: "70%",
-              objectFit: "cover",
-              display: "block",
-              cursor: "pointer",
-            }}
-          />
-        </NavLink>
-        <NavLink
-          to={"/coldweathercollection"}
-          style={{ color: "black", textDecoration: "none" }}
+        <video
+          autoPlay
+          playsInline
+          muted
+          loop
+          src={ManListFashion}
+          style={{
+            width: "70%",
+            height: "70%",
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
+
+        <Typography
+          component={"h4"}
+          sx={{
+            paddingBlockStart: "0.7rem",
+            fontFamily: `"Didot", "Bodoni MT", "Times New Roman", serif`,
+            fontSize: "0.8rem",
+            letterSpacing: "0.15rem",
+            fontWeight: 400,
+            textTransform: "uppercase",
+          }}
         >
-          <Typography
-            component={"h4"}
-            sx={{
-              paddingBlockStart: "0.5rem",
-              cursor: "pointer",
-              fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
-              fontSize: "0.8rem",
-            }}
-          >
-            WINTER COLLECTION
-          </Typography>
-        </NavLink>
+          CLASSIC, MODERN, TIMELESS.
+        </Typography>
       </Box>
       <Box
         component={"nav"}
@@ -68,11 +63,14 @@ const MenDetail = () => {
               <Typography
                 component={"li"}
                 sx={{
-                  fontWeight: "bold",
-                  fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+                  fontFamily: `"Helvetica Neue", Arial, sans-serif`,
+                  fontWeight: 600,
+                  fontSize: "0.85rem",
+                  letterSpacing: "0.05rem",
+                  textTransform: "uppercase",
                 }}
               >
-                TRENDING FOR YOU 2
+                FEATURED LOOKS
               </Typography>
             </NavLink>
             <NavLink
@@ -85,10 +83,18 @@ const MenDetail = () => {
               <Typography
                 component={"li"}
                 sx={{
-                  fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+                  fontFamily: `"Open Sans", sans-seriff`,
+                  fontWeight: 300,
+                  fontSize: "1rem",
+                  letterSpacing: "0.03rem",
+                  textTransform: "capitalize",
+                  cursor: "pointer",
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
                 }}
               >
-                Jeans / Trousers 2
+                Jackets / Coats
               </Typography>
             </NavLink>
           </Box>
@@ -100,10 +106,18 @@ const MenDetail = () => {
               <Typography
                 component={"li"}
                 sx={{
-                  fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+                  fontFamily: `"Open Sans", sans-seriff`,
+                  fontWeight: 300,
+                  fontSize: "1rem",
+                  letterSpacing: "0.03rem",
+                  textTransform: "capitalize",
+                  cursor: "pointer",
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
                 }}
               >
-                Jackets | Coats 2
+                Trousers | Jeans
               </Typography>
             </NavLink>
             <NavLink
@@ -113,10 +127,18 @@ const MenDetail = () => {
               <Typography
                 component={"li"}
                 sx={{
-                  fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
+                  fontFamily: `"Open Sans", sans-seriff`,
+                  fontWeight: 300,
+                  fontSize: "1rem",
+                  letterSpacing: "0.03rem",
+                  textTransform: "capitalize",
+                  cursor: "pointer",
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
                 }}
               >
-                Sweaters | Knitwear
+                Shoes / Accessories
               </Typography>
             </NavLink>
             <NavLink
@@ -126,19 +148,22 @@ const MenDetail = () => {
               <Typography
                 component={"li"}
                 sx={{
-                  fontFamily: `"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`,
-                  fontWeight: "bold",
-                  fontStyle: "inherit",
+                  fontFamily: `"Helvetica Neue", Arial, sans-serif`,
+                  fontWeight: 600,
+                  fontSize: "0.85rem",
+                  letterSpacing: "0.05rem",
+                  textTransform: "uppercase",
+                  color: "#b71c1c",
                 }}
               >
-                SPECIAL PRICE
+                LIMITED OFFER
               </Typography>
             </NavLink>
           </Box>
         </Box>
       </Box>
     </Stack>
-  )
-}
+  );
+};
 
-export default MenDetail
+export default MenDetail;
