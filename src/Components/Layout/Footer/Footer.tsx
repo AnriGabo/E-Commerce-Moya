@@ -26,7 +26,7 @@ const Footer = () => {
         }}
         direction={"row"}
       >
-        <FooterCaption>About Us</FooterCaption>
+        <FooterCaption>Contact Us</FooterCaption>
         <FooterCaption> Customer Service</FooterCaption>
         <FooterCaption> Orders & Returns</FooterCaption>
         <FooterCaption> Privacy Policy</FooterCaption>

@@ -3,10 +3,10 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box, Button, Stack } from "@mui/material";
 import { useState } from "react";
 
-import VideoSlider2 from "../../../Assets/Videos/FashionMode2.mp4";
-import VideoSlider1 from "../../../Assets/Videos/FashionModel1.mp4";
-import VideoSlider3 from "../../../Assets/Videos/FashionModel3.mp4";
-import VideoSlider4 from "../../../Assets/Videos/FashionModel4.mp4";
+import VideoSlider1 from "../../../Assets/Videos/fashion_model_01.mp4";
+import VideoSlider2 from "../../../Assets/Videos/fashion_model_02.mp4";
+import VideoSlider3 from "../../../Assets/Videos/fashion_model_03.mp4";
+import VideoSlider4 from "../../../Assets/Videos/fashion_model_04.mp4";
 
 const videos = [VideoSlider2, VideoSlider1, VideoSlider4, VideoSlider3];
 
@@ -24,17 +24,14 @@ export default function VideoSlider() {
   return (
     <Stack
       sx={{
-        display: "flex",
         justifyContent: "center",
-        alignItems:"center",
-        marginBlockStart: "6rem",
+        alignItems: "center",
       }}
     >
-      <Box
-        sx={{width:"50%"}}
-      >
+      <Box sx={{ width: "50%" }}>
         <Box sx={{ aspectRatio: "16 / 9", width: "100%" }}>
           <video
+            preload="metadata"
             key={videos[currentIndex]}
             src={videos[currentIndex]}
             autoPlay
@@ -46,6 +43,8 @@ export default function VideoSlider() {
               height: "100%",
               display: "block",
               objectFit: "cover",
+              animation:" fadeIn .3s ease-in-out",
+              
             }}
           />
         </Box>

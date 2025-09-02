@@ -1,16 +1,16 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { HelmetProvider } from "react-helmet-async";
 
-import BlackWomanFashionModel from "../../../Assets/Images/BlackFashionModel4.jpg";
-import BlackWomanFashionModelWithKneel from "../../../Assets/Images/BlackFashionModel5.jpg";
+import WomanOutfitPolkaDot from "../../../Assets/Images/black_fashion_model_00.jpg";
+import WomanSandalPolkaDot  from "../../../Assets/Images/black_fashion_model_shoes_00.jpg";
 
 const ImageSlider = [
   {
-    img: BlackWomanFashionModel,
+    img: WomanOutfitPolkaDot,
   },
 
   {
-    img: BlackWomanFashionModelWithKneel,
+    img: WomanSandalPolkaDot,
     h4: "SPECIAL EDITION",
     h5: "MOYA WOMAN COLLECTION",
     h6: "BLACK FRAME / 002",

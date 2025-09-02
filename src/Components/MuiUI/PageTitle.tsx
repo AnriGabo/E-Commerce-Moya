@@ -22,7 +22,7 @@ export default function CustomMainTitleTypography({ children }: MainTitleTypogra
           fontFamily: `"Bodoni Moda", serif`,
           fontWeight: 700,
           textTransform: "uppercase",
-          fontSize: "6rem",     
+          fontSize: "6.5rem",     
           lineHeight: 0.95,      
           letterSpacing: "-0.02em", 
           userSelect: "none",

@@ -1,10 +1,10 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
 import { HelmetProvider } from "react-helmet-async";
 
-import FashionDesignChapter5 from "./FashionCollection/FashionDesignChapter5";
 import MainFashionDesign from "./FashionCollection/MainFashionDesign";
-import SpringCollection from "./FashionCollection/SpringCollection";
-import SummerCollection from "./FashionCollection/SummerCollection";
+import SpringWomanCollection from "./FashionCollection/SpringWomanCollection";
+import SummerWomanCollection from "./FashionCollection/SummerWomanCollection";
+import FashionDesignChapter5 from "./FashionCollection/WomanVestLook";
 import FashionModel from "./FashionModel";
 import PhotoSlider from "./PhotoSlider";
 import ZaraWomanCollection from "./WomanCollection2025";
@@ -33,11 +33,10 @@ const Collection = () => {
           The New
         </Typography>
       </Box>
-
-      <SpringCollection />
+      <SpringWomanCollection />
       <PhotoSlider />
       <FashionModel />
-      <SummerCollection />
+      <SummerWomanCollection />
       <MainFashionDesign />
 
       <Divider sx={{ marginBlockStart: "6rem", marginInline: "5rem" }}>

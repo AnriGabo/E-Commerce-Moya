@@ -1,15 +1,15 @@
 import { Box, Stack, Typography } from "@mui/material";
 
-import BlackFashionModel3 from "../../../Assets/Images/BlackFashionModel3.jpg"
-import BlackFashionModel2 from "../../../Assets/Images/BlackFashionModel2.jpg"
+import ModelPolkaDotTop from "../../../Assets/Images/black_fashion_model_01.jpg"
+import BrownPolkaDotSandal  from "../../../Assets/Images/black_fashion_model_shoes_01.jpg"
 import { HelmetProvider } from "react-helmet-async";
 
 const FashionModelStyle = [
   {
-    img: BlackFashionModel3,
+    img: ModelPolkaDotTop,
   },
   {
-    img: BlackFashionModel2,
+    img: BrownPolkaDotSandal ,
     h4: "LIMITED DROP",
     h5: "MOYA WOMAN COLLECTION",
     h6: "BLACK CUT / 003",
@@ -44,7 +44,7 @@ const FashionModel = () => {
             <img
               src={Item.img}
               alt={`Fashion Model Style ${I}`}
-              style={{ width: "100%"}}
+              style={{ width: "100%",cursor:"pointer"}}
             />
           )}
           <Box

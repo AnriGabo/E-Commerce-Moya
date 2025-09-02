@@ -1,27 +1,27 @@
 import { Box, Stack, Typography } from "@mui/material";
-import Zara2025Jewellery from "../../../Assets/Images/ZaraJewellery.jpg";
-import Zara2025Keys from "../../../Assets/Images/ZaraKeys.jpg";
-import Zara2025CollectionN0 from "../../../Assets/Images/ZaraWomanCollection.jpg";
-import Zara2025CollectionN1 from "../../../Assets/Images/ZaraWomanCollection1.jpg";
+import Moyajewellery from "../../../Assets/Images/moya_jewellery_00.jpg";
+import MoyaKeysCollection from "../../../Assets/Images/moya_keys_01.jpg";
+import WomanWhiteBlouse  from "../../../Assets/Images/fashion_model_07.jpg";
+import WomanBlackHeelsWithSocks  from "../../../Assets/Images/fashion_model_sock_02.jpg";
 
 const ZaraCollectionOf2025 = [
   {
-    img: Zara2025CollectionN0,
+    img: WomanWhiteBlouse,
     h5: "Embroidered Collar Blouse",
     h6: "A D D B",
   },
   {
-    img: Zara2025CollectionN1,
+    img: WomanBlackHeelsWithSocks,
     h5: "Cotton Blend Kneel",
     h6: "E L N A",
   },
   {
-    img: Zara2025Keys,
+    img: MoyaKeysCollection,
     h5: "Charm Lock Necklace",
     h4: "0 0 3",
   },
   {
-    img: Zara2025Jewellery,
+    img: Moyajewellery,
     h5: "Layered Medallion Necklace",
     h4: "0 0 4",
   },
@@ -31,7 +31,7 @@ const ZaraWomanCollection = () => {
   return (
     <Stack
       sx={{
-        marginBlock: "7rem",
+        marginBlockStart: "7rem",
         display: "grid",
         gridTemplateColumns: "repeat(2,1fr)",
         gridTemplateRows: "repeat(2,1fr)",

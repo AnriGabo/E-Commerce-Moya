@@ -10,7 +10,7 @@ const WomanEarringDetail = () => {
         marginBlockStart: "3rem",
       }}
     >
-      <img src={WomanEarringDetail13} alt={"Fashion Model"} style={{width:"90%"}}  />
+      <img src={WomanEarringDetail13} alt={"Fashion Model"} style={{width:"90%",cursor:"pointer"}}  />
       <Box
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
