@@ -22,6 +22,41 @@ export default function RegistrationTextField() {
     setChecked(event.target.checked);
   };
 
+  async function getData() {
+    const URL = "http://localhost:5000/auth/register";
+
+    try {
+      const response = await fetch(URL, {
+        method: "POST",
+        // headers ის მეშვეობით ჩვენ ვეუბნებით რა ფორმატით მოდის რექვესთის ბადი
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // Body ში არის მოცემული დატა რომელსაც ვაგზავნით ჩვენი კლიენტიდან, და
+        // json.stringify  ობიექტს გადაააკონვერტირებს როგორც ჯეისონის სტრინგი
+        body: JSON.stringify({
+          username: "tsitsi",
+          lastname: "manvelishvili",
+          email: "tsitshimanvelishvili12@gmail.com",
+          password_hash: "tsitsi$",
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`Response status : ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error(error);
+      }
+    }
+  }
+  getData();
+
   return (
     <Stack
       component="form"
