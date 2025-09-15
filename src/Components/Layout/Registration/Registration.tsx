@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import RegistrationTextField from "./RegistrationField";
+import RegistrationTextField from "./RegistrationRequest";
 
 const Registration = () => {
   return (
