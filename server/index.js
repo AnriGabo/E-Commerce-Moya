@@ -1,26 +1,25 @@
 import express from "express";
+import { config } from "dotenv";
+import helmet from "helmet";
+import pg from "pg";
+import cors from "cors";
+import bcrypt from "bcrypt";
+
 const app = express();
 app.use(express.json());
 
-import { config } from "dotenv";
 config();
-
-import helmet from "helmet";
 app.use(helmet());
-import cors from "cors";
 
 app.use(
   cors({
-    // მხოლოდ და მხოლოდ ამისგანაა დაშვებული რექვესთი მაგას ვეუბნებით აქ 
     origin: "http://localhost:5174",
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-import pg from "pg";
 const { Pool } = pg;
-
 const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
@@ -44,6 +43,10 @@ app.get("/", async (req, res) => {
 // Create data, insert
 app.post("/auth/register", async (req, res) => {
   const registruser = req.body;
+  const registerPassword = registruser.password_hash;
+
+  const COST = 12;
+  const storedHash = await bcrypt.hash(registerPassword, COST);
 
   try {
     const result = await pool.query({
@@ -55,10 +58,10 @@ app.post("/auth/register", async (req, res) => {
         registruser.username,
         registruser.lastname,
         registruser.email,
-        registruser.password_hash,
+        storedHash,
       ],
     });
-    res.status(201).json(result.rows[0]);
+    res.status(201).json({ message: `Data Is Adding Succsessfully` });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: `Database insert failed` });
