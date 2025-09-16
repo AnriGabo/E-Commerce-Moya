@@ -39,8 +39,6 @@ app.get("/", async (req, res) => {
     res.status(500).send("Retrive data is not succsessfully");
   }
 });
-
-// Create data, insert
 app.post("/auth/register", async (req, res) => {
   const registruser = req.body;
   const registerPassword = registruser.password_hash;
@@ -67,8 +65,6 @@ app.post("/auth/register", async (req, res) => {
     res.status(500).json({ error: `Database insert failed` });
   }
 });
-
-// DELETE data
 app.delete("/user/:id", async (req, res) => {
   // ამ შემთხვევაში /:id ში რასაც გადავცემთ რექვესთის დროს, ის შეინახება DeleteUserId ცვლადში
   const DeleteUserId = req.params.id;
@@ -84,9 +80,6 @@ app.delete("/user/:id", async (req, res) => {
     res.status(500).send(`Delete data is failed`);
   }
 });
-
-// MOdified data
-
 app.put("/userchange/:id", async (req, res) => {
   // URL ში გადაცემულ ID-ს იღებს
   const changeId = req.params.id;
@@ -102,6 +95,37 @@ app.put("/userchange/:id", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: `Data Modified is failing` });
+  }
+});
+
+app.post("/auth/login", async (req, res) => {
+  const { email, password_hash } = req.body;
+
+  if (!email || !password_hash) {
+    res.status(404).json({ message: `Email And Password is required` });
+  }
+
+  try {
+    const result = await pool.query({
+      text: `SELECT email, password_hash FROM registration WHERE email = $1`,
+      values: [email],
+    });
+
+    if (result.rows.length === 0) {
+      res.status(401).json({ message: `Wrong credentials 0` });
+    }
+
+
+    const hashedPasswordinDb = result.rows[0].password_hash;
+    const match = await bcrypt.compare(password_hash, hashedPasswordinDb);
+    if (!match) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    return res.status(200).json({ message: "Login successful" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: `Wrong Credentials` });
   }
 });
 
