@@ -99,7 +99,9 @@ app.put("/userchange/:id", async (req, res) => {
 });
 
 app.post("/auth/login", async (req, res) => {
-  const { email, password_hash } = req.body;
+  const {email,password_hash} = req.body;
+
+  
 
   if (!email || !password_hash) {
     res.status(404).json({ message: `Email And Password is required` });
@@ -114,7 +116,6 @@ app.post("/auth/login", async (req, res) => {
     if (result.rows.length === 0) {
       res.status(401).json({ message: `Wrong credentials 0` });
     }
-
 
     const hashedPasswordinDb = result.rows[0].password_hash;
     const match = await bcrypt.compare(password_hash, hashedPasswordinDb);
