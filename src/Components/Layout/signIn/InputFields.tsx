@@ -15,16 +15,16 @@ import { Link as RouterLink } from "react-router-dom";
 interface inputType {
   visiblePassword: boolean;
   handleClick: () => void;
+  SignInRequest: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
-  SignInRequest: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>;
 }
 
 const InputFields = ({
-  visiblePassword,
-  handleClick,
   setEmail,
   setPassword,
+  visiblePassword,
+  handleClick,
   SignInRequest,
 }: inputType) => {
   return (
@@ -83,23 +83,24 @@ const InputFields = ({
           <Typography
             sx={{
               fontSize: "0.78rem",
+              width: "fit-content",
               cursor: "pointer",
               fontFamily:
                 "'Poppins', 'Roboto', 'Helvetica', 'Arial', sans-serif",
               fontWeight: 400,
-              color: "#555",
+              color: "#5e6f8bff",
               "&:hover": {
                 textDecoration: "underline",
-                color: "#1976d2",
+                color: "#000",
               },
             }}
           >
-            Forget password?
+            Forgot password?
           </Typography>
         </Box>
         <Box sx={{ paddingBlockStart: "1.5rem" }}>
           <Button
-           onClick={SignInRequest}
+            onClick={SignInRequest}
             variant="contained"
             sx={{
               backgroundColor: "black",
@@ -115,33 +116,26 @@ const InputFields = ({
                 letterSpacing: "1px",
               }}
             >
-              Enter System
+              Access account
             </Typography>
           </Button>
-          <Box>
+          <Box sx={{ paddingBlockStart: "1rem" }}>
             <MuiLink component={RouterLink} to="/registration" underline="none">
-              <Button
-                variant="outlined"
+              <Typography
                 sx={{
-                  width: "22.5rem",
-                  border: "1px solid black",
-                  color: "black",
-                  textTransform: "capitalize",
-                  marginBlockStart: "1rem",
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: "0.875rem",
+                  fontWeight: 400,
+                  letterSpacing: "1.5px",
+                  color: "#5e6f8bff",
+                  "&:hover": {
+                    textDecoration: "underline",
+                    color: "#000",
+                  },
                 }}
               >
-                <Typography
-                  sx={{
-                    fontFamily: "'Montserrat', sans-serif",
-                    fontSize: "0.875rem", // 14px
-                    fontWeight: 400,
-                    letterSpacing: "1px",
-                    color: "black",
-                  }}
-                >
-                  Registration
-                </Typography>
-              </Button>
+                Don’t have an account? Sign up
+              </Typography>
             </MuiLink>
           </Box>
         </Box>

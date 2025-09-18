@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { Link } from "react-router-dom";
 
 interface propsType {
   visiblePass: boolean;
@@ -26,7 +27,7 @@ interface propsType {
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
   setRepeatPass: React.Dispatch<React.SetStateAction<string>>;
-    getData: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>;
+  getData: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>;
 }
 
 const RegistrationFields = ({
@@ -44,7 +45,7 @@ const RegistrationFields = ({
   email,
   password,
   repeatpass,
-  getData
+  getData,
 }: propsType) => {
   return (
     <Stack
@@ -108,6 +109,7 @@ const RegistrationFields = ({
           display: "flex",
           alignItems: "center",
           paddingBlockStart: "0.5rem",
+          paddingInlineStart: "0.4rem",
           gap: "0.5rem",
         }}
       >
@@ -131,12 +133,12 @@ const RegistrationFields = ({
           I have read the privacy and cookie policy.
         </Typography>
       </Box>
-      <Box sx={{ paddingInlineStart: "0.5rem" }}>
+      <Stack sx={{ paddingInlineStart: "0.5rem" }}>
         <Button
           variant="outlined"
           onClick={getData}
           sx={{
-            width: "14rem",
+            width: "16.1rem",
             textTransform: "capitalize",
             color: "black",
             border: "1px solid black",
@@ -154,7 +156,27 @@ const RegistrationFields = ({
             Create account
           </Typography>
         </Button>
-      </Box>
+        <Box sx={{ paddingBlockStart: "1rem" }}>
+          <Link to={"/signin"}>
+            <Typography
+              sx={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: "0.875rem",
+                fontWeight: 400,
+                letterSpacing: "1.5px",
+                color: "#5e6f8bff",
+                "&:hover": {
+                  textDecoration: "underline",
+                  color: "#000",
+                  cursor: "pointer",
+                },
+              }}
+            >
+              Already have an account? Sign in
+            </Typography>
+          </Link>
+        </Box>
+      </Stack>
     </Stack>
   );
 };
