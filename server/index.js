@@ -4,6 +4,7 @@ import helmet from "helmet";
 import pg from "pg";
 import cors from "cors";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const app = express();
 app.use(express.json());
@@ -39,32 +40,7 @@ app.get("/", async (req, res) => {
     res.status(500).send("Retrive data is not succsessfully");
   }
 });
-app.post("/auth/register", async (req, res) => {
-  const registruser = req.body;
-  const registerPassword = registruser.password_hash;
 
-  const COST = 12;
-  const storedHash = await bcrypt.hash(registerPassword, COST);
-
-  try {
-    const result = await pool.query({
-      text: `INSERT INTO registration (username, lastname, email, password_hash)
-      VALUES ($1, $2, $3, $4)
-      RETURNING user_id, username, email, created_at
-      `,
-      values: [
-        registruser.username,
-        registruser.lastname,
-        registruser.email,
-        storedHash,
-      ],
-    });
-    res.status(201).json({ message: `Data Is Adding Succsessfully` });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: `Database insert failed` });
-  }
-});
 app.delete("/user/:id", async (req, res) => {
   // ამ შემთხვევაში /:id ში რასაც გადავცემთ რექვესთის დროს, ის შეინახება DeleteUserId ცვლადში
   const DeleteUserId = req.params.id;
@@ -74,7 +50,8 @@ app.delete("/user/:id", async (req, res) => {
       text: `DELETE FROM registration WHERE user_id = $1`,
       values: [DeleteUserId],
     });
-    res.status(204).send(`Delete is executing succsessfuly`);
+
+    res.status(200).send(`Delete Request is executing succsessfuly`);
   } catch (err) {
     console.error(err);
     res.status(500).send(`Delete data is failed`);
@@ -98,23 +75,46 @@ app.put("/userchange/:id", async (req, res) => {
   }
 });
 
-app.post("/auth/login", async (req, res) => {
-  const {email,password_hash} = req.body;
+app.post("/auth/register", async (req, res) => {
+  const { username, lastname, email, password_hash } = req.body;
 
-  
+  if (!username || !lastname || !email || !password_hash) {
+    return res.status(404).json({ message: `Input Fields is Required` });
+  }
+
+  const COST = 12;
+  const storedHash = await bcrypt.hash(password_hash, COST);
+
+  try {
+    const result = await pool.query({
+      text: `INSERT INTO registration (username, lastname, email, password_hash)
+      VALUES ($1, $2, $3, $4)
+      RETURNING user_id, username, email, created_at
+      `,
+      values: [username, lastname, email, storedHash],
+    });
+    res.status(201).json({ message: `Data Is Adding Succsessfully` });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: `Wrong Credentials` });
+  }
+});
+
+app.post("/auth/login", async (req, res) => {
+  const { email, password_hash } = req.body;
 
   if (!email || !password_hash) {
-    res.status(404).json({ message: `Email And Password is required` });
+    return res.status(404).json({ message: `Email And Password is required` });
   }
 
   try {
     const result = await pool.query({
-      text: `SELECT email, password_hash FROM registration WHERE email = $1`,
+      text: `SELECT user_id,email, password_hash FROM registration WHERE email = $1`,
       values: [email],
     });
 
     if (result.rows.length === 0) {
-      res.status(401).json({ message: `Wrong credentials 0` });
+      return res.status(401).json({ message: `Invalid credentials ` });
     }
 
     const hashedPasswordinDb = result.rows[0].password_hash;
@@ -123,10 +123,21 @@ app.post("/auth/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    return res.status(200).json({ message: "Login successful" });
+    const userId = result.rows[0].user_id;
+
+    const payload = {
+      sub: userId,
+      role:"user",
+      email: email,
+    };
+    const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: "13m",
+    });
+
+    return res.status(200).json({ accessToken: accessToken });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: `Wrong Credentials` });
+    return res.status(500).json({ message: `Invalid Credentials` });
   }
 });
 
