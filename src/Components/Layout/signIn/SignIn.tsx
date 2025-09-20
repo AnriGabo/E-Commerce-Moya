@@ -1,13 +1,14 @@
 import { Box } from "@mui/material";
 import { useState } from "react";
 import InputFields from "./InputFields";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [visiblePassword, setVisiblePassword] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const handleClick = () => setVisiblePassword((prev) => !prev);
-
+  const navigate = useNavigate();
   // შეინახება სერვერიდან წამოსული პასუხი
   // const [save, setSave] = useState("");
 
@@ -37,6 +38,8 @@ const SignIn = () => {
       const result = await response.json();
       console.log(result.message);
       // setSave(result.message);
+
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

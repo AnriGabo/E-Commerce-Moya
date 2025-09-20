@@ -1,10 +1,13 @@
+import { Stack } from "@mui/material";
 import { useState } from "react";
 import RegistrationFields from "./RegistrationFields";
-import { Stack } from "@mui/material";
+// import PositionedSnackbar from "./Snackbar";
+import {useNavigate } from "react-router-dom";
 
 export default function RegistrationTextField() {
   const [visiblePass, setVisiblePass] = useState<boolean>(false);
   const handleClick = () => setVisiblePass((prev) => !prev);
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState<string>("");
   const [lastname, setLastName] = useState<string>("");
@@ -43,19 +46,21 @@ export default function RegistrationTextField() {
         throw new Error(`Response status : ${response.status}`);
       }
 
+      const result = await response.json();
+      console.log(result.message);
+
       setUsername("");
       setLastName("");
       setEmail("");
       setPassword("");
       setRepeatPass("");
 
-      const result = await response.json();
-      console.log(result.message);
+      navigate("/signin");
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
       } else {
-        console.error(error);
+        console.log(error);
       }
     }
   }
