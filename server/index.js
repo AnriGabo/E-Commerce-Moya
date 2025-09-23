@@ -5,9 +5,11 @@ import pg from "pg";
 import cors from "cors";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import cookieParser from "cookie-parser";
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 config();
 app.use(helmet());
@@ -17,6 +19,7 @@ app.use(
     origin: "http://localhost:5174",
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    credentials:true
   })
 );
 
@@ -127,14 +130,23 @@ app.post("/auth/login", async (req, res) => {
 
     const payload = {
       sub: userId,
-      role:"user",
       email: email,
     };
     const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
       expiresIn: "13m",
     });
 
-    return res.status(200).json({ accessToken: accessToken });
+    // ამ ტოკენს და კონფიგურაციას ვინახავთ ქუქიში
+    res.cookie("access", accessToken, { 
+      httpOnly:true,
+      secure:false,
+      sameSite:"lax", 
+      maxAge:13 * 60 * 1000,
+      path: "/"
+    })
+    // ამდროს ბრაუზერი თვითონ ინახავს ქუქის
+
+    return res.status(200).json({ message: `Logged In` });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: `Invalid Credentials` });

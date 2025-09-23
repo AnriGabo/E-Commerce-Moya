@@ -29,6 +29,8 @@ const SignIn = () => {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(credentials),
+        // ეუბნება,რომ გამოაგზავნე არსებული ქოქიები ამ რექვესთთან ერთად
+          credentials: "include"
       });
 
       if (!response.ok) {
@@ -38,6 +40,7 @@ const SignIn = () => {
       const result = await response.json();
       console.log(result.message);
       // setSave(result.message);
+      // result message-ს სწორედ სნაქბარში გამოვიყენებთ
 
       navigate("/");
     } catch (error) {
