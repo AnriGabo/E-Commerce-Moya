@@ -6,9 +6,12 @@ import cors from "cors";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
+import authenticationToken from "./authMiddleware.js";
 
 const app = express();
+// გადმოაკონვერტირებს როგორ js object და დებს req.bodyში
 app.use(express.json());
+// კითხულობს ყველა შემომავალ ქუქის და დებს req.cookies ობიექტში
 app.use(cookieParser());
 
 config();
@@ -19,7 +22,7 @@ app.use(
     origin: "http://localhost:5174",
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials:true
+    credentials: true,
   })
 );
 
@@ -136,21 +139,27 @@ app.post("/auth/login", async (req, res) => {
       expiresIn: "13m",
     });
 
+    // const refreshToken
+
     // ამ ტოკენს და კონფიგურაციას ვინახავთ ქუქიში
-    res.cookie("access", accessToken, { 
-      httpOnly:true,
-      secure:false,
-      sameSite:"lax", 
-      maxAge:13 * 60 * 1000,
-      path: "/"
-    })
-    // ამდროს ბრაუზერი თვითონ ინახავს ქუქის
+    res.cookie("access", accessToken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      maxAge: 13 * 60 * 1000,
+      path: "/",
+    });
 
     return res.status(200).json({ message: `Logged In` });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: `Invalid Credentials` });
   }
+});
+
+
+app.get("/api/me", authenticationToken, (req, res) => {
+  res.json({ id: req.user.id, email: req.user.email });
 });
 
 const port = process.env.PORT;
