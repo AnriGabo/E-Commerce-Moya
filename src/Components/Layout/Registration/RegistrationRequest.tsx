@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 import { useState } from "react";
 import RegistrationFields from "./RegistrationFields";
 // import PositionedSnackbar from "./Snackbar";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function RegistrationTextField() {
   const [visiblePass, setVisiblePass] = useState<boolean>(false);
@@ -20,7 +20,7 @@ export default function RegistrationTextField() {
     setChecked(event.target.checked);
   };
 
-  async function getData(e: React.MouseEvent<HTMLButtonElement>) {
+  async function getData(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const URL = "http://localhost:5000/auth/register";
@@ -30,7 +30,6 @@ export default function RegistrationTextField() {
       lastname: lastname,
       email: email,
       password_hash: password,
-      repeatpass,
     };
 
     try {
@@ -49,6 +48,7 @@ export default function RegistrationTextField() {
       const result = await response.json();
       console.log(result.message);
 
+      // ეს მხოლოდ მაშინ ეშვება როცა წარმატებულია
       setUsername("");
       setLastName("");
       setEmail("");

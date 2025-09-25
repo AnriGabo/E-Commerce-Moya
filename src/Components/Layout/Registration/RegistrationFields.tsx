@@ -1,3 +1,5 @@
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import {
   Box,
   Button,
@@ -8,8 +10,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Link } from "react-router-dom";
 
 interface propsType {
@@ -27,7 +27,7 @@ interface propsType {
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
   setRepeatPass: React.Dispatch<React.SetStateAction<string>>;
-  getData: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>;
+  getData: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
 }
 
 const RegistrationFields = ({
@@ -50,6 +50,7 @@ const RegistrationFields = ({
   return (
     <Stack
       component="form"
+      onSubmit={getData}
       sx={{ "& > :not(style)": { width: "45ch" }, marginBlockStart: "2rem" }}
       noValidate
       autoComplete="off"
@@ -61,6 +62,7 @@ const RegistrationFields = ({
         id="standard-name"
         label="First name"
         variant="standard"
+        autoComplete="given-name"
       />
       <TextField
         value={lastname}
@@ -68,6 +70,7 @@ const RegistrationFields = ({
         id="standard-lastname"
         label="Last name"
         variant="standard"
+        autoComplete="family-name"
       />
       <TextField
         value={email}
@@ -75,6 +78,7 @@ const RegistrationFields = ({
         id="standard-emailAddress"
         label="Email address"
         variant="standard"
+        autoComplete="email"
       />
       <TextField
         value={password}
@@ -83,7 +87,7 @@ const RegistrationFields = ({
         label="Password"
         type={visiblePass ? "text" : "password"}
         variant="standard"
-        autoComplete="on"
+        autoComplete="new-password"
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -135,8 +139,8 @@ const RegistrationFields = ({
       </Box>
       <Stack sx={{ paddingInlineStart: "0.5rem" }}>
         <Button
+          type="submit"
           variant="outlined"
-          onClick={getData}
           sx={{
             width: "16.1rem",
             textTransform: "capitalize",
@@ -157,7 +161,7 @@ const RegistrationFields = ({
           </Typography>
         </Button>
         <Box sx={{ paddingBlockStart: "1rem" }}>
-          <Link to={"/signin"}>
+          <Link to={"/signin"} style={{ textDecoration: "none" }}>
             <Typography
               sx={{
                 fontFamily: "'Montserrat', sans-serif",

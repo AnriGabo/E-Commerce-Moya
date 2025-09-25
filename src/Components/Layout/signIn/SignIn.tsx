@@ -12,9 +12,7 @@ const SignIn = () => {
   // შეინახება სერვერიდან წამოსული პასუხი
   // const [save, setSave] = useState("");
 
-  async function SignInRequest(
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) {
+  async function SignInRequest(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const URL = "http://localhost:5000/auth/login";
@@ -30,7 +28,7 @@ const SignIn = () => {
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(credentials),
         // ეუბნება,რომ გამოაგზავნე არსებული ქოქიები ამ რექვესთთან ერთად
-          credentials: "include"
+        credentials: "include",
       });
 
       if (!response.ok) {

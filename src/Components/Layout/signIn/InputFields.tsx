@@ -15,7 +15,7 @@ import { Link as RouterLink } from "react-router-dom";
 interface inputType {
   visiblePassword: boolean;
   handleClick: () => void;
-  SignInRequest: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>;
+  SignInRequest: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -36,6 +36,7 @@ const InputFields = ({
     >
       <Stack
         component="form"
+        onSubmit={SignInRequest}
         sx={{
           "& > :not(style)": { width: "45ch" },
         }}
@@ -100,7 +101,7 @@ const InputFields = ({
         </Box>
         <Box sx={{ paddingBlockStart: "1.5rem" }}>
           <Button
-            onClick={SignInRequest}
+            type="submit"
             variant="contained"
             sx={{
               backgroundColor: "black",
