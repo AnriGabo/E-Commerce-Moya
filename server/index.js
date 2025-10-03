@@ -8,6 +8,7 @@ import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import authenticationToken from "./authMiddleware.js";
 
+// deserialization
 const app = express();
 // გადმოაკონვერტირებს როგორ js object და დებს req.bodyში
 app.use(express.json());
@@ -110,7 +111,18 @@ app.post("/auth/login", async (req, res) => {
   const { email, password_hash } = req.body;
 
   if (!email || !password_hash) {
-    return res.status(404).json({ message: `Email And Password is required` });
+    return res.status(400).type("application/problem+json").json({
+      "type": "https://www.moya.com/problems/validation-errro",
+      "title": "Validation Error",
+      "status": 400,
+      "detail": `Required field is missing`,
+      // ამ დეტალებს გამოვიტანთ Ui-ში ინფათისქვემოთ დავწერთ, რომ ინფათი საჭიროა, სერვერიდან წამოვა ეგ
+      "errors": 
+      {
+        "email": ["Email is required"],
+        "password": ["Password is required"]
+      }
+    });
   }
 
   try {
@@ -120,13 +132,42 @@ app.post("/auth/login", async (req, res) => {
     });
 
     if (result.rows.length === 0) {
-      return res.status(401).json({ message: `Invalid credentials ` });
+      return res
+        .status(401)
+        .type("application/problem+json")
+        .json({
+          "type": "https://www.moya.com/problems/user-not-found",
+          "title": "Invalid Credentials",
+          "status": 401,
+          "detail": "Email or password is incorrect",
+          "invalid-params": [
+            {
+              "detail": "Email is not valid format or it is wrong",
+              "pointer": "/email",
+            },
+          ],
+        });
     }
 
     const hashedPasswordinDb = result.rows[0].password_hash;
-    const match = await bcrypt.compare(password_hash, hashedPasswordinDb);
+    const match = await (passbcrypt.compareword_hash, hashedPasswordinDb);
     if (!match) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res
+        .status(401)
+        .type("application/problem+json")
+        .json({
+          "type": "https://www.moya.com/problems/incorrect-password",
+          "title": "Invalid Credentials",
+          "status": 401,
+          "detail": `Email or password is incorrect`,
+          "invalid-params": [
+            {
+              "detail": "Password is not matching in db hash",
+              "pointer": "/password_hash",
+            },
+             
+          ],
+        });
     }
 
     const userId = result.rows[0].user_id;
@@ -135,19 +176,32 @@ app.post("/auth/login", async (req, res) => {
       sub: userId,
       email: email,
     };
+
+    // jwt = 3part, header ავტომატურად, payload object, signature = secret key
     const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
       expiresIn: "13m",
     });
 
-    // const refreshToken
-
-    // ამ ტოკენს და კონფიგურაციას ვინახავთ ქუქიში
     res.cookie("access", accessToken, {
       httpOnly: true,
       secure: false,
       sameSite: "lax",
       maxAge: 13 * 60 * 1000,
       path: "/",
+    });
+
+    const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
+      expiresIn: 60 * 60 * 24 * 7,
+      algorithm: "HS256",
+      issuer: "MOYA",
+    });
+
+    res.cookie("refresh", refreshToken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7,
+      path: "/auth",
     });
 
     return res.status(200).json({ message: `Logged In` });
@@ -157,12 +211,19 @@ app.post("/auth/login", async (req, res) => {
   }
 });
 
-
+// ეს ჯერ ჯერობით არის სატესტო ვერსია, ეს არის დაცული როუტი
+// ჯერ დარტყმა ხდება რექვესთის authenticationTokenზედა ამ საზღვარმა თუ გაატარა
+// მოვა აქ თუარადა აარა :),ყოველ API CALLებზე გამოვიყენებთ მას
 app.get("/api/me", authenticationToken, (req, res) => {
   res.json({ id: req.user.id, email: req.user.email });
 });
 
-const port = process.env.PORT;
+// ესეც სატესტო ვერსიაა ჯერ ჯერობით
+app.get("/auth/refresh", (req, res) => {
+  res.json({ message: `This is refresh token` });
+});
+
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
