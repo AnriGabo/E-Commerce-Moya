@@ -82,12 +82,41 @@ app.put("/userchange/:id", async (req, res) => {
   }
 });
 
+
 app.post("/auth/register", async (req, res) => {
   const { username, lastname, email, password_hash } = req.body;
 
   if (!username || !lastname || !email || !password_hash) {
-    return res.status(404).json({ message: `Input Fields is Required` });
+     return res.status(400).type('application/problem+json').json({
+       "type":'https://www.moya.com/problems/validation',
+       "title": "Validation Error",
+       "detail": "Required Filled Is Missing",
+       "errors":
+        {
+         "username": ["Username is required"],
+         "lastname": ["Lastname is Required"],
+         "email": ["Email is Required"],
+         "password_hash": ['Password is Required']
+       }
+     })
   }
+
+  if(password_hash.length < 8  || password_hash.length > 25){
+    return res.status(400).type("application/problem+json").json({
+      "type": "https://www.moya.com/problems/validation-error",
+      "title":"Validation Error",
+      "detail": "Password must be between 8 and 25 characters long",
+      "invalid-params": [
+        {
+          "detail": "Password ",
+           "detail": "Password must be between 8 and 25 characters long",
+        }
+      ]
+    })
+  }
+
+  
+
 
   const COST = 12;
   const storedHash = await bcrypt.hash(password_hash, COST);
@@ -101,22 +130,35 @@ app.post("/auth/register", async (req, res) => {
       values: [username, lastname, email, storedHash],
     });
     res.status(201).json({ message: `Data Is Adding Succsessfully` });
-  } catch (err) {
-    console.error(err);
+  } catch (err ) {
+    console.log(err);
+    if(err.code === '23505' && err.constraint === 'registration_email_key'){
+       return res.status(409).type('application/problem+json').json({
+         "type": "https://www.moya.com/problems/dublicate-email",
+         "title": "Invalid Credentials",
+         "detail": "Registration Failed",
+         "invalid-params":[
+           {
+              "pointer": "/email",
+               "detail": "Registration failed"
+           }
+         ]
+         
+       })
+    }
     res.status(500).json({ error: `Wrong Credentials` });
   }
 });
 
 app.post("/auth/login", async (req, res) => {
   const { email, password_hash } = req.body;
-
+ 
   if (!email || !password_hash) {
     return res.status(400).type("application/problem+json").json({
-      "type": "https://www.moya.com/problems/validation-errro",
+      "type": "https://www.moya.com/problems/validation-error",
       "title": "Validation Error",
       "status": 400,
       "detail": `Required field is missing`,
-      // ამ დეტალებს გამოვიტანთ Ui-ში ინფათისქვემოთ დავწერთ, რომ ინფათი საჭიროა, სერვერიდან წამოვა ეგ
       "errors": 
       {
         "email": ["Email is required"],
@@ -149,8 +191,8 @@ app.post("/auth/login", async (req, res) => {
         });
     }
 
-    const hashedPasswordinDb = result.rows[0].password_hash;
-    const match = await (passbcrypt.compareword_hash, hashedPasswordinDb);
+    const hashedPasswordInDb = result.rows[0].password_hash;
+    const match = await bcrypt.compare(password_hash, hashedPasswordInDb)
     if (!match) {
       return res
         .status(401)
@@ -162,7 +204,7 @@ app.post("/auth/login", async (req, res) => {
           "detail": `Email or password is incorrect`,
           "invalid-params": [
             {
-              "detail": "Password is not matching in db hash",
+              "detail": "Email or password is incorrect",
               "pointer": "/password_hash",
             },
              
@@ -171,7 +213,6 @@ app.post("/auth/login", async (req, res) => {
     }
 
     const userId = result.rows[0].user_id;
-
     const payload = {
       sub: userId,
       email: email,
@@ -207,7 +248,7 @@ app.post("/auth/login", async (req, res) => {
     return res.status(200).json({ message: `Logged In` });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: `Invalid Credentials` });
+    return res.status(500).json({ message: `Internal Server Error` });
   }
 });
 
