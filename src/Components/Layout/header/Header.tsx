@@ -7,8 +7,14 @@ import AuthLink from "../AuthLink/AuthLink";
 import AnnouncmentBar from "./AnnouncmentBar";
 import { useLocation } from "react-router-dom";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
+import { useState } from "react";
+
 
 export default function Header() {
+ const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen((Prev) => !Prev);
+  const handleClose = () => setOpen((Prev) => !Prev);
+
   const trigger = useScrollTrigger();
 
   const { pathname } = useLocation();
@@ -50,7 +56,7 @@ export default function Header() {
             alignItems:"center",
           }}
         >
-          <BurgerMenu />
+          <BurgerMenu handleOpen={handleOpen} open={open} handleClose={handleClose} />
           <Slide in={!trigger} direction="down" mountOnEnter unmountOnExit>
             <ButtonBase component={NavLink} to={"/"} onClick={handleClick}>
               <CustomMainTitleTypography>MOYA</CustomMainTitleTypography>

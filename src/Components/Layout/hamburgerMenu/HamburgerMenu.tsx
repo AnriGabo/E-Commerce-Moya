@@ -1,8 +1,15 @@
 import { Box, IconButton, Slide } from "@mui/material";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import { FiMenu } from "react-icons/fi";
+import Drawer from "./DrawerMenu";
 
-const BurgerMenu = () => {
+interface handleOpenType {
+  handleOpen: () => void;
+  handleClose: () => void;
+  open: boolean;
+}
+
+const HamburgerMenu = ({ handleOpen,handleClose,open }: handleOpenType) => {
   const trigger = useScrollTrigger();
 
   return (
@@ -12,7 +19,7 @@ const BurgerMenu = () => {
       }}
     >
       <Slide in={!trigger} direction="down" mountOnEnter unmountOnExit>
-        <IconButton>
+        <IconButton onClick={handleOpen}>
           <FiMenu
             style={{
               color: "black",
@@ -23,8 +30,9 @@ const BurgerMenu = () => {
           />
         </IconButton>
       </Slide>
+      <Drawer handleClose={handleClose} open={open}></Drawer>
     </Box>
   );
 };
 
-export default BurgerMenu;
+export default HamburgerMenu;
