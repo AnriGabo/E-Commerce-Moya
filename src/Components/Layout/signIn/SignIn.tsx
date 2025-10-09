@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { useState } from "react";
-import InputFields from "./InputFields";
+import InputFields from "./AuthActions";
 import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
@@ -9,8 +9,6 @@ const SignIn = () => {
   const [password, setPassword] = useState<string>("");
   const handleClick = () => setVisiblePassword((prev) => !prev);
   const navigate = useNavigate();
-  // შეინახება სერვერიდან წამოსული პასუხი
-  // const [save, setSave] = useState("");
 
   async function SignInRequest(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -27,20 +25,18 @@ const SignIn = () => {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(credentials),
-        // ეუბნება,რომ გამოაგზავნე არსებული ქოქიები ამ რექვესთთან ერთად
         credentials: "include",
       });
 
-      if (!response.ok) {
-        throw new Error(`Response status : ${response.status}`);
-      }
-
       const result = await response.json();
       console.log(result.message);
-      // setSave(result.message);
+
+      alert([result.title, result.detail]);
+
       // result message-ს სწორედ სნაქბარში გამოვიყენებთ
 
       navigate("/");
+      // წარმატებით ემატება მონაცემები, მაგრამ არასწორი
     } catch (error) {
       console.log(error);
     }
