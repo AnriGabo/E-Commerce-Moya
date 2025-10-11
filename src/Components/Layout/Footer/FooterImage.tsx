@@ -9,6 +9,7 @@ const footerImages = [
   },
   {
     img: FemaleModel,
+    alt:"R"
   },
   {
     img: FemaleModelBlindfold,

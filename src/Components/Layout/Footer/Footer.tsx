@@ -5,35 +5,36 @@ import FooterImage from "./FooterImage";
 const Footer = () => {
   return (
     <Stack
-      component={"footer"}
+      component="footer"
       id="app-footer"
       sx={{
         backgroundColor: "rgba(236, 234, 234, 1)",
         display: "grid",
-        gridTemplateColumns: "repeat(2,1fr)",
+        gridTemplateColumns: "repeat(2, 1fr)",
+        alignItems:"center",
         paddingInline: "3rem",
-        marginBlockStart: "8rem",
         borderTopLeftRadius: "8px",
         borderTopRightRadius: "8px",
+        marginBlockStart:"8rem",
+        
       }}
     >
       <Stack
+        direction="row"
         sx={{
           gap: "1.7rem",
-          paddingBlockStart: "3rem",
           flexWrap: "wrap",
           alignItems: "center",
         }}
-        direction={"row"}
       >
         <FooterCaption>Contact Us</FooterCaption>
-        <FooterCaption> Customer Service</FooterCaption>
-        <FooterCaption> Orders & Returns</FooterCaption>
-        <FooterCaption> Privacy Policy</FooterCaption>
+        <FooterCaption>Customer Service</FooterCaption>
+        <FooterCaption>Orders & Returns</FooterCaption>
+        <FooterCaption>Privacy Policy</FooterCaption>
 
         <Typography
           variant="body2"
-          component={"h6"}
+          component="h6"
           sx={{
             flexBasis: "100%",
             fontFamily: "Cormorant Garamond, serif",
@@ -46,6 +47,7 @@ const Footer = () => {
           English | Georgian • © 2025 YourBrand. All rights reserved.
         </Typography>
       </Stack>
+
       <FooterImage />
     </Stack>
   );
