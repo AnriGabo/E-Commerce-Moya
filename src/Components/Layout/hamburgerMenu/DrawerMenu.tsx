@@ -1,7 +1,11 @@
 import { Stack, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import type { JSX } from "react/jsx-runtime";
+import Children from "../../menuSections/children/children";
+import Man from "../../menuSections/man/man";
 import Woman from "../../menuSections/woman/Woman";
 
 interface stateType {
@@ -10,29 +14,52 @@ interface stateType {
 }
 
 const NavigationLinks = [
-  { to: "/woman", label: "Woman" },
-  { to: "/man", label: "Man" },
-  { to: "/children", label: "Children" },
-  { to: "/newcollection", label: "NEW IN" },
-  { to: "/limitededition", label: "LIMITED EDITION" },
-  { to: "/stories", label: "STORIES" },
+  { key: "woman", label: "Woman", type: "view" },
+  { key: "man", label: "Man", type: "view" },
+  { key: "children", label: "Children", type: "view" },
+  { key: "new", type: "direct", to: "/new", label: "NEW IN" },
+  {
+    key: "limited",
+    type: "direct",
+    to: "/registration",
+    label: "LIMITED EDITION",
+  },
+  { key: "stories", type: "direct", to: "/stories", label: "STORIES" },
 ];
 
 export default function TemporaryDrawer({ open, handleClose }: stateType) {
+  const [selectedKey, setSelectedKey] = useState("woman");
+
+  const viewsMap: Record<string, JSX.Element> = {
+    woman: <Woman />,
+    man: <Man />,
+    children: <Children />,
+  };
+
+  const navigate = useNavigate();
+
   const DrawerList = (
     <Stack
       sx={{
         padding: "2.5rem",
         display: "grid",
-        gridTemplateColumns: "repeat(3,1fr)",
+        gridTemplateColumns: "250px 1fr",
+        width: "47.938rem",
       }}
     >
-      <Box component={"nav"} role="presentation" sx={{ gridColumn: "1/2" }}>
+      <Box component={"nav"} role="presentation">
         <Box component={"ul"}>
-          {NavigationLinks.map((link) => (
+          {NavigationLinks.map((item) => (
             <Box
               component={"li"}
-              key={link.to}
+              key={item.key}
+              onClick={() => {
+                if (item.type === "view") setSelectedKey(item.key);
+                if (item.type === "direct" && item.to) {
+                  navigate(item.to);
+                  handleClose();
+                }
+              }}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -41,37 +68,33 @@ export default function TemporaryDrawer({ open, handleClose }: stateType) {
                 padding: "0.5rem",
               }}
             >
-              <NavLink to={link.to} style={{ textDecoration: "none" }}>
-                <Typography
-                  sx={{
-                    fontFamily: "'Trebuchet MS', Tahoma, sans-serif",
-                    fontWeight: 300,
-                    fontSize: "0.9rem",
-                    letterSpacing: "0.07em",
-                    textTransform: "uppercase",
-                    color: "#111111",
-                    lineHeight: 1.4,
-                  }}
-                >
-                  {link.label}
-                </Typography>
-              </NavLink>
+              <Typography
+                sx={{
+                  fontFamily: "'Trebuchet MS', Tahoma, sans-serif",
+                  cursor: "pointer",
+                  fontWeight: 300,
+                  fontSize: "0.9rem",
+                  letterSpacing: "0.07em",
+                  textTransform: "uppercase",
+                  color: "#111111",
+                  lineHeight: 1.4,
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    opacity: 0.6,
+                    fontWeight: "bold",
+                    transform: "translateX(2px)",
+                  },
+                }}
+              >
+                {item.label}
+              </Typography>
             </Box>
           ))}
         </Box>
       </Box>
-      {/* ეს არის მეორე სვეტი და ამ მეორე სვეტში დარენდერდება რეალურად ქალიც კაციც ბავშვივ და ასე შემდეგ */}
       <Stack onClick={handleClose}>
-        <Woman />
+        <section>{viewsMap[selectedKey]}</section>
       </Stack>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        Hire this is new level of brand
-      </Box>
     </Stack>
   );
 
@@ -80,11 +103,6 @@ export default function TemporaryDrawer({ open, handleClose }: stateType) {
       <Drawer
         open={open}
         onClose={handleClose}
-        PaperProps={{
-          sx: {
-            width: "767.5px",
-          },
-        }}
       >
         <Box>{DrawerList}</Box>
       </Drawer>

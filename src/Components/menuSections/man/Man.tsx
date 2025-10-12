@@ -1,17 +1,17 @@
 import { Box, Stack, Typography } from "@mui/material";
-import womanSection from "../../../Assets/Images/womanSection.jpg";
+import manSection from "../../../Assets/Images/manSection.jpg";
 import { NavLink } from "react-router-dom";
 
-const womanSectionList = [
-  { to: "coatandjacket", label: "Coats & Jackets" },
-  { to: "suits", label: "Blazers & Suits" },
-  { to: "dresses", label: "Dresses & Jumpsuits" },
-  { to: "tops", label: "Tops & Bodysuits" },
-  { to: "trousers", label: "Trousers & Jeans" },
-  { to: "shirts", label: "Shirts & T-Shirts" },
+const manSectionList = [
+  { to: "mancoat", label: "Coats & Jackets" },
+  { to: "mansuits", label: "Blazers & Suits" },
+  { to: "mansweatshirts", label: "Knitwear & Sweatshirts" },
+  { to: "mansaccessories", label: "Shoes & Accessories" },
+  { to: "manstrouzers", label: "Trousers & Jeans" },
+  { to: "manshirts", label: "Shirts & T-Shirts" },
 ];
 
-const Woman = () => {
+const Man = () => {
   return (
     <Stack
       gap="2rem"
@@ -23,7 +23,7 @@ const Woman = () => {
       <Box>
         <Box
           component="img"
-          src={womanSection}
+          src={manSection}
           alt="Woman fashion"
           sx={{
             width: 200,
@@ -34,7 +34,7 @@ const Woman = () => {
           }}
         />
       </Box>
-      <Box sx={{}}>
+      <Box>
         <Typography>50 Years of unniversary</Typography>
         <Box
           sx={{
@@ -44,7 +44,7 @@ const Woman = () => {
             paddingBlockStart: "2rem",
           }}
         >
-          {womanSectionList.map((item) => (
+          {manSectionList.map((item) => (
             <Typography
               key={item.to}
               sx={{
@@ -75,4 +75,4 @@ const Woman = () => {
   );
 };
 
-export default Woman;
+export default Man;
