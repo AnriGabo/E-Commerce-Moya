@@ -27,13 +27,6 @@ const HamburgerMenu = ({ handleOpen, handleClose, open }: handleOpenType) => {
             aria-label="Open menu"
             aria-controls="main-menu"
           />
-          {/* <img src={burgermenuicon}
-            style={{
-              width:"7rem"
-            }}
-            aria-label="Open menu"
-            aria-controls="main-menu"
-          /> */}
         </IconButton>
       </Slide>
       <Drawer handleClose={handleClose} open={open}></Drawer>

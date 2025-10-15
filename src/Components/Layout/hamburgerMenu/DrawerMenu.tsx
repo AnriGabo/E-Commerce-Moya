@@ -4,8 +4,8 @@ import Drawer from "@mui/material/Drawer";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { JSX } from "react/jsx-runtime";
-import Children from "../../menuSections/children/children";
-import Man from "../../menuSections/man/man";
+import Children from "../../menuSections/children/Children";
+import Man from "../../menuSections/man/Man";
 import Woman from "../../menuSections/woman/Woman";
 
 interface stateType {
@@ -43,7 +43,7 @@ export default function TemporaryDrawer({ open, handleClose }: stateType) {
       sx={{
         padding: "2.5rem",
         display: "grid",
-        gridTemplateColumns: "250px 1fr",
+        gridTemplateColumns: "12.5rem 1fr",
         width: "47.938rem",
       }}
     >
@@ -92,7 +92,7 @@ export default function TemporaryDrawer({ open, handleClose }: stateType) {
           ))}
         </Box>
       </Box>
-      <Stack onClick={handleClose}>
+      <Stack>
         <section>{viewsMap[selectedKey]}</section>
       </Stack>
     </Stack>
@@ -103,6 +103,11 @@ export default function TemporaryDrawer({ open, handleClose }: stateType) {
       <Drawer
         open={open}
         onClose={handleClose}
+        sx={{
+          "& .MuiDrawer-paper": {
+            backgroundColor: "#faf7f2", 
+          },
+        }}
       >
         <Box>{DrawerList}</Box>
       </Drawer>
