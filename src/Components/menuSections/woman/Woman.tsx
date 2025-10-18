@@ -5,16 +5,28 @@ import womanSection2 from "../../../Assets/Images/womanSection1.jpg";
 import womanSection3 from "../../../Assets/Images/womanSection55.jpg";
 
 const womanSectionList = [
-  { to: "/coatandjacket", label: "Coats | Jackets" },
-  { to: "/dresses", label: "Dresses | Jumpsuits" },
-  { to: "/knitwear", label: "Knitwear | Cardigans" },
-  { to: "/accessories", label: "Shoes | Accessories" },
+  { to: "/coats-jackets", label: "Coats | Jackets" },
+  { to: "/dresses-jumpsuits", label: "Dresses | Jumpsuits" },
+  { to: "/knitwear-cardigans", label: "Knitwear | Cardigans" },
+  { to: "/shoes-accessories", label: "Shoes | Accessories" },
 ];
 
 const imageList = [
-  { key: 0, image: womanSection2, alt: "First Woman" },
-  { key: 1, image: womanSection, alt: "First Woman" },
-  { key: 2, image: womanSection3, alt: "First Woman" },
+  {
+    id: 0,
+    image: womanSection2,
+    alt: "Close-up of woman in a beige shearling coat",
+  },
+  {
+    id: 1,
+    image: womanSection,
+    alt: "Woman in olive quilted jacket and cap walking outdoors",
+  },
+  {
+    id: 2,
+    image: womanSection3,
+    alt: "Woman crossing street wearing a brown shearling jacket and sunglasses",
+  },
 ];
 const Woman = () => {
   return (
@@ -34,24 +46,26 @@ const Woman = () => {
         }}
       >
         {imageList.map((Item) => (
-          <Box
-            component="img"
-            src={Item.image}
-            key={Item.key}
-            alt={Item.alt}
-            sx={{
-              width: "8.438rem",
-              height: "12.813rem",
-              objectFit: "cover",
-              objectPosition: "center",
-              borderRadius: "3px",
-              cursor: "pointer",
-            }}
-          />
+          <Box key={Item.id}>
+            <Box
+              component="img"
+              src={Item.image}
+              alt={Item.alt}
+              loading="lazy"
+              sx={{
+                width: "8.438rem",
+                height: "12.813rem",
+                objectFit: "cover",
+                objectPosition: "center",
+                borderRadius: "3px",
+                cursor: "pointer",
+              }}
+            />
+          </Box>
         ))}
       </Stack>
+
       <Stack>
-        <Box>
           <Typography
             sx={{
               fontFamily: "'Playfair Display', serif",
@@ -69,20 +83,25 @@ const Woman = () => {
               fontFamily: "'Inter', sans-serif",
               fontSize: "0.88rem",
               opacity: 0.7,
-              color: "#333",
               paddingBlockStart: "0.4rem",
               cursor: "pointer",
             }}
           >
-            An exclusive collaboration blending fashion and imagination.
+            <NavLink
+              to={"/exclusive-collaboration"}
+              style={{ textDecoration: "none", color: "#333" }}
+            >
+              An exclusive collaboration blending fashion and imagination.
+            </NavLink>
           </Typography>
-        </Box>
+      </Stack>
+
+      <Stack>
         <Box
           sx={{
             display: "flex",
             gap: "0.8rem",
             flexDirection: "column",
-            paddingBlockStart: "2rem",
           }}
         >
           {womanSectionList.map((item) => (
@@ -93,7 +112,6 @@ const Woman = () => {
                 fontSize: "0.95rem",
                 fontWeight: 400,
                 letterSpacing: "0.02rem",
-                color: "#202020",
                 transition: "all 0.3s ease",
                 "&:hover": {
                   opacity: 0.6,
@@ -104,14 +122,16 @@ const Woman = () => {
             >
               <NavLink
                 to={item.to}
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none", color: "#202020" }}
               >
                 {item.label}
               </NavLink>
             </Typography>
           ))}
         </Box>
-        <Box sx={{ paddingBlockStart: "2rem" }}>
+      </Stack>
+      
+      <Stack>
           <Typography
             sx={{
               fontFamily: "'Satoshi', 'Inter', sans-serif",
@@ -135,9 +155,13 @@ const Woman = () => {
               cursor: "pointer",
             }}
           >
-            Best sellers. Limited edition. Special prices.
+            <NavLink
+              to={"/womans/special-prices"}
+              style={{ textDecoration: "none", color: "#333" }}
+            >
+              Best sellers. Limited edition. Special prices.
+            </NavLink>
           </Typography>
-        </Box>
       </Stack>
     </Stack>
   );

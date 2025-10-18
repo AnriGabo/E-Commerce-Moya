@@ -5,16 +5,28 @@ import manFashion7 from "../../../Assets/Images/manFashion7.jpg";
 import manFashion3 from "../../../Assets/Images/manFashion5.jpg";
 
 const manSectionList = [
-  { to: "/mancoat", label: "Coats | Jackets" },
-  { to: "/mansaccessories", label: "Shoes | Accessories" },
-  { to: "/manstrouzers", label: "Trousers | Jeans" },
-  { to: "/manshirts", label: "Sweatshirts | T-Shirts" },
+  { to: "/men/coats-jackets", label: "Coats | Jackets" },
+  { to: "/men/shoes-accessories", label: "Shoes | Accessories" },
+  { to: "/men/trousers-jeans", label: "Trousers | Jeans" },
+  { to: "/men/sweatshirts-tshirts", label: "Sweatshirts | T-Shirts" },
 ];
 
 const manList = [
-  { key: 0, img: manFashion, alt: `First image` },
-  { key: 1, img: manFashion7, alt: `Second Image` },
-  { key: 2, img: manFashion3, alt: `Third Image` },
+  {
+    id: 0,
+    img: manFashion,
+    alt: "Man wearing a beige trench coat and sunglasses, with a serious expression",
+  },
+  {
+    id: 1,
+    img: manFashion7,
+    alt: "Man in a cozy patterned sweater, paired with grey trousers",
+  },
+  {
+    id: 2,
+    img: manFashion3,
+    alt: "Man in a brown leather jacket, beige pants, and sunglasses, standing outdoors",
+  },
 ];
 
 const Man = () => {
@@ -35,20 +47,22 @@ const Man = () => {
         }}
       >
         {manList.map((Item) => (
-          <Box
-            component="img"
-            alt={Item.alt}
-            src={Item.img}
-            key={Item.key}
-            sx={{
-              width: "8.438rem",
-              height: "12.813rem",
-              objectFit: "cover",
-              objectPosition: "center",
-              cursor: "pointer",
-              borderRadius: "3px",
-            }}
-          />
+          <Box key={Item.id}>
+            <Box
+              component="img"
+              alt={Item.alt}
+              src={Item.img}
+              loading="lazy"
+              sx={{
+                width: "8.438rem",
+                height: "12.813rem",
+                objectFit: "cover",
+                objectPosition: "center",
+                cursor: "pointer",
+                borderRadius: "3px",
+              }}
+            />
+          </Box>
         ))}
       </Stack>
 
@@ -72,20 +86,26 @@ const Man = () => {
               fontFamily: "'Inter', sans-serif",
               fontSize: "0.88rem",
               opacity: 0.7,
-              color: "#333",
               paddingBlockStart: "0.4rem",
               cursor: "pointer",
             }}
           >
-            Modern tailoring. Effortless attitude.
+            <NavLink
+              to={"/modern-tailoring"}
+              style={{ textDecoration: "none", color: "#333" }}
+            >
+              Modern tailoring. Effortless attitude.
+            </NavLink>
           </Typography>
         </Box>
+      </Stack>
+
+      <Stack>
         <Box
           sx={{
             display: "flex",
             gap: "0.8rem",
             flexDirection: "column",
-            paddingBlockStart: "2rem",
           }}
         >
           {manSectionList.map((item) => (
@@ -96,7 +116,6 @@ const Man = () => {
                 fontSize: "0.95rem",
                 fontWeight: 400,
                 letterSpacing: "0.02rem",
-                color: "#202020",
                 transition: "all 0.3s ease",
                 "&:hover": {
                   opacity: 0.6,
@@ -107,45 +126,47 @@ const Man = () => {
             >
               <NavLink
                 to={item.to}
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none", color: "#202020" }}
               >
                 {item.label}
               </NavLink>
             </Typography>
           ))}
         </Box>
-        <Box
+      </Stack>
+
+      <Stack>
+        <Typography
+          component={"h2"}
           sx={{
-            paddingBlockStart: "2rem",
+            fontFamily: "'Satoshi', 'Inter', sans-serif",
+            fontSize: "1.05rem",
+            fontWeight: 530,
+            color: "#1a1a1a",
+            letterSpacing: "0.04rem",
+            textAlign: "left",
+            position: "relative",
           }}
         >
-          <Typography
-            component={"h2"}
-            sx={{
-              fontFamily: "'Satoshi', 'Inter', sans-serif",
-              fontSize: "1.05rem",
-              fontWeight: 530,
-              color: "#1a1a1a",
-              letterSpacing: "0.04rem",
-              textAlign: "left",
-              position: "relative",
-            }}
-          >
-            The Signature Capsule / Edition 24·01
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: "0.88rem",
-              fontFamily: "'Inter', sans-serif",
-              opacity: 0.7,
-              color: "#333",
-              paddingBlockStart: "0.4rem",
-              cursor: "pointer",
-            }}
+          The Signature Capsule / Edition 24·01
+        </Typography>
+        <Typography
+          sx={{
+            fontSize: "0.88rem",
+            fontFamily: "'Inter', sans-serif",
+            opacity: 0.7,
+            color: "#333",
+            paddingBlockStart: "0.4rem",
+            cursor: "pointer",
+          }}
+        >
+          <NavLink
+            to={"/mans/special-prices"}
+            style={{ textDecoration: "none", color: "#333" }}
           >
             Best sellers. Limited edition. Special prices.
-          </Typography>
-        </Box>
+          </NavLink>
+        </Typography>
       </Stack>
     </Stack>
   );
