@@ -1,73 +1,156 @@
-import { Box, Stack } from "@mui/material";
-import child0 from "../../../Assets/Images/children0.jpg";
-import child1 from "../../../Assets/Images/children1.jpg";
-import child2 from "../../../Assets/Images/children2.jpg";
-import child3 from "../../../Assets/Images/children3.jpg";
+import { Box, Stack, Typography } from "@mui/material";
+import childrenColl1 from "../../../Assets/Images/childrenColl.jpg";
+import childrenColl2 from "../../../Assets/Images/childrenColl2.jpg";
+import childrenColl3 from "../../../Assets/Images/childrenColl3.jpg";
+import { NavLink } from "react-router-dom";
 
-const imageSlider = [
-  { id: 0, img: child0, alt: "2 years old children", label: "1-3y" },
-  { id: 1, img: child1, alt: "4 years old children", label: "1½ - 6y" },
-  { id: 2, img: child2, alt: "4 years old children", label: "3-6y" },
-  { id: 3, img: child3, alt: "4 years old children", label: "3-6y" },
+const menuLinks = [
+  { to: "/girls-6-14", label: "Girl 6 - 14 years" },
+  { to: "/boys-6-14", label: "Boy 6 - 14 years" },
+  { to: "/girls-1-6", label: "Girl 1 - 6 years" },
+  { to: "/boys-1-6", label: "Boy 1 - 6 years" },
+  { to: "/babies-0-18m", label: "Babies 0 - 18 months" },
 ];
 
-// ქვემოთა ჩამონათვალი
-// const childrenSection = [
-//   { to: "coatandjacket", label: "Coats & Jackets" },
-//   { to: "suits", label: "Blazers & Suits" },
-//   { to: "dresses", label: "Dresses & Jumpsuits" },
-//   { to: "tops", label: "Tops & Bodysuits" },
-//   { to: "trousers", label: "Trousers & Jeans" },
-//   { to: "shirts", label: "Shirts & T-Shirts" },
-// ];
-
-const children = () => {
+const childrenList = [
+  {
+    id: 0,
+    img: childrenColl1,
+    alt: "Toddler in brown fleece outfit sitting on leaves",
+  },
+  {
+    id: 1,
+    img: childrenColl2,
+    alt: "Little girl in pink dress holding a metallic bag",
+  },
+  {
+    id: 2,
+    img: childrenColl3,
+    alt: "Boy in blue long sleeve shirt and brown pants",
+  },
+];
+const Children = () => {
   return (
-    <Stack
-      gap={2}
-      sx={{
-        minHeight: "100%",
-      }}
-    >
-      <Box
+    <Stack gap="2rem" sx={{ minHeight: "100%", px: "2px" }}>
+      <Stack
         sx={{
-          display: "flex",
-          width: "440px",
-          overflowX: "auto",
-          cursor: "pointer",
-          gap: "1.5rem",
-          scrollSnapType: "x mandatory",
-          WebkitOverflowScrolling: "touch",
+          display: "grid",
+          gridTemplateColumns: "repeat(3,1fr)",
+          flexDirection: "row",
+          gap: "0.7rem",
         }}
       >
-        {imageSlider.map((Item) => (
-          <Box
-            key={Item.id}
-            sx={{
-              scrollSnapAlign: "start",
-              flex: "0 0 130px",
-              display: "flex",
-              gap: "0.5rem",
-              flexDirection: "column",
-            }}
-          >
-            <img
+        {childrenList.map((Item) => (
+          <Box key={Item.id}>
+            <Box
+              component="img"
               src={Item.img}
               alt={Item.alt}
+              loading="lazy"
               style={{
-                width: 130,
-                height: 130,
+                width: "8.438rem",
+                height: "12.813rem",
                 objectFit: "cover",
-                borderRadius: "8px",
-                boxShadow: "0 4px 20px rgba(15, 1, 1, 0.05)",
+                objectPosition: "center",
+                cursor: "pointer",
+                borderRadius: "3px",
               }}
             />
-            {Item.label}
           </Box>
         ))}
-      </Box>
+      </Stack>
+
+      <Stack>
+        <Typography
+          sx={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "1rem",
+            letterSpacing: "0.15rem",
+            textTransform: "uppercase",
+            fontWeight: 600,
+            color: "#111",
+          }}
+        >
+          MOYA KIDS / Everyday Magic 21·01
+        </Typography>
+        <Typography
+          sx={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "0.88rem",
+            opacity: 0.7,
+            paddingBlockStart: "0.4rem",
+            cursor: "pointer",
+          }}
+        >
+          <NavLink
+            to={"/playful-collection"}
+            style={{ textDecoration: "none", color: "#333" }}
+          >
+            Designed for play. Made with love
+          </NavLink>
+        </Typography>
+      </Stack>
+      <Stack>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "0.8rem" }}>
+          {menuLinks.map((Item) => (
+            <Typography
+              sx={{
+                fontFamily: "'General Sans', sans-serif",
+                fontSize: "0.95rem",
+                fontWeight: 400,
+                letterSpacing: "0.02rem",
+                transition: "all 0.3s ease",
+                "&:hover": {
+                  opacity: 0.6,
+                  color: "#888",
+                  transform: "translateX(2px)",
+                },
+              }}
+            >
+              <NavLink
+                to={Item.to}
+                style={{ textDecoration: "none", color: "#202020" }}
+              >
+                {Item.label}
+              </NavLink>
+            </Typography>
+          ))}
+        </Box>
+      </Stack>
+      <Stack>
+        <Typography
+          sx={{
+            fontFamily: "'Satoshi', 'Inter', sans-serif",
+            fontSize: "1.05rem",
+            fontWeight: 530,
+            color: "#1a1a1a",
+            letterSpacing: "0.04rem",
+            textAlign: "left",
+            position: "relative",
+          }}
+        >
+          Joy Capsule / 25·01 Release
+        </Typography>
+        <Typography
+          sx={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "0.88rem",
+            opacity: 0.7,
+            color: "#333",
+            paddingBlockStart: "0.4rem",
+            cursor: "pointer",
+          }}
+        >
+          <NavLink
+            to={"/best-sellers"}
+            style={{ textDecoration: "none", color: "#333" }}
+          >
+            Best sellers. Limited edition. Special prices.
+          </NavLink>
+        </Typography>
+      </Stack>
     </Stack>
   );
 };
 
-export default children;
+export default Children;

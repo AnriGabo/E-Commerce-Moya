@@ -18,7 +18,11 @@ const HamburgerMenu = ({ handleOpen, handleClose, open }: handleOpenType) => {
       }}
     >
       <Slide in={!trigger} direction="down" mountOnEnter unmountOnExit>
-        <IconButton onClick={handleOpen}>
+        <IconButton onClick={handleOpen} sx={{
+          "&:hover":{
+            backgroundColor:"transparent"
+          }
+        }}>
           <FiMenu
             style={{
               color: "black",
