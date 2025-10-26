@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import MainFashionModel from "../../../../Assets/Images/fashion_model_06.jpg"
+import MainFashionModel from "../../../../Assets/Images/fashion_model_06.webp";
 
 const MainModels = [
   {
@@ -7,6 +7,7 @@ const MainModels = [
     h4: "Shapes are clear-cut, lines are decisive. A study in sharp proportions, dense fabrics, confident stances.",
     h5: "The kind of clothes that lead",
     h6: "/CLEAR-CUT.",
+    alt: "MOYA - Model in a black and white halter dress posing against a red background for MOYA fashion brand",
   },
 ];
 
@@ -36,7 +37,7 @@ const h6Style = {
   lineHeight: 1.1,
 };
 
-const MainFashionDesign = () => {
+const FashionEditorial = () => {
   return (
     <Stack
       sx={{
@@ -47,7 +48,17 @@ const MainFashionDesign = () => {
     >
       {MainModels.map((Item, I) => (
         <Box key={I}>
-          <img src={Item.img} style={{ width: "100%", cursor: "pointer" }} />
+          <Box
+            component={"img"}
+            src={Item.img}
+            alt={Item.alt}
+            loading="lazy"
+            decoding="async"
+            sx={{
+              width: "100%",
+              cursor: "pointer",
+            }}
+          />
           <Stack sx={{ flexDirection: "row", justifyContent: "space-between" }}>
             <Box
               sx={{
@@ -82,4 +93,4 @@ const MainFashionDesign = () => {
   );
 };
 
-export default MainFashionDesign;
+export default FashionEditorial;

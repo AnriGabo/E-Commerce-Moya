@@ -1,15 +1,19 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { HelmetProvider } from "react-helmet-async";
 
-import WomanOutfitPolkaDot from "../../../Assets/Images/black_fashion_model_00.jpg";
-import WomanSandalPolkaDot  from "../../../Assets/Images/black_fashion_model_shoes_00.jpg";
+import WomanOutfitPolkaDot from "../../../Assets/Images/black_fashion_model_00.webp";
+import WomanSandalPolkaDot from "../../../Assets/Images/black_fashion_model_shoes_00.webp";
 
 const ImageSlider = [
   {
+    id: 0,
+    alt: "MOYA - Back view of woman in chocolate satin halter dress — MOYA Evening Collection",
     img: WomanOutfitPolkaDot,
   },
 
   {
+    id: 1,
+    alt: "MOYA - Brown heeled sandal with fine dotted straps — MOYA Accessories Collection",
     img: WomanSandalPolkaDot,
     h4: "SPECIAL EDITION",
     h5: "MOYA WOMAN COLLECTION",
@@ -17,7 +21,7 @@ const ImageSlider = [
   },
 ];
 
-const PhotoSlider = () => {
+const WhiteDressSection = () => {
   return (
     <Stack
       sx={{
@@ -41,13 +45,24 @@ const PhotoSlider = () => {
           rel="stylesheet"
         />
       </HelmetProvider>
-      {ImageSlider.map((Item, I) => (
-        <Stack key={I}>
-          <img
-            src={Item.img}
-            alt={`Image-${I}`}
-            style={{ width: "100%", cursor: "pointer" }}
-          />
+      {ImageSlider.map((Item) => (
+        <Stack>
+          <Box key={Item.id}>
+            {Item.img && (
+              <Box
+                component={"img"}
+                src={Item.img}
+                alt={Item.alt}
+                loading="lazy"
+                decoding="async"
+                sx={{
+                  width: "100%",
+                  cursor: "pointer",
+                }}
+              />
+            )}
+          </Box>
+
           <Box
             sx={{
               display: "flex",
@@ -96,4 +111,4 @@ const PhotoSlider = () => {
   );
 };
 
-export default PhotoSlider;
+export default WhiteDressSection;

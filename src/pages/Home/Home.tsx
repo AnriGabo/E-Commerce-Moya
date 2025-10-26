@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import Collection from "../../Components/editorial/photo-gallery/TheNewSection";
-import VideoSlider from "../../Components/editorial/video-carousel/VideoSlider";
+import VideoSlider from "../../Components/editorial/Video/MainVideo";
 
 const HomePage = () => {
   const HEADER_HEIGHT = "11rem";

@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
-import FemaleModel from "../../../Assets/Images/fashion_model_08.jpg";
-import FemaleModelBlindfold from "../../../Assets/Images/female-model-blindfold.jpg";
-import MaleModelBlindfold from "../../../Assets/Images/male-model-blindfold.jpg";
+import FemaleModel from "../../../Assets/Images/fashion_model_08.webp";
+import FemaleModelBlindfold from "../../../Assets/Images/female-model-blindfold.webp";
+import MaleModelBlindfold from "../../../Assets/Images/male-model-blindfold.webp";
 
 const footerImages = [
   {

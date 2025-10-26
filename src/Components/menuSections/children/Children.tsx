@@ -1,7 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
-import childrenColl1 from "../../../Assets/Images/childrenColl.jpg";
-import childrenColl2 from "../../../Assets/Images/childrenColl2.jpg";
-import childrenColl3 from "../../../Assets/Images/childrenColl3.jpg";
+import childrenColl1 from "../../../Assets/Images/childrenColl.webp";
+import childrenColl2 from "../../../Assets/Images/childrenColl2.webp";
+import childrenColl3 from "../../../Assets/Images/childrenColl3.webp";
 import { NavLink } from "react-router-dom";
 
 const menuLinks = [
@@ -16,17 +16,17 @@ const childrenList = [
   {
     id: 0,
     img: childrenColl1,
-    alt: "Toddler in brown fleece outfit sitting on leaves",
+    alt: "MOYA - Toddler in brown fleece outfit sitting on leaves",
   },
   {
     id: 1,
     img: childrenColl2,
-    alt: "Little girl in pink dress holding a metallic bag",
+    alt: "MOYA - Little girl in pink dress holding a metallic bag",
   },
   {
     id: 2,
     img: childrenColl3,
-    alt: "Boy in blue long sleeve shirt and brown pants",
+    alt: "MOYA - Boy in blue long sleeve shirt and brown pants",
   },
 ];
 const Children = () => {
@@ -47,6 +47,7 @@ const Children = () => {
               src={Item.img}
               alt={Item.alt}
               loading="lazy"
+              decoding="async"
               style={{
                 width: "8.438rem",
                 height: "12.813rem",

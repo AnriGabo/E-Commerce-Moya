@@ -1,8 +1,8 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import womanSection from "../../../Assets/Images/womanSection77.jpg";
-import womanSection2 from "../../../Assets/Images/womanSection1.jpg";
-import womanSection3 from "../../../Assets/Images/womanSection55.jpg";
+import womanSection from "../../../Assets/Images/womanSection77.webp";
+import womanSection2 from "../../../Assets/Images/womanSection1.webp";
+import womanSection3 from "../../../Assets/Images/womanSection55.webp";
 
 const womanSectionList = [
   { to: "/coats-jackets", label: "Coats | Jackets" },
@@ -15,17 +15,17 @@ const imageList = [
   {
     id: 0,
     image: womanSection2,
-    alt: "Close-up of woman in a beige shearling coat",
+    alt: "MOYA - Close-up of woman in a beige shearling coat",
   },
   {
     id: 1,
     image: womanSection,
-    alt: "Woman in olive quilted jacket and cap walking outdoors",
+    alt: "MOYA - Woman in olive quilted jacket and cap walking outdoors",
   },
   {
     id: 2,
     image: womanSection3,
-    alt: "Woman crossing street wearing a brown shearling jacket and sunglasses",
+    alt: "MOYA - Woman crossing street wearing a brown shearling jacket and sunglasses",
   },
 ];
 const Woman = () => {
@@ -51,7 +51,6 @@ const Woman = () => {
               component="img"
               src={Item.image}
               alt={Item.alt}
-              loading="lazy"
               sx={{
                 width: "8.438rem",
                 height: "12.813rem",

@@ -1,26 +1,34 @@
 import { Box, Stack, Typography } from "@mui/material";
-import Moyajewellery from "../../../Assets/Images/moya_jewellery_00.jpg";
-import MoyaKeysCollection from "../../../Assets/Images/moya_keys_01.jpg";
-import WomanWhiteBlouse  from "../../../Assets/Images/fashion_model_07.jpg";
-import WomanBlackHeelsWithSocks  from "../../../Assets/Images/fashion_model_sock_02.jpg";
+import WomanWhiteBlouse from "../../../Assets/Images/fashion_model_07.webp";
+import WomanBlackHeelsWithSocks from "../../../Assets/Images/fashion_model_sock_02.webp";
+import Moyajewellery from "../../../Assets/Images/moya_jewellery_00.webp";
+import MoyaKeysCollection from "../../../Assets/Images/moya_keys_01.webp";
 
 const ZaraCollectionOf2025 = [
   {
+    id: 0,
+    alt: "MOYA - Silver layered necklace with delicate chain and small pendants — MOYA Accessories Collection",
     img: WomanWhiteBlouse,
     h5: "Embroidered Collar Blouse",
     h6: "A D D B",
   },
   {
+    id: 1,
+    alt: "MOYA - Antique gold multi-chain necklace with small rounded charms — MOYA Jewelry Selection",
     img: WomanBlackHeelsWithSocks,
     h5: "Cotton Blend Kneel",
     h6: "E L N A",
   },
   {
+    id: 2,
+    alt: "MOYA - Model wearing embroidered white collar blouse with black wide trousers — MOYA Editorial Collection",
     img: MoyaKeysCollection,
     h5: "Charm Lock Necklace",
     h4: "0 0 3",
   },
   {
+    id: 3,
+    alt: "MOYA - Close-up of ribbed black socks paired with high-heeled sandals — MOYA Accessories Campaign",
     img: Moyajewellery,
     h5: "Layered Medallion Necklace",
     h4: "0 0 4",
@@ -38,15 +46,23 @@ const ZaraWomanCollection = () => {
         gap: "3rem",
       }}
     >
-      {ZaraCollectionOf2025.map((Item, I) => (
-        <Stack key={I}>
-          {Item.img && (
-            <img
-              src={Item.img}
-              alt={`Fashion Model 2025 Collection ${I}`}
-              style={{ width: "100%", cursor: "pointer" }}
-            />
-          )}
+      {ZaraCollectionOf2025.map((Item) => (
+        <Stack>
+          <Box key={Item.id}>
+            {Item.img && (
+              <Box
+                component={"img"}
+                src={Item.img}
+                alt={Item.alt}
+                loading="lazy"
+                decoding="async"
+                sx={{
+                  width: "100%",
+                  cursor: "pointer",
+                }}
+              />
+            )}
+          </Box>
           <Box
             sx={{
               marginBlockStart: "0.5rem",

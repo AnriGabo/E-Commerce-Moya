@@ -1,7 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
-import WomanEarringDetail13 from "../../../../Assets/Images/fashion_model_13.jpg"
+import WomanEarringDetail13 from "../../../../Assets/Images/fashion_model_13.webp";
 
-const WomanEarringDetail = () => {
+const EarringEditorial = () => {
   return (
     <Stack
       sx={{
@@ -10,7 +10,19 @@ const WomanEarringDetail = () => {
         marginBlockStart: "3rem",
       }}
     >
-      <img src={WomanEarringDetail13} alt={"Fashion Model"} style={{width:"90%",cursor:"pointer"}}  />
+      <Box
+        component={"img"}
+        src={WomanEarringDetail13}
+        loading="lazy"
+        decoding="async"
+        alt={
+          "MOYA - Close-up portrait of woman wearing minimalist gold ear cuff — MOYA Accessories Collection"
+        }
+        sx={{
+          width: "100%",
+          cursor: "pointer",
+        }}
+      />
       <Box
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
@@ -30,4 +42,4 @@ const WomanEarringDetail = () => {
   );
 };
 
-export default WomanEarringDetail;
+export default EarringEditorial;

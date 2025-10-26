@@ -1,21 +1,25 @@
 import { Box, Stack, Typography } from "@mui/material";
-import SummerLookFull  from "../../../../Assets/Images/fashion_model_00.jpg"
-import SummerLookClose  from "../../../../Assets/Images/fashion_model_01.jpg";
-import SummerLookDetail  from "../../../../Assets/Images/fashion_model_02.jpg";
-
-
+import SummerLookFull from "../../../../Assets/Images/fashion01.webp";
+import SummerLookClose from "../../../../Assets/Images/fashion02.webp";
+import SummerLookDetail from "../../../../Assets/Images/fashion03.webp";
 
 import CustomBoxComponent from "../../../MuiUI/BoxContainer";
 import CustomImageDescriptionTypography from "../../../MuiUI/ImageCaption";
 
 const summerCollectionImg = [
   {
+    id: 0,
+    alt: "MOYA - Female model in navy denim vest and wide-leg trousers walking in a Paris street — MOYA Summer Collection",
     img: SummerLookFull,
   },
   {
+    id: 1,
+    alt: "MOYA -Close-up of woman wearing sleeveless denim vest with metallic buttons — MOYA Summer Campaign",
     img: SummerLookClose,
   },
   {
+    id: 2,
+    alt: "MOYA - Model in yellow sleeveless set posing under soft sunlight — MOYA Summer Collection 2025",
     img: SummerLookDetail,
   },
   {
@@ -25,19 +29,24 @@ const summerCollectionImg = [
   },
 ];
 
-const SummerWomanCollection = () => {
+const SummerWomanEditorial = () => {
   return (
     <Stack sx={{ marginBlockStart: "8rem" }}>
       <CustomBoxComponent>
-        {summerCollectionImg.map((Item, I) => (
-          <Stack key={I}>
-            {Item.img && (
-              <img
-                src={Item.img}
-                alt={`Summer Woman Collection image ${I}`}
-                style={{ width: "100%", cursor: "pointer" }}
-              />
-            )}
+        {summerCollectionImg.map((Item) => (
+          <Stack>
+            <Box key={Item.id}>
+              {Item.img && (
+                <Box
+                  component={"img"}
+                  src={Item.img}
+                  alt={Item.alt}
+                  loading="lazy"
+                  decoding="async"
+                  sx={{ width: "100%", cursor: "pointer" }}
+                />
+              )}
+            </Box>
             <Box
               sx={{
                 display: "flex",
@@ -50,7 +59,7 @@ const SummerWomanCollection = () => {
               <Typography
                 variant={"h4"}
                 component={"h5"}
-                sx={{ fontWeight: "bold",letterSpacing:"0.5rem" }}
+                sx={{ fontWeight: "bold", letterSpacing: "0.5rem" }}
               >
                 {Item.h4}
               </Typography>
@@ -68,4 +77,4 @@ const SummerWomanCollection = () => {
   );
 };
 
-export default SummerWomanCollection;
+export default SummerWomanEditorial;

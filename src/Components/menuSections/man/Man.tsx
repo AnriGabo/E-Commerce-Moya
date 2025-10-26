@@ -1,8 +1,8 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import manFashion from "../../../Assets/Images/manFashion6.jpg";
-import manFashion7 from "../../../Assets/Images/manFashion7.jpg";
-import manFashion3 from "../../../Assets/Images/manFashion5.jpg";
+import manFashion from "../../../Assets/Images/manFashion6.webp";
+import manFashion7 from "../../../Assets/Images/manFashion7.webp";
+import manFashion3 from "../../../Assets/Images/manFashion5.webp";
 
 const manSectionList = [
   { to: "/men/coats-jackets", label: "Coats | Jackets" },
@@ -15,17 +15,17 @@ const manList = [
   {
     id: 0,
     img: manFashion,
-    alt: "Man wearing a beige trench coat and sunglasses, with a serious expression",
+    alt: "MOYA - Man wearing a beige trench coat and sunglasses, with a serious expression",
   },
   {
     id: 1,
     img: manFashion7,
-    alt: "Man in a cozy patterned sweater, paired with grey trousers",
+    alt: "MOYA - Man in a cozy patterned sweater, paired with grey trousers",
   },
   {
     id: 2,
     img: manFashion3,
-    alt: "Man in a brown leather jacket, beige pants, and sunglasses, standing outdoors",
+    alt: "MOYA - Man in a brown leather jacket, beige pants, and sunglasses, standing outdoors",
   },
 ];
 
@@ -53,6 +53,7 @@ const Man = () => {
               alt={Item.alt}
               src={Item.img}
               loading="lazy"
+              decoding="async"
               sx={{
                 width: "8.438rem",
                 height: "12.813rem",
