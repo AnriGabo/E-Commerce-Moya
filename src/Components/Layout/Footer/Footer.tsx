@@ -9,14 +9,13 @@ const Footer = () => {
       id="app-footer"
       sx={{
         backgroundColor: "rgba(236, 234, 234, 1)",
+        marginBlockStart:"4rem",
         display: "grid",
         gridTemplateColumns: "repeat(2, 1fr)",
         alignItems:"center",
         paddingInline: "3rem",
         borderTopLeftRadius: "8px",
-        borderTopRightRadius: "8px",
-        marginBlockStart:"8rem",
-        
+        borderTopRightRadius: "8px",        
       }}
     >
       <Stack
