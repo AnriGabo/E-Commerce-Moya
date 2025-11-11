@@ -4,16 +4,29 @@ import ModelPolkaDotTop from "../../../Assets/Images/black_fashion_model_01.webp
 import BrownPolkaDotSandal from "../../../Assets/Images/black_fashion_model_shoes_01.webp";
 import { HelmetProvider } from "react-helmet-async";
 
+// mobile version
+import mobileModelPolkaDotTop from "../../../Assets/Images/black_fashion_model_01_400.webp";
+import mobileBrownPolkaDotSandal from "../../../Assets/Images/black_fashion_model_shoes_01_400.webp";
+
+// desktop version
+
+import tablet from "../../../Assets/Images/black_fashion_model_01_800.webp";
+import tablet2 from "../../../Assets/Images/black_fashion_model_shoes_01_800.webp";
+
 const FashionModelStyle = [
   {
     id: 0,
     alt: "MOYA - Back view of woman in chocolate satin halter dress — MOYA Evening Collection",
     img: ModelPolkaDotTop,
+    mobileversion: mobileModelPolkaDotTop,
+    tabletversion: tablet,
   },
   {
-    id: 0,
+    id: 1,
     alt: "MOYA - Brown heeled sandal with fine dotted straps — MOYA Accessories Collection",
     img: BrownPolkaDotSandal,
+    mobileversion: mobileBrownPolkaDotSandal,
+    tabletversion: tablet2,
     h4: "LIMITED DROP",
     h5: "MOYA WOMAN COLLECTION",
     h6: "BLACK CUT / 003",
@@ -49,11 +62,17 @@ const EveningWomanLook = () => {
               <Box
                 component={"img"}
                 src={Item.img}
+                srcSet={`${Item.mobileversion} 400w, ${Item.tabletversion} 800w, ${Item.img} 850w`}
+                sizes="(max-width:768px) 100vw, (max-width:1000px) 50vw, 850px"
                 alt={Item.alt}
                 loading="lazy"
                 decoding="async"
+                width={850}
+                height={1275}
                 sx={{
                   width: "100%",
+                  height:"auto",
+                  display:"block",
                   cursor: "pointer",
                 }}
               />

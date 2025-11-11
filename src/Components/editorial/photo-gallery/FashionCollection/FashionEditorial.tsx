@@ -1,8 +1,11 @@
 import { Box, Stack, Typography } from "@mui/material";
 import MainFashionModel from "../../../../Assets/Images/fashion_model_06.webp";
+import mobilemodel from "../../../../Assets/Images/fashion_model_06_400.webp";
+import tabletVersion from "../../../../Assets/Images/fashion_model_06_800.webp";
 
 const MainModels = [
   {
+    id:0,
     img: MainFashionModel,
     h4: "Shapes are clear-cut, lines are decisive. A study in sharp proportions, dense fabrics, confident stances.",
     h5: "The kind of clothes that lead",
@@ -46,16 +49,22 @@ const FashionEditorial = () => {
         marginBlockStart: "8rem",
       }}
     >
-      {MainModels.map((Item, I) => (
-        <Box key={I}>
+      {MainModels.map((Item) => (
+        <Box key={Item.id}>
           <Box
             component={"img"}
             src={Item.img}
+            srcSet={`${mobilemodel} 400w,  ${tabletVersion} 800w, ${MainFashionModel} 1500w`}
+            sizes="(max-width:768px) 100vw, (max-width:1000px) 50vw, 1500px"
             alt={Item.alt}
             loading="lazy"
             decoding="async"
+            width={1500}
+            height={1875}
             sx={{
               width: "100%",
+              height:"auto",
+              display:"block",
               cursor: "pointer",
             }}
           />

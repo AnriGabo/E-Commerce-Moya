@@ -51,6 +51,7 @@ const Woman = () => {
               component="img"
               src={Item.image}
               alt={Item.alt}
+              loading="eager"
               sx={{
                 width: "8.438rem",
                 height: "12.813rem",
