@@ -7,6 +7,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import authenticationToken from "./authMiddleware.js";
+import { userRegistrationSchema } from "./schemas/userSchemas.js";
+import Validate from "./middleware/validationMiddleware.js";
 
 // deserialization
 const app = express();
@@ -82,89 +84,99 @@ app.put("/userchange/:id", async (req, res) => {
   }
 });
 
-
-app.post("/auth/register", async (req, res) => {
-  const { username, lastname, email, password_hash } = req.body;
-
-  if (!username || !lastname || !email || !password_hash) {
-     return res.status(400).type('application/problem+json').json({
-       "type":'https://www.moya.com/problems/validation',
-       "title": "Validation Error",
-       "detail": "Required Filled Is Missing",
-       "errors":
-        {
-         "username": ["Username is required"],
-         "lastname": ["Lastname is Required"],
-         "email": ["Email is Required"],
-         "password_hash": ['Password is Required']
-       }
-     })
-  }
-
-  if(password_hash.length < 8  || password_hash.length > 25){
-    return res.status(400).type("application/problem+json").json({
-      "type": "https://www.moya.com/problems/validation-error",
-      "title":"Validation Error",
-      "detail": "Password must be between 8 and 25 characters long",
-      "invalid-params": [
-        {
-          "detail": "Password ",
-           "detail": "Password must be between 8 and 25 characters long",
-        }
-      ]
-    })
-  }
-
+app.post(
+  "/auth/register",
+  Validate({ body: userRegistrationSchema }),
+  // ვფიქრობთ ისინი წასაშლელია ქვევით შედარებები
   
+  async (req, res) => {
+    const { username, lastname, email, password_hash } = req.body;
+    if (!username || !lastname || !email || !password_hash) {
+      return res
+        .status(400)
+        .type("application/problem+json")
+        .json({
+          type: "https://www.moya.com/problems/validation",
+          title: "Validation Error",
+          detail: "Required Filled Is Missing",
+          errors: {
+            username: ["Username is required"],
+            lastname: ["Lastname is Required"],
+            email: ["Email is Required"],
+            password_hash: ["Password is Required"],
+          },
+        });
+    }
 
+    // if (password_hash.length < 8 || password_hash.length > 25) {
+    //   return res
+    //     .status(400)
+    //     .type("application/problem+json")
+    //     .json({
+    //       type: "https://www.moya.com/problems/validation-error",
+    //       title: "Validation Error",
+    //       detail: "Password must be between 8 and 25 characters long",
+    //       "invalid-params": [
+    //         {
+    //           pointer: "/password ",
+    //           detail: "Password must be between 8 and 25 characters long",
+    //         },
+    //       ],
+    //     });
+    // }
 
-  const COST = 12;
-  const storedHash = await bcrypt.hash(password_hash, COST);
+    const COST = 12;
+    const storedHash = await bcrypt.hash(password_hash, COST);
 
-  try {
-    const result = await pool.query({
-      text: `INSERT INTO registration (username, lastname, email, password_hash)
+    try {
+      const result = await pool.query({
+        text: `INSERT INTO registration (username, lastname, email, password_hash)
       VALUES ($1, $2, $3, $4)
       RETURNING user_id, username, email, created_at
       `,
-      values: [username, lastname, email, storedHash],
-    });
-    res.status(201).json({ message: `Data Is Adding Succsessfully` });
-  } catch (err ) {
-    console.log(err);
-    if(err.code === '23505' && err.constraint === 'registration_email_key'){
-       return res.status(409).type('application/problem+json').json({
-         "type": "https://www.moya.com/problems/dublicate-email",
-         "title": "Invalid Credentials",
-         "detail": "Registration Failed",
-         "invalid-params":[
-           {
-              "pointer": "/email",
-               "detail": "Registration failed"
-           }
-         ]
-         
-       })
+        values: [username, lastname, email, storedHash],
+      });
+      res.status(201).json({ message: `Data Is Adding Succsessfully` });
+    } catch (err) {
+      if (err.code === "23505" && err.constraint === "registration_email_key") {
+        return res
+          .status(409)
+          .type("application/problem+json")
+          .json({
+            type: "https://www.moya.com/problems/dublicate-email",
+            title: "Invalid Credentials",
+            detail: "Registration Failed",
+            "invalid-params": [
+              {
+                pointer: "/email",
+                detail: "Registration failed",
+              },
+            ],
+          });
+      }
+      res.status(500).json({ error: `Wrong Credentials` });
     }
-    res.status(500).json({ error: `Wrong Credentials` });
   }
-});
+);
 
+// ხვალ ამასაც გავაკეთებთ
 app.post("/auth/login", async (req, res) => {
   const { email, password_hash } = req.body;
- 
+
   if (!email || !password_hash) {
-    return res.status(400).type("application/problem+json").json({
-      "type": "https://www.moya.com/problems/validation-error",
-      "title": "Validation Error",
-      "status": 400,
-      "detail": `Required field is missing`,
-      "errors": 
-      {
-        "email": ["Email is required"],
-        "password": ["Password is required"]
-      }
-    });
+    return res
+      .status(400)
+      .type("application/problem+json")
+      .json({
+        type: "https://www.moya.com/problems/validation-error",
+        title: "Validation Error",
+        status: 400,
+        detail: `Required field is missing`,
+        errors: {
+          email: ["Email is required"],
+          password: ["Password is required"],
+        },
+      });
   }
 
   try {
@@ -178,36 +190,35 @@ app.post("/auth/login", async (req, res) => {
         .status(401)
         .type("application/problem+json")
         .json({
-          "type": "https://www.moya.com/problems/user-not-found",
-          "title": "Invalid Credentials",
-          "status": 401,
-          "detail": "Email or password is incorrect",
+          type: "https://www.moya.com/problems/user-not-found",
+          title: "Invalid Credentials",
+          status: 401,
+          detail: "Email or password is incorrect",
           "invalid-params": [
             {
-              "detail": "Email is not valid format or it is wrong",
-              "pointer": "/email",
+              detail: "Email is not valid format or it is wrong",
+              pointer: "/email",
             },
           ],
         });
     }
 
     const hashedPasswordInDb = result.rows[0].password_hash;
-    const match = await bcrypt.compare(password_hash, hashedPasswordInDb)
+    const match = await bcrypt.compare(password_hash, hashedPasswordInDb);
     if (!match) {
       return res
         .status(401)
         .type("application/problem+json")
         .json({
-          "type": "https://www.moya.com/problems/incorrect-password",
-          "title": "Invalid Credentials",
-          "status": 401,
-          "detail": `Email or password is incorrect`,
+          type: "https://www.moya.com/problems/incorrect-password",
+          title: "Invalid Credentials",
+          status: 401,
+          detail: `Email or password is incorrect`,
           "invalid-params": [
             {
-              "detail": "Email or password is incorrect",
-              "pointer": "/password_hash",
+              detail: "Email or password is incorrect",
+              pointer: "/password_hash",
             },
-             
           ],
         });
     }
