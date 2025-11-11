@@ -20,12 +20,11 @@ function problemDetailsFromZod(err, status = 400) {
   };
 }
 
-function Validate({body }) {
+export function ValidateRegister({ body }) {
   return (req, res, next) => {
     try {
       if (body) {
         const r = body.safeParse(req.body);
-        console.log(r);
         if (!r.success)
           return res.status(400).json(problemDetailsFromZod(r.error));
         req.body = r.data;
@@ -40,4 +39,21 @@ function Validate({body }) {
   };
 }
 
-export default Validate;
+export function ValidateSignIn({ body }) {
+  return (req, res, next) => {
+    try {
+      if (body) {
+        const r = body.safeParse(req.body);
+        if (!r.success)
+          return res.status(400).json(problemDetailsFromZod(r.error));
+        req.body = r.data;
+      }
+      next();
+    } catch (err) {
+      if (err instanceof ZodError) {
+        return res.status(400).json(problemDetailsFromZod(err));
+      }
+      next(err);
+    }
+  };
+}

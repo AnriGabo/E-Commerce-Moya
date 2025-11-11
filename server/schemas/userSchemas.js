@@ -23,15 +23,20 @@ export const userRegistrationSchema = z.object({
     ),
   password_hash: z
     .string()
-    .trim()
-    .min(8)
-    .max(64)
+    .min(8, "Password must be at least 8 characters long")
+    .max(64, "Password's charachter long max size is 64 ")
+    .regex(/[A-Z]/, "Password must includes at least one uppercase letter")
+    .regex(/[a-z]/, "Password must includes at least one lowercase letter")
+    .regex(/[0-9]/, "Password must includes at least one number letter")
     .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      "Invalid password format"
+      /[^A-Za-z0-9]/,
+      "Password must includes at least one special charachter"
     ),
 });
 
-
-
-
+export const userSignInSchema = z
+  .object({
+    email: z.string().trim().toLowerCase().email(),
+    password_hash: z.string().min(8).max(64),
+  })
+  .strict();

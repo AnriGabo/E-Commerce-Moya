@@ -7,12 +7,11 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import authenticationToken from "./authMiddleware.js";
-import { userRegistrationSchema } from "./schemas/userSchemas.js";
-import Validate from "./middleware/validationMiddleware.js";
+import { userRegistrationSchema,userSignInSchema } from "./schemas/userSchemas.js";
+import { ValidateRegister,ValidateSignIn } from "./middleware/validationMiddleware.js";
 
-// deserialization
 const app = express();
-// გადმოაკონვერტირებს როგორ js object და დებს req.bodyში
+// Deserialization როგორ js object და დებს req.bodyში
 app.use(express.json());
 // კითხულობს ყველა შემომავალ ქუქის და დებს req.cookies ობიექტში
 app.use(cookieParser());
@@ -86,9 +85,9 @@ app.put("/userchange/:id", async (req, res) => {
 
 app.post(
   "/auth/register",
-  Validate({ body: userRegistrationSchema }),
+  ValidateRegister({ body: userRegistrationSchema }),
   // ვფიქრობთ ისინი წასაშლელია ქვევით შედარებები
-  
+
   async (req, res) => {
     const { username, lastname, email, password_hash } = req.body;
     if (!username || !lastname || !email || !password_hash) {
@@ -159,109 +158,112 @@ app.post(
   }
 );
 
-// ხვალ ამასაც გავაკეთებთ
-app.post("/auth/login", async (req, res) => {
-  const { email, password_hash } = req.body;
+app.post(
+  "/auth/login",
+  ValidateSignIn({ body: userSignInSchema }),
+  async (req, res) => {
+    const { email, password_hash } = req.body;
 
-  if (!email || !password_hash) {
-    return res
-      .status(400)
-      .type("application/problem+json")
-      .json({
-        type: "https://www.moya.com/problems/validation-error",
-        title: "Validation Error",
-        status: 400,
-        detail: `Required field is missing`,
-        errors: {
-          email: ["Email is required"],
-          password: ["Password is required"],
-        },
+    // if (!email || !password_hash) {
+    //   return res
+    //     .status(400)
+    //     .type("application/problem+json")
+    //     .json({
+    //       type: "https://www.moya.com/problems/validation-error",
+    //       title: "Validation Error",
+    //       status: 400,
+    //       detail: `Required field is missing`,
+    //       errors: {
+    //         email: ["Email is required"],
+    //         password: ["Password is required"],
+    //       },
+    //     });
+    // }
+
+    try {
+      const result = await pool.query({
+        text: `SELECT user_id,email, password_hash FROM registration WHERE email = $1`,
+        values: [email],
       });
-  }
 
-  try {
-    const result = await pool.query({
-      text: `SELECT user_id,email, password_hash FROM registration WHERE email = $1`,
-      values: [email],
-    });
+      if (result.rows.length === 0) {
+        return res
+          .status(401)
+          .type("application/problem+json")
+          .json({
+            type: "https://www.moya.com/problems/user-not-found",
+            title: "Invalid Credentials",
+            status: 401,
+            detail: "Email or password is incorrect",
+            "invalid-params": [
+              {
+                detail: "Email is not valid format or it is wrong",
+                pointer: "/email",
+              },
+            ],
+          });
+      }
 
-    if (result.rows.length === 0) {
-      return res
-        .status(401)
-        .type("application/problem+json")
-        .json({
-          type: "https://www.moya.com/problems/user-not-found",
-          title: "Invalid Credentials",
-          status: 401,
-          detail: "Email or password is incorrect",
-          "invalid-params": [
-            {
-              detail: "Email is not valid format or it is wrong",
-              pointer: "/email",
-            },
-          ],
-        });
+      const hashedPasswordInDb = result.rows[0].password_hash;
+      const match = await bcrypt.compare(password_hash, hashedPasswordInDb);
+      if (!match) {
+        return res
+          .status(401)
+          .type("application/problem+json")
+          .json({
+            type: "https://www.moya.com/problems/incorrect-password",
+            title: "Invalid Credentials",
+            status: 401,
+            detail: `Email or password is incorrect`,
+            "invalid-params": [
+              {
+                detail: "Email or password is incorrect",
+                pointer: "/password_hash",
+              },
+            ],
+          });
+      }
+
+      const userId = result.rows[0].user_id;
+      const payload = {
+        sub: userId,
+        email: email,
+      };
+
+      // jwt = 3part, header ავტომატურად, payload object, signature = secret key
+      const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: "13m",
+      });
+
+      res.cookie("access", accessToken, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax",
+        maxAge: 13 * 60 * 1000,
+        path: "/",
+      });
+
+      // const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
+      //   expiresIn: 60 * 60 * 24 * 7,
+      //   algorithm: "HS256",
+      //   issuer: "MOYA",
+      // });
+
+      // res.cookie("refresh", refreshToken, {
+      //   httpOnly: true,
+      //   secure: false,
+      //   sameSite: "lax",
+      //   maxAge: 60 * 60 * 24 * 7,
+      //   path: "/auth",
+      // });
+
+      return res.status(200).json({ message: `Logged In` });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ message: `Internal Server Error` });
     }
-
-    const hashedPasswordInDb = result.rows[0].password_hash;
-    const match = await bcrypt.compare(password_hash, hashedPasswordInDb);
-    if (!match) {
-      return res
-        .status(401)
-        .type("application/problem+json")
-        .json({
-          type: "https://www.moya.com/problems/incorrect-password",
-          title: "Invalid Credentials",
-          status: 401,
-          detail: `Email or password is incorrect`,
-          "invalid-params": [
-            {
-              detail: "Email or password is incorrect",
-              pointer: "/password_hash",
-            },
-          ],
-        });
-    }
-
-    const userId = result.rows[0].user_id;
-    const payload = {
-      sub: userId,
-      email: email,
-    };
-
-    // jwt = 3part, header ავტომატურად, payload object, signature = secret key
-    const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
-      expiresIn: "13m",
-    });
-
-    res.cookie("access", accessToken, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-      maxAge: 13 * 60 * 1000,
-      path: "/",
-    });
-
-    const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
-      expiresIn: 60 * 60 * 24 * 7,
-      algorithm: "HS256",
-      issuer: "MOYA",
-    });
-
-    res.cookie("refresh", refreshToken, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 7,
-      path: "/auth",
-    });
-
-    return res.status(200).json({ message: `Logged In` });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ message: `Internal Server Error` });
   }
-});
+);
 
 // ეს ჯერ ჯერობით არის სატესტო ვერსია, ეს არის დაცული როუტი
 // ჯერ დარტყმა ხდება რექვესთის authenticationTokenზედა ამ საზღვარმა თუ გაატარა
