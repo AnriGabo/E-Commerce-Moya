@@ -7,8 +7,14 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import authenticationToken from "./authMiddleware.js";
-import { userRegistrationSchema,userSignInSchema } from "./schemas/userSchemas.js";
-import { ValidateRegister,ValidateSignIn } from "./middleware/validationMiddleware.js";
+import {
+  userRegistrationSchema,
+  userSignInSchema,
+} from "./schemas/userSchemas.js";
+import {
+  ValidateRegister,
+  ValidateSignIn,
+} from "./middleware/validationMiddleware.js";
 
 const app = express();
 // Deserialization როგორ js object და დებს req.bodyში
@@ -49,84 +55,22 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.delete("/user/:id", async (req, res) => {
-  // ამ შემთხვევაში /:id ში რასაც გადავცემთ რექვესთის დროს, ის შეინახება DeleteUserId ცვლადში
-  const DeleteUserId = req.params.id;
-
-  try {
-    const result = await pool.query({
-      text: `DELETE FROM registration WHERE user_id = $1`,
-      values: [DeleteUserId],
-    });
-
-    res.status(200).send(`Delete Request is executing succsessfuly`);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send(`Delete data is failed`);
-  }
-});
-app.put("/userchange/:id", async (req, res) => {
-  // URL ში გადაცემულ ID-ს იღებს
-  const changeId = req.params.id;
-  // object data ინახება აქ, ის მონაცემები რითაც უნდა განახლდეს
-  const changedBody = req.body;
-
-  try {
-    const result = await pool.query({
-      text: `UPDATE registration SET username = $1, lastname = $2 WHERE user_id = $3 `,
-      values: [changedBody.username, changedBody.lastname, changeId],
-    });
-    res.status(201).json(`data is changing succsesfully`);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: `Data Modified is failing` });
-  }
-});
-
+// ვალიდაციას წარმატებით გადის რადგან როვერ გადიოდეს დააბრუნდებოდა problem detail json
+// controllerზეც გადადის და რაღაც აქ არის პრობლემა უკვე
 app.post(
   "/auth/register",
   ValidateRegister({ body: userRegistrationSchema }),
-  // ვფიქრობთ ისინი წასაშლელია ქვევით შედარებები
 
   async (req, res) => {
     const { username, lastname, email, password_hash } = req.body;
-    if (!username || !lastname || !email || !password_hash) {
-      return res
-        .status(400)
-        .type("application/problem+json")
-        .json({
-          type: "https://www.moya.com/problems/validation",
-          title: "Validation Error",
-          detail: "Required Filled Is Missing",
-          errors: {
-            username: ["Username is required"],
-            lastname: ["Lastname is Required"],
-            email: ["Email is Required"],
-            password_hash: ["Password is Required"],
-          },
-        });
-    }
-
-    // if (password_hash.length < 8 || password_hash.length > 25) {
-    //   return res
-    //     .status(400)
-    //     .type("application/problem+json")
-    //     .json({
-    //       type: "https://www.moya.com/problems/validation-error",
-    //       title: "Validation Error",
-    //       detail: "Password must be between 8 and 25 characters long",
-    //       "invalid-params": [
-    //         {
-    //           pointer: "/password ",
-    //           detail: "Password must be between 8 and 25 characters long",
-    //         },
-    //       ],
-    //     });
-    // }
+    console.log(req.body);
+    // console.log("password_hash:", password_hash);
 
     const COST = 12;
+    // აქ ქოსთროა გადაცემული რამე მაგიტო ხოარა
     const storedHash = await bcrypt.hash(password_hash, COST);
 
+    // აქ რამე ხოარ ჭირდბეა შემოწმება ნეტა პაროლს და ხელახლა შეადარე პაროლი ერთმანეთს
     try {
       const result = await pool.query({
         text: `INSERT INTO registration (username, lastname, email, password_hash)
@@ -153,6 +97,7 @@ app.post(
             ],
           });
       }
+      // აქიდან წამოსულა ყველაფერი
       res.status(500).json({ error: `Wrong Credentials` });
     }
   }
@@ -163,23 +108,6 @@ app.post(
   ValidateSignIn({ body: userSignInSchema }),
   async (req, res) => {
     const { email, password_hash } = req.body;
-
-    // if (!email || !password_hash) {
-    //   return res
-    //     .status(400)
-    //     .type("application/problem+json")
-    //     .json({
-    //       type: "https://www.moya.com/problems/validation-error",
-    //       title: "Validation Error",
-    //       status: 400,
-    //       detail: `Required field is missing`,
-    //       errors: {
-    //         email: ["Email is required"],
-    //         password: ["Password is required"],
-    //       },
-    //     });
-    // }
-
     try {
       const result = await pool.query({
         text: `SELECT user_id,email, password_hash FROM registration WHERE email = $1`,
