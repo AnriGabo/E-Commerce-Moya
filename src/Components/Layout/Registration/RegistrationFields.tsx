@@ -12,6 +12,9 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
+// ⬇️ ეს უკვე გაქვს სადაც-то ფაილის თავში (React ტიპებისთვის)
+import React from "react";
+
 interface propsType {
   visiblePass: boolean;
   handleClick: () => void;
@@ -30,6 +33,17 @@ interface propsType {
   getData: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
 }
 
+// ✅ ნებადართული საკონტროლო ღილაკები (წაშლა, ისრები და სხვ.)
+const allowedControlKeys = [
+  "Backspace",
+  "Delete",
+  "ArrowLeft",
+  "ArrowRight",
+  "Tab",
+  "Home",
+  "End",
+];
+
 const RegistrationFields = ({
   visiblePass,
   handleClick,
@@ -47,11 +61,41 @@ const RegistrationFields = ({
   repeatpass,
   getData,
 }: propsType) => {
+  const handlepaste = (e: React.ClipboardEvent<HTMLInputElement>) =>
+    e.preventDefault();
+
+  // ⬇️ მთავარი ლოგიკა: ვუშვებთ მხოლოდ ასოებს და control ღილაკებს
+  const handleNameKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const { key, ctrlKey, metaKey } = event;
+console.log(ctrlKey, metaKey)
+    // 1) ნებადართული shortcut-ები: Ctrl/⌘ + A/C/V/X
+    if (
+      (ctrlKey || metaKey) &&
+      ["a", "c", "v", "x"].includes(key.toLowerCase())
+    ) {
+      return;
+    }
+
+    // 2) ნებადართული საკონტროლო ღილაკები (ბექსპეისი, ისრები და სხვ.)
+    if (allowedControlKeys.includes(key)) {
+      return;
+    }
+
+    // 3) თუ ასოა (a–z ან A–Z) → ვუშვებთ
+    const isLetter = /^[a-zA-Z]$/.test(key);
+    if (isLetter) {
+      return;
+    }
+
+    // 4) ყველა სხვა კლავიში — ბლოკი (არ დაიწეროს input-ში)
+    event.preventDefault();
+  };
+
   return (
     <Stack
       component="form"
       onSubmit={getData}
-      sx={{ "& > :not(style)": { width: "45ch" }, marginBlockStart: "2rem" }}
+      sx={{ "& > :not(style)": { width: "45ch" }, marginBlockStart: "1rem" }}
       noValidate
       autoComplete="off"
       spacing={2}
@@ -59,6 +103,9 @@ const RegistrationFields = ({
       <TextField
         value={username}
         onChange={(e) => setUsername(e.target.value)}
+        onKeyDown={handleNameKeyDown}
+        placeholder="Latin letters only"
+        onPaste={handlepaste}
         id="standard-name"
         label="First name"
         variant="standard"
@@ -67,6 +114,8 @@ const RegistrationFields = ({
       <TextField
         value={lastname}
         onChange={(e) => setLastName(e.target.value)}
+        onKeyDown={handleNameKeyDown}
+        onPaste={handlepaste}
         id="standard-lastname"
         label="Last name"
         variant="standard"
@@ -101,6 +150,7 @@ const RegistrationFields = ({
       <TextField
         value={repeatpass}
         onChange={(e) => setRepeatPass(e.target.value)}
+        onPaste={handlepaste}
         id="repeat-password"
         label="Repeat password"
         type="password"
