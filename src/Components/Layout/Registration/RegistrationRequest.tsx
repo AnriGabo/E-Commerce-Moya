@@ -1,36 +1,36 @@
 import { Stack } from "@mui/material";
 import { useState } from "react";
-import RegistrationFields from "./RegistrationFields";
-// import PositionedSnackbar from "./Snackbar";
 import { useNavigate } from "react-router-dom";
+import RegistrationFields from "./RegistrationFields";
 
 export default function RegistrationTextField() {
   const [visiblePass, setVisiblePass] = useState<boolean>(false);
+    const [checked, setChecked] = useState(false);
   const handleClick = () => setVisiblePass((prev) => !prev);
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState<string>("");
-  const [lastname, setLastName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState("");
-  const [repeatpass, setRepeatPass] = useState("");
-  const [checked, setChecked] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
   };
 
-  async function getData(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  async function getData(data: {
+    username:string,
+    lastname:string,
+    email:string,
+    password_hash:string,
+    repeatpass:string
+  }) {
 
     const URL = "http://localhost:5000/auth/register";
 
-    const newUser = {
-      username: username,
-      lastname: lastname,
-      email: email,
-      password_hash: password,
-    };
+    const registrationForm = {
+      username:data.username,
+      lastname:data.lastname,
+      email:data.email,
+      password_hash:data.password_hash,
+      repeatpass:data.repeatpass
+    }
 
     try {
       const response = await fetch(URL, {
@@ -38,22 +38,18 @@ export default function RegistrationTextField() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newUser),
+        body: JSON.stringify(registrationForm),
+        
       });
 
+      // server-იდან დაბრუნებ reponse ვუკეთებთ დესერიალიზაციას ისევ
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error(`Response status : ${response.status}`);
+        return alert([result.title, result.detail]);
       }
 
-      const result = await response.json();
-      console.log(result.message);
-
-      // ეს მხოლოდ მაშინ ეშვება როცა წარმატებულია
-      setUsername("");
-      setLastName("");
-      setEmail("");
-      setPassword("");
-      setRepeatPass("");
+      alert(result.message);
 
       navigate("/signin");
     } catch (error) {
@@ -68,22 +64,11 @@ export default function RegistrationTextField() {
   return (
     <Stack>
       <RegistrationFields
-        username={username}
-        lastname={lastname}
-        email={email}
-        password={password}
-        repeatpass={repeatpass}
-        setUsername={setUsername}
-        setLastName={setLastName}
-        setEmail={setEmail}
-        setPassword={setPassword}
-        setRepeatPass={setRepeatPass}
         visiblePass={visiblePass}
         handleClick={handleClick}
         checked={checked}
         handleChange={handleChange}
-        getData={getData}
-      />
+        getData={getData} errors={""}      />
     </Stack>
   );
 }

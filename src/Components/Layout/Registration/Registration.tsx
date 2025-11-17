@@ -7,6 +7,7 @@ const Registration = () => {
       <Typography
         component="h2"
         sx={{
+          marginBlockStart:"1rem",
           fontFamily: "'Playfair Display', serif",
           fontSize: "1.3rem",
           fontWeight: 500,

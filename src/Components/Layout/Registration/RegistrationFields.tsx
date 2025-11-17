@@ -1,3 +1,9 @@
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+// ამ rezolver -ის დახმარებით მოხდება რეალურად ზოდ სქემის შედარება რეგისტრაციის ფორმასთან
+import RegistrationSchema from "../../../zodschema/userSchemas";
+
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import {
@@ -19,18 +25,15 @@ interface propsType {
   visiblePass: boolean;
   handleClick: () => void;
   checked: boolean;
-  username: string;
-  lastname: string;
-  email: string;
-  password: string;
-  repeatpass: string;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  setUsername: React.Dispatch<React.SetStateAction<string>>;
-  setLastName: React.Dispatch<React.SetStateAction<string>>;
-  setEmail: React.Dispatch<React.SetStateAction<string>>;
-  setPassword: React.Dispatch<React.SetStateAction<string>>;
-  setRepeatPass: React.Dispatch<React.SetStateAction<string>>;
-  getData: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  getData: (data: {
+    username: string;
+    lastname: string;
+    email: string;
+    password_hash: string;
+    repeatpass: string;
+  }) => Promise<void>;
+  errors: string;
 }
 
 // ✅ ნებადართული საკონტროლო ღილაკები (წაშლა, ისრები და სხვ.)
@@ -49,25 +52,27 @@ const RegistrationFields = ({
   handleClick,
   checked,
   handleChange,
-  setUsername,
-  setLastName,
-  setEmail,
-  setPassword,
-  setRepeatPass,
-  username,
-  lastname,
-  email,
-  password,
-  repeatpass,
   getData,
 }: propsType) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors},
+  } = useForm({
+    // რაც ნიშნავს ამას  registrationschema.safeParse(values), resolver არის ხიდი rfc x zod-ის რომლითაც ჩვენ ვამოწმებთ 
+    // რეგისტრაციის ფორმა რამდენად შეესაბამება სქემას
+    // აბრუნებს ობიექტს, წარუმატებელი არის  errors, data
+    resolver: zodResolver(RegistrationSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
+  });
+
   const handlepaste = (e: React.ClipboardEvent<HTMLInputElement>) =>
     e.preventDefault();
 
   // ⬇️ მთავარი ლოგიკა: ვუშვებთ მხოლოდ ასოებს და control ღილაკებს
   const handleNameKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const { key, ctrlKey, metaKey } = event;
-console.log(ctrlKey, metaKey)
     // 1) ნებადართული shortcut-ები: Ctrl/⌘ + A/C/V/X
     if (
       (ctrlKey || metaKey) &&
@@ -94,15 +99,14 @@ console.log(ctrlKey, metaKey)
   return (
     <Stack
       component="form"
-      onSubmit={getData}
+      onSubmit={handleSubmit(getData)}
       sx={{ "& > :not(style)": { width: "45ch" }, marginBlockStart: "1rem" }}
       noValidate
       autoComplete="off"
       spacing={2}
     >
       <TextField
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        {...register("username")}
         onKeyDown={handleNameKeyDown}
         placeholder="Latin letters only"
         onPaste={handlepaste}
@@ -110,33 +114,38 @@ console.log(ctrlKey, metaKey)
         label="First name"
         variant="standard"
         autoComplete="given-name"
+        error={!!errors?.username}
+        helperText={errors?.username?.message as string}
       />
       <TextField
-        value={lastname}
-        onChange={(e) => setLastName(e.target.value)}
+        {...register("lastname")}
         onKeyDown={handleNameKeyDown}
         onPaste={handlepaste}
         id="standard-lastname"
         label="Last name"
         variant="standard"
         autoComplete="family-name"
+        error={!!errors?.lastname}
+        helperText={errors?.lastname?.message as string}
       />
       <TextField
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        {...register("email")}
         id="standard-emailAddress"
         label="Email address"
         variant="standard"
         autoComplete="email"
+        error={!!errors?.email}
+        helperText={errors?.email?.message as string}
       />
       <TextField
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        {...register("password_hash")}
         id="standard-password"
         label="Password"
         type={visiblePass ? "text" : "password"}
         variant="standard"
         autoComplete="new-password"
+        error={!!errors?.password_hash}
+        helperText={errors?.password_hash?.message as string}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -148,14 +157,15 @@ console.log(ctrlKey, metaKey)
         }}
       />
       <TextField
-        value={repeatpass}
-        onChange={(e) => setRepeatPass(e.target.value)}
+        {...register("repeatpass")}
         onPaste={handlepaste}
         id="repeat-password"
         label="Repeat password"
         type="password"
         variant="standard"
         autoComplete="on"
+        error={!!errors?.repeatpass}
+        helperText={errors?.repeatpass?.message as string}
       />
 
       <Box
