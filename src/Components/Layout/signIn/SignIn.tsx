@@ -5,19 +5,19 @@ import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [visiblePassword, setVisiblePassword] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const handleClick = () => setVisiblePassword((prev) => !prev);
   const navigate = useNavigate();
 
-  async function SignInRequest(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
+  async function SignInRequest(data: { email: string; password_hash: string }) {
     const URL = "http://localhost:5000/auth/login";
 
+    // data მოდის safeParse როცა წარმატებით დააბრუნებს
+    // ობიექტს data შიგნით იქნება სუფთა მონაცემები უკვე
+    // რომლებმაც წარმატებით გაიარეს ზოდის სქემა
+
     const credentials = {
-      email: email,
-      password_hash: password,
+      email: data.email,
+      password_hash: data.password_hash,
     };
 
     try {
@@ -29,14 +29,14 @@ const SignIn = () => {
       });
 
       const result = await response.json();
+
+      if (!response.ok) {
+        return alert([result.title, result.detail]);
+      }
+
       console.log(result.message);
 
-      alert([result.title, result.detail]);
-
-      // result message-ს სწორედ სნაქბარში გამოვიყენებთ
-
       navigate("/");
-      // წარმატებით ემატება მონაცემები, მაგრამ არასწორი
     } catch (error) {
       console.log(error);
     }
@@ -45,14 +45,11 @@ const SignIn = () => {
   return (
     <Box>
       <InputFields
-        setEmail={setEmail}
-        setPassword={setPassword}
         SignInRequest={SignInRequest}
         visiblePassword={visiblePassword}
         handleClick={handleClick}
+        errors={""}
       />
-
-      {/* {save ? <Alert variant="filled">{save}</Alert> : "" } */}
     </Box>
   );
 };
